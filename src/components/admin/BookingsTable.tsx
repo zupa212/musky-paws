@@ -8,7 +8,8 @@ import {
     ChevronRight, Clock, User, Phone, Mail, PawPrint,
     CheckCheck, AlertCircle, MoreHorizontal
 } from 'lucide-react'
-import { updateBookingStatus } from '@/app/actions/admin'
+import { updateBookingStatus, resendNotification } from '@/app/actions/admin'
+import { Send } from 'lucide-react'
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
     pending: { label: 'Αναμονή', color: 'bg-yellow-100 text-yellow-800 border-yellow-200' },
@@ -25,6 +26,8 @@ export default function BookingsTable({ bookings }: { bookings: any[] }) {
     const [isPending, startTransition] = useTransition()
     const [drawerBooking, setDrawerBooking] = useState<any>(null)
     const [actionPending, setActionPending] = useState<string | null>(null)
+    const [resendBusy, setResendBusy] = useState<string | null>(null)
+    const [resendDone, setResendDone] = useState<string | null>(null)
 
     const updateParam = (key: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString())
@@ -38,6 +41,16 @@ export default function BookingsTable({ bookings }: { bookings: any[] }) {
         await updateBookingStatus(id, status as any)
         setActionPending(null)
         setDrawerBooking(null)
+    }
+
+    const handleResend = async (channel: 'sms' | 'email', template: string) => {
+        if (!drawerBooking) return
+        const key = `${channel}-${template}`
+        setResendBusy(key)
+        await resendNotification(drawerBooking.id, channel, template)
+        setResendBusy(null)
+        setResendDone(key)
+        setTimeout(() => setResendDone(null), 3000)
     }
 
     const exportCSV = () => {
@@ -278,6 +291,31 @@ export default function BookingsTable({ bookings }: { bookings: any[] }) {
                                 <p className="mt-1 text-sm bg-brand-50 rounded-xl p-3">{drawerBooking.notes}</p>
                             </div>
                         )}
+
+                        {/* Resend Notifications */}
+                        <div>
+                            <label className="text-xs font-semibold text-brand-400 uppercase tracking-wide">Επαναποστολή Ειδοποίησης</label>
+                            <div className="mt-2 flex flex-wrap gap-2">
+                                {[
+                                    { channel: 'sms' as const, template: `booking_${drawerBooking.status}_customer`, label: 'SMS Πελάτη' },
+                                    ...(drawerBooking.customers?.email ? [{ channel: 'email' as const, template: `booking_${drawerBooking.status}_customer`, label: 'Email Πελάτη' }] : []),
+                                ].map(({ channel, template, label }) => {
+                                    const key = `${channel}-${template}`
+                                    return (
+                                        <button
+                                            key={key}
+                                            onClick={() => handleResend(channel, template)}
+                                            disabled={resendBusy === key}
+                                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-colors
+                                              ${resendDone === key ? 'bg-green-100 text-green-700 border-green-300' : 'border-brand-200 text-brand-600 hover:bg-brand-50'}`}
+                                        >
+                                            <Send className="w-3 h-3" />
+                                            {resendDone === key ? '✓ Εστάλη' : resendBusy === key ? '...' : label}
+                                        </button>
+                                    )
+                                })}
+                            </div>
+                        </div>
 
                         <div className="text-xs text-brand-400">ID: {drawerBooking.id}</div>
                     </div>

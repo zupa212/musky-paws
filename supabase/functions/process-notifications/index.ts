@@ -1,197 +1,229 @@
 // @ts-nocheck
-// This file runs in Deno / Supabase Edge Functions environment
-// TypeScript errors for Deno-specific APIs are expected and safe to ignore
-
+// Runs in Deno / Supabase Edge Functions — Deno-specific APIs are expected
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+
+// ── Config (mirrors src/config/business.ts) ───────────────────────────────────
+const BUSINESS = {
+  name: Deno.env.get('BUSINESS_NAME') ?? 'Musky Paws',
+  phone: Deno.env.get('BUSINESS_PHONE') ?? '+306948965371',
+  phoneDisplay: Deno.env.get('BUSINESS_PHONE_DISP') ?? '694 896 5371',
+  bookingUrl: Deno.env.get('BUSINESS_BOOKING_URL') ?? 'https://muskypaws.gr/booking',
+  emailFrom: Deno.env.get('RESEND_FROM_EMAIL') ?? 'bookings@muskypaws.gr',
+  emailFromName: Deno.env.get('RESEND_FROM_NAME') ?? 'Musky Paws',
+}
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
 const TWILIO_ACCOUNT_SID = Deno.env.get('TWILIO_ACCOUNT_SID')
 const TWILIO_AUTH_TOKEN = Deno.env.get('TWILIO_AUTH_TOKEN')
 const TWILIO_FROM_NUMBER = Deno.env.get('TWILIO_FROM_NUMBER')
-const FROM_EMAIL = 'Musky Paws <hello@muskypaws.gr>'
+const BUSINESS_NOTIFY_SMS = Deno.env.get('BUSINESS_NOTIFY_SMS')  // owner SMS (optional)
+const BUSINESS_NOTIFY_EMAIL = Deno.env.get('BUSINESS_NOTIFY_EMAIL') // owner email (optional)
 
 const supabase = createClient(
   Deno.env.get('SUPABASE_URL') ?? '',
   Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
 )
 
-// ─── Email Templates ────────────────────────────────────────────────────────
+// ── Greek date/time helpers ───────────────────────────────────────────────────
+function grDate(iso: string) {
+  return new Date(iso).toLocaleDateString('el-GR', {
+    weekday: 'long', day: 'numeric', month: 'long',
+    timeZone: 'Europe/Athens'
+  })
+}
+function grTime(iso: string) {
+  return new Date(iso).toLocaleTimeString('el-GR', {
+    hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Athens'
+  })
+}
 
-function emailTemplate(template: string, payload: any): { subject: string; html: string } {
-  const { name, serviceName, date, time } = payload
+// ── SMS Templates (exact professional Greek style) ────────────────────────────
+function smsBody(template: string, p: Record<string, string>): string {
+  const B = BUSINESS.name, PH = BUSINESS.phoneDisplay, URL = BUSINESS.bookingUrl
+  const dateGr = p.date_gr ?? '', timeGr = p.time_gr ?? '', svc = p.service ?? ''
 
-  const base = (body: string) => `
-    <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">
-      <div style="background:#1a1a2e;padding:24px 32px;display:flex;align-items:center;gap:12px;">
-        <span style="font-size:24px;">🐾</span>
-        <span style="color:#fff;font-size:20px;font-weight:bold;">Musky Paws</span>
-      </div>
-      <div style="padding:32px;">${body}</div>
-      <div style="background:#f9fafb;padding:20px 32px;text-align:center;font-size:12px;color:#9ca3af;">
-        Musky Paws Pet Grooming · Σόλωνος 28Β, Περαία 570 19<br/>
-        <a href="tel:+306948965371" style="color:#6366f1;">+30 694 896 5371</a>
-      </div>
+  switch (template) {
+    case 'booking_pending_customer':
+      return `«Το αίτημά σας για ραντεβού στο "${B}" για ${svc} στις ${dateGr} ${timeGr} καταχωρήθηκε. Θα λάβετε επιβεβαίωση σύντομα. Τηλ: ${PH}.»`
+    case 'booking_confirmed_customer':
+      return `«Το ραντεβού σας στο "${B}" για ${svc} στις ${dateGr} ${timeGr} επιβεβαιώθηκε. Για οποιαδήποτε αλλαγή καλέστε στο ${PH}.»`
+    case 'booking_canceled_customer':
+      return `«Το ραντεβού σας στο "${B}" στις ${dateGr} ${timeGr} ακυρώθηκε. Για νέα κράτηση: ${URL} ή ${PH}.»`
+    case 'reminder_24h_customer':
+      return `«Υπενθύμιση: Το ραντεβού σας στο "${B}" για ${svc} είναι αύριο στις ${timeGr}. Για αλλαγή καλέστε ${PH}.»`
+    case 'reminder_2h_customer':
+      return `«Υπενθύμιση: Σε 2 ώρες στις ${timeGr} έχετε ραντεβού στο "${B}" (${svc}). Σας περιμένουμε!»`
+    case 'booking_pending_business':
+      return `[${B}] Νέο αίτημα ραντεβού: ${p.customer_name}, ${svc}, ${dateGr} ${timeGr}. Τηλ: ${p.customer_phone}`
+    case 'booking_confirmed_business':
+      return `[${B}] Επιβεβαιώθηκε: ${p.customer_name}, ${svc}, ${dateGr} ${timeGr}.`
+    default:
+      return `[${B}] Ενημέρωση ραντεβού: ${dateGr} ${timeGr}.`
+  }
+}
+
+// ── Email HTML Templates ──────────────────────────────────────────────────────
+function emailContent(template: string, p: Record<string, string>): { subject: string; html: string } {
+  const B = BUSINESS.name, PH = BUSINESS.phoneDisplay, URL = BUSINESS.bookingUrl
+  const dateGr = p.date_gr ?? '', timeGr = p.time_gr ?? '', svc = p.service ?? ''
+  const name = p.customer_name ?? 'Πελάτη'
+
+  const wrap = (title: string, color: string, body: string) => ({
+    subject: `${title} – ${B}`,
+    html: `<!DOCTYPE html><html lang="el"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/></head>
+<body style="margin:0;background:#f9fafb;font-family:'Segoe UI',Arial,sans-serif">
+<div style="max-width:600px;margin:32px auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08)">
+  <div style="background:#1a1a2e;padding:24px 32px;display:flex;align-items:center;gap:12px">
+    <span style="font-size:28px">🐾</span>
+    <span style="color:#fff;font-size:22px;font-weight:700;letter-spacing:-0.5px">${B}</span>
+  </div>
+  <div style="padding:32px">
+    <div style="display:inline-block;background:${color};color:#fff;border-radius:8px;padding:4px 14px;font-size:13px;font-weight:600;margin-bottom:20px">${title}</div>
+    ${body}
+  </div>
+  <div style="background:#f3f4f6;padding:20px 32px;text-align:center;font-size:12px;color:#9ca3af;border-top:1px solid #e5e7eb">
+    ${B} · Σόλωνος 28Β, Περαία 570 19<br/>
+    <a href="tel:${BUSINESS.phone}" style="color:#6366f1">📞 ${PH}</a> &nbsp;|&nbsp;
+    <a href="${URL}" style="color:#6366f1">Κάντε κράτηση online</a>
+  </div>
+</div></body></html>`
+  })
+
+  const detailBox = (bgColor = '#f0fdf4', borderColor = '#86efac', textColor = '#166534') =>
+    `<div style="background:${bgColor};border:1px solid ${borderColor};border-radius:10px;padding:16px;margin:16px 0">
+      <p style="margin:6px 0;color:${textColor}"><strong>📋 Υπηρεσία:</strong> ${svc}</p>
+      <p style="margin:6px 0;color:${textColor}"><strong>📅 Ημερομηνία:</strong> ${dateGr}</p>
+      <p style="margin:6px 0;color:${textColor}"><strong>🕐 Ώρα:</strong> ${timeGr}</p>
     </div>`
 
   switch (template) {
-    case 'booking_confirmation_pending':
-      return {
-        subject: '🐾 Λάβαμε το αίτημα σας – Musky Paws',
-        html: base(`
-          <h2 style="color:#1a1a2e;margin-top:0;">Γεια σας, ${name}!</h2>
-          <p style="color:#4b5563;">Λάβαμε το αίτημα σας για ραντεβού. Θα επικοινωνήσουμε σύντομα για επιβεβαίωση.</p>
-          <div style="background:#f3f4f6;border-radius:8px;padding:16px;margin:20px 0;">
-            <p style="margin:4px 0;color:#374151;"><strong>📋 Υπηρεσία:</strong> ${serviceName}</p>
-            <p style="margin:4px 0;color:#374151;"><strong>📅 Ημερομηνία:</strong> ${date}</p>
-            <p style="margin:4px 0;color:#374151;"><strong>🕐 Ώρα:</strong> ${time}</p>
-          </div>
-          <p style="color:#6b7280;font-size:14px;">Χρειάζεστε άλλη ώρα; Καλέστε μας στο <a href="tel:+306948965371" style="color:#6366f1;">694 896 5371</a></p>
-        `)
-      }
-    case 'booking_confirmed':
-      return {
-        subject: '✅ Επιβεβαίωση Ραντεβού – Musky Paws',
-        html: base(`
-          <h2 style="color:#1a1a2e;margin-top:0;">Το ραντεβού σας επιβεβαιώθηκε! 🎉</h2>
-          <p style="color:#4b5563;">Γεια σας, <strong>${name}</strong>! Ανυπομονούμε να σας δούμε.</p>
-          <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:16px;margin:20px 0;">
-            <p style="margin:4px 0;color:#166534;"><strong>📋 Υπηρεσία:</strong> ${serviceName}</p>
-            <p style="margin:4px 0;color:#166534;"><strong>📅 Ημερομηνία:</strong> ${date}</p>
-            <p style="margin:4px 0;color:#166534;"><strong>🕐 Ώρα:</strong> ${time}</p>
-          </div>
-          <p style="color:#6b7280;font-size:14px;">📍 Σόλωνος 28Β, Περαία · <a href="https://maps.google.com/?q=Solonos+28B,+Peraia+57019" style="color:#6366f1;">Οδηγίες</a></p>
-        `)
-      }
-    case 'booking_canceled':
-      return {
-        subject: '❌ Ακύρωση Ραντεβού – Musky Paws',
-        html: base(`
-          <h2 style="color:#1a1a2e;margin-top:0;">Ακύρωση ραντεβού</h2>
-          <p style="color:#4b5563;">Γεια σας, <strong>${name}</strong>. Το ραντεβού σας για <strong>${serviceName}</strong> στις <strong>${date} ${time}</strong> ακυρώθηκε.</p>
-          <p style="color:#6b7280;">Για νέο ραντεβού επισκεφτείτε <a href="https://muskypaws.gr/booking" style="color:#6366f1;">muskypaws.gr/booking</a> ή καλέστε μας.</p>
-        `)
-      }
-    case 'reminder_24h':
-      return {
-        subject: '⏰ Υπενθύμιση: Αύριο το ραντεβού σας – Musky Paws',
-        html: base(`
-          <h2 style="color:#1a1a2e;margin-top:0;">Υπενθύμιση ραντεβού 🐶</h2>
-          <p style="color:#4b5563;">Γεια σας, <strong>${name}</strong>! Υπενθυμίζουμε ότι αύριο έχετε ραντεβού:</p>
-          <div style="background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:16px;margin:20px 0;">
-            <p style="margin:4px 0;color:#92400e;"><strong>📋 Υπηρεσία:</strong> ${serviceName}</p>
-            <p style="margin:4px 0;color:#92400e;"><strong>📅 Ημερομηνία:</strong> ${date}</p>
-            <p style="margin:4px 0;color:#92400e;"><strong>🕐 Ώρα:</strong> ${time}</p>
-          </div>
-          <p style="color:#6b7280;font-size:14px;">📍 Σόλωνος 28Β, Περαία · Χρειάζεστε ακύρωση; Καλέστε μας στο 694 896 5371</p>
-        `)
-      }
+    case 'booking_pending_customer':
+      return wrap('Αίτημα Καταχωρήθηκε ⏳', '#f59e0b', `
+        <p style="color:#374151;font-size:16px">Γεια σας, <strong>${name}</strong>!</p>
+        <p style="color:#6b7280">Λάβαμε το αίτημά σας και θα επικοινωνήσουμε σύντομα για επιβεβαίωση.</p>
+        ${detailBox('#fffbeb', '#fde68a', '#92400e')}
+        <p style="color:#6b7280;font-size:14px">Χρειάζεστε αλλαγή; Καλέστε μας: <a href="tel:${BUSINESS.phone}" style="color:#6366f1">${PH}</a></p>`)
+
+    case 'booking_confirmed_customer':
+      return wrap('Ραντεβού Επιβεβαιώθηκε ✅', '#10b981', `
+        <p style="color:#374151;font-size:16px">Γεια σας, <strong>${name}</strong>! Ανυπομονούμε να σας δούμε 🐶</p>
+        ${detailBox()}
+        <p style="color:#6b7280;font-size:14px">📍 Σόλωνος 28Β, Περαία &nbsp;
+          <a href="https://maps.google.com/?q=Solonos+28B,+Peraia+57019" style="color:#6366f1">Οδηγίες →</a></p>
+        <p style="color:#6b7280;font-size:14px">Για αλλαγή/ακύρωση: <a href="tel:${BUSINESS.phone}" style="color:#6366f1">${PH}</a></p>`)
+
+    case 'booking_canceled_customer':
+      return wrap('Ραντεβού Ακυρώθηκε ❌', '#ef4444', `
+        <p style="color:#374151">Το ραντεβού σας για <strong>${svc}</strong> στις <strong>${dateGr} ${timeGr}</strong> ακυρώθηκε.</p>
+        <p style="color:#6b7280">Για νέα κράτηση: <a href="${URL}" style="color:#6366f1">${URL}</a> ή καλέστε <strong>${PH}</strong></p>`)
+
+    case 'reminder_24h_customer':
+      return wrap('Υπενθύμιση Ραντεβού ⏰', '#8b5cf6', `
+        <p style="color:#374151">Γεια σας, <strong>${name}</strong>! Υπενθυμίζουμε ότι <strong>αύριο</strong> έχετε ραντεβού:</p>
+        ${detailBox('#fefce8', '#fde68a', '#92400e')}
+        <p style="color:#6b7280;font-size:14px">📍 Σόλωνος 28Β, Περαία · Ακύρωση: <a href="tel:${BUSINESS.phone}" style="color:#6366f1">${PH}</a></p>`)
+
     default:
-      return { subject: 'Ενημέρωση Ραντεβού – Musky Paws', html: base(`<p>Ενημέρωση για το ραντεβού σας.</p>`) }
+      return wrap('Ενημέρωση Ραντεβού', '#6366f1',
+        `<p style="color:#374151">Ενημέρωση σχετικά με το ραντεβού σας (${dateGr} ${timeGr}).</p>`)
   }
 }
 
-// ─── SMS Templates ───────────────────────────────────────────────────────────
-
-function smsTemplate(template: string, payload: any): string {
-  const { name, serviceName, date, time } = payload
-  switch (template) {
-    case 'booking_confirmation_pending_sms':
-      return `Musky Paws: Λάβαμε το αίτημα σας για ${serviceName} (${date} ${time}). Θα επικοινωνήσουμε σύντομα. Πληρ: 694 896 5371`
-    case 'booking_confirmed_sms':
-      return `Musky Paws: ✅ Επιβεβαίωση! ${name}, σας περιμένουμε ${date} στις ${time} (${serviceName}). Σόλωνος 28Β, Περαία.`
-    case 'booking_canceled_sms':
-      return `Musky Paws: Το ραντεβού σας (${date} ${time}) ακυρώθηκε. Νέο ραντεβού: muskypaws.gr/booking`
-    case 'reminder_2h_sms':
-      return `Musky Paws ⏰: Υπενθύμιση! Σήμερα στις ${time} - ${serviceName}. Σόλωνος 28Β, Περαία.`
-    default:
-      return `Musky Paws: Ενημέρωση για το ραντεβού σας (${date} ${time}).`
-  }
+// ── Provider adapters ─────────────────────────────────────────────────────────
+async function sendSMS(to: string, body: string): Promise<string> {
+  if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_FROM_NUMBER)
+    throw new Error('Twilio not configured')
+  const phone = to.startsWith('+') ? to : `+30${to.replace(/\D/g, '')}`
+  const res = await fetch(
+    `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`,
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Basic ${btoa(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`)}`,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({ To: phone, From: TWILIO_FROM_NUMBER, Body: body }).toString()
+    }
+  )
+  const d = await res.json()
+  if (!res.ok) throw new Error(d.message ?? 'Twilio error')
+  return d.sid
 }
 
-// ─── Senders ─────────────────────────────────────────────────────────────────
-
-async function sendEmail(to: string, template: string, payload: any): Promise<string> {
+async function sendEmail(to: string, subject: string, html: string): Promise<string> {
   if (!RESEND_API_KEY) throw new Error('RESEND_API_KEY not set')
-  const { subject, html } = emailTemplate(template, payload)
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: FROM_EMAIL, to, subject, html })
+    headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: `${BUSINESS.emailFromName} <${BUSINESS.emailFrom}>`,
+      to, subject, html
+    })
   })
-  const data = await res.json()
-  if (!res.ok) throw new Error(data.message || 'Resend API error')
-  return data.id
+  const d = await res.json()
+  if (!res.ok) throw new Error(d.message ?? 'Resend error')
+  return d.id
 }
 
-async function sendSMS(to: string, template: string, payload: any): Promise<string> {
-  if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_FROM_NUMBER) throw new Error('Twilio not configured')
-  // Ensure E.164 format
-  const phone = to.startsWith('+') ? to : `+30${to.replace(/\D/g, '')}`
-  const body = smsTemplate(template, payload)
-  const url = `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`
-  const params = new URLSearchParams({ To: phone, From: TWILIO_FROM_NUMBER, Body: body })
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Basic ${btoa(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`)}`,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: params.toString()
-  })
-  const data = await res.json()
-  if (!res.ok) throw new Error(data.message || 'Twilio API error')
-  return data.sid
-}
-
-// ─── Main Handler ─────────────────────────────────────────────────────────────
-
+// ── Main handler ──────────────────────────────────────────────────────────────
 serve(async (req) => {
-  const auth = req.headers.get('Authorization')
-  if (auth !== `Bearer ${Deno.env.get('CRON_SECRET')}`) {
+  if (req.headers.get('Authorization') !== `Bearer ${Deno.env.get('CRON_SECRET')}`)
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
-  }
 
-  try {
-    const { data: pending, error } = await supabase
+  const { data: pending, error } = await supabase
+    .from('notification_outbox')
+    .select('*')
+    .eq('status', 'pending')
+    .lte('run_at', new Date().toISOString())
+    .lt('attempts', 5)
+    .order('created_at', { ascending: true })
+    .limit(50)
+
+  if (error) return new Response(JSON.stringify({ error: error.message }), { status: 500 })
+  if (!pending?.length) return new Response(JSON.stringify({ message: 'Nothing to process' }), { status: 200 })
+
+  let sent = 0, failed = 0
+
+  for (const n of pending) {
+    // Mark as processing (idempotency guard)
+    const { error: lockError } = await supabase
       .from('notification_outbox')
-      .select('*')
-      .eq('status', 'pending')
-      .lte('run_at', new Date().toISOString())
-      .lt('attempts', 3)
-      .order('created_at', { ascending: true })
-      .limit(50)
+      .update({ status: 'processing', attempts: n.attempts + 1 })
+      .eq('id', n.id)
+      .eq('status', 'pending') // only grab if still pending (concurrent safety)
+    if (lockError) continue // another worker grabbed it
 
-    if (error) throw error
-    if (!pending?.length) return new Response(JSON.stringify({ message: 'No pending notifications.' }), { status: 200 })
+    try {
+      const p = n.payload as Record<string, string>
+      let providerId: string
 
-    let sent = 0, failed = 0
-
-    for (const n of pending) {
-      // Mark as processing
-      await supabase.from('notification_outbox').update({ status: 'processing', attempts: n.attempts + 1 }).eq('id', n.id)
-
-      try {
-        let providerId: string
-        if (n.channel === 'email') {
-          providerId = await sendEmail(n.to, n.template, n.payload)
-        } else {
-          providerId = await sendSMS(n.to, n.template, n.payload)
-        }
-        await supabase.from('notification_outbox').update({ status: 'sent', provider_message_id: providerId, last_error: null }).eq('id', n.id)
-        sent++
-      } catch (err: any) {
-        const isFinal = n.attempts >= 2
-        await supabase.from('notification_outbox').update({
-          status: isFinal ? 'failed' : 'pending',
-          last_error: err.message
-        }).eq('id', n.id)
-        failed++
+      if (n.channel === 'sms') {
+        const body = smsBody(n.template, p)
+        providerId = await sendSMS(n.to, body)
+      } else {
+        const { subject, html } = emailContent(n.template, p)
+        providerId = await sendEmail(n.to, subject, html)
       }
-    }
 
-    return new Response(JSON.stringify({ sent, failed }), { headers: { 'Content-Type': 'application/json' }, status: 200 })
-  } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 })
+      await supabase.from('notification_outbox').update({
+        status: 'sent', provider_message_id: providerId, last_error: null
+      }).eq('id', n.id)
+      sent++
+    } catch (err: any) {
+      // Exponential backoff: retry after 2^attempts minutes
+      const minutesDelay = Math.pow(2, n.attempts) // 2, 4, 8, 16, 32 min
+      const runAt = new Date(Date.now() + minutesDelay * 60_000).toISOString()
+      const isFinal = n.attempts >= 4 // 5th attempt = give up
+
+      await supabase.from('notification_outbox').update({
+        status: isFinal ? 'failed' : 'pending',
+        last_error: err.message,
+        run_at: isFinal ? n.run_at : runAt
+      }).eq('id', n.id)
+      failed++
+    }
   }
+
+  return new Response(JSON.stringify({ sent, failed }), { status: 200 })
 })
