@@ -1,19 +1,21 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { Plus, Trash2, Save, Calendar, Clock } from 'lucide-react'
-import { upsertSchedule, deleteScheduleException, upsertScheduleException } from '@/app/actions/admin'
+import { Plus, Trash2, Save, Calendar, Clock, Ban } from 'lucide-react'
+import { upsertSchedule, deleteScheduleException, upsertScheduleException, createBlockedTime, deleteBlockedTime } from '@/app/actions/admin'
 import { useRouter } from 'next/navigation'
+import { format, parseISO } from 'date-fns'
 
 const DAYS = ['Κυριακή', 'Δευτέρα', 'Τρίτη', 'Τετάρτη', 'Πέμπτη', 'Παρασκευή', 'Σάββατο']
 
-export default function ScheduleManager({ schedules, exceptions }: { schedules: any[], exceptions: any[] }) {
+export default function ScheduleManager({ schedules, exceptions, blockedTimes }: { schedules: any[], exceptions: any[], blockedTimes?: any[] }) {
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
     const [editedSchedules, setEditedSchedules] = useState<Record<string, any>>(
         Object.fromEntries(schedules.map(s => [s.day_of_week, s]))
     )
     const [newException, setNewException] = useState({ date: '', is_closed: true, notes: '' })
+    const [newBlock, setNewBlock] = useState({ date: '', startTime: '09:00', endTime: '10:00', reason: '' })
 
     const staffId = '00000000-0000-0000-0000-000000000001'
 
@@ -51,6 +53,22 @@ export default function ScheduleManager({ schedules, exceptions }: { schedules: 
         })
     }
 
+    const handleAddBlock = () => {
+        if (!newBlock.date || !newBlock.startTime || !newBlock.endTime) return
+        startTransition(async () => {
+            await createBlockedTime(newBlock)
+            setNewBlock({ date: '', startTime: '09:00', endTime: '10:00', reason: '' })
+            router.refresh()
+        })
+    }
+
+    const handleDeleteBlock = (id: string) => {
+        startTransition(async () => {
+            await deleteBlockedTime(id)
+            router.refresh()
+        })
+    }
+
     const inputCls = "text-sm border border-brand-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-accent-500 outline-none"
 
     return (
@@ -73,13 +91,8 @@ export default function ScheduleManager({ schedules, exceptions }: { schedules: 
                                 <label className="flex items-center gap-2 cursor-pointer">
                                     <div
                                         onClick={() => {
-                                            if (isActive) {
-                                                handleScheduleChange(day, 'start_time', '')
-                                                handleScheduleChange(day, 'end_time', '')
-                                            } else {
-                                                handleScheduleChange(day, 'start_time', '09:00')
-                                                handleScheduleChange(day, 'end_time', '18:00')
-                                            }
+                                            if (isActive) { handleScheduleChange(day, 'start_time', ''); handleScheduleChange(day, 'end_time', '') }
+                                            else { handleScheduleChange(day, 'start_time', '09:00'); handleScheduleChange(day, 'end_time', '18:00') }
                                         }}
                                         className={`w-10 h-5 rounded-full transition-colors cursor-pointer ${isActive ? 'bg-green-400' : 'bg-brand-200'}`}
                                     >
@@ -105,8 +118,6 @@ export default function ScheduleManager({ schedules, exceptions }: { schedules: 
                 <div className="border-b border-brand-100 p-5">
                     <h2 className="font-bold text-brand-900 flex items-center gap-2"><Calendar className="w-5 h-5 text-brand-400" /> Εξαιρέσεις / Αργίες</h2>
                 </div>
-
-                {/* Add exception */}
                 <div className="p-5 bg-brand-50 border-b border-brand-100 flex flex-wrap gap-3 items-end">
                     <div>
                         <label className="text-xs font-semibold text-brand-500 mb-1 block">Ημερομηνία</label>
@@ -127,8 +138,6 @@ export default function ScheduleManager({ schedules, exceptions }: { schedules: 
                         <Plus className="w-4 h-4" /> Προσθήκη
                     </button>
                 </div>
-
-                {/* List */}
                 <div className="divide-y divide-brand-100">
                     {exceptions.length === 0 ? (
                         <p className="text-center text-brand-400 py-8 text-sm">Δεν υπάρχουν εξαιρέσεις</p>
@@ -141,6 +150,51 @@ export default function ScheduleManager({ schedules, exceptions }: { schedules: 
                             {ex.notes && <span className="text-sm text-brand-500">{ex.notes}</span>}
                             <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button onClick={() => handleDeleteException(ex.id)} className="p-1.5 text-red-400 hover:bg-red-50 rounded-lg"><Trash2 className="w-4 h-4" /></button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Blocked Time Ranges */}
+            <div className="bg-white rounded-2xl border border-brand-200 overflow-hidden">
+                <div className="border-b border-brand-100 p-5">
+                    <h2 className="font-bold text-brand-900 flex items-center gap-2"><Ban className="w-5 h-5 text-orange-400" /> Αποκλεισμοί Ωρών</h2>
+                    <p className="text-xs text-brand-400 mt-1">Μπλοκάρετε ώρες για προσωπικούς λόγους, συντήρηση κ.λπ.</p>
+                </div>
+                <div className="p-5 bg-orange-50/50 border-b border-brand-100 flex flex-wrap gap-3 items-end">
+                    <div>
+                        <label className="text-xs font-semibold text-brand-500 mb-1 block">Ημερομηνία</label>
+                        <input type="date" value={newBlock.date} onChange={e => setNewBlock({ ...newBlock, date: e.target.value })} className={inputCls} />
+                    </div>
+                    <div>
+                        <label className="text-xs font-semibold text-brand-500 mb-1 block">Από</label>
+                        <input type="time" value={newBlock.startTime} onChange={e => setNewBlock({ ...newBlock, startTime: e.target.value })} className={inputCls} />
+                    </div>
+                    <div>
+                        <label className="text-xs font-semibold text-brand-500 mb-1 block">Έως</label>
+                        <input type="time" value={newBlock.endTime} onChange={e => setNewBlock({ ...newBlock, endTime: e.target.value })} className={inputCls} />
+                    </div>
+                    <div className="flex-1 min-w-40">
+                        <label className="text-xs font-semibold text-brand-500 mb-1 block">Λόγος</label>
+                        <input type="text" value={newBlock.reason} onChange={e => setNewBlock({ ...newBlock, reason: e.target.value })} placeholder="π.χ. Προσωπικό" className={`${inputCls} w-full`} />
+                    </div>
+                    <button onClick={handleAddBlock} disabled={isPending || !newBlock.date} className="flex items-center gap-2 px-4 py-2 bg-orange-500 text-white text-sm font-bold rounded-xl hover:bg-orange-600 disabled:opacity-50 transition-colors">
+                        <Plus className="w-4 h-4" /> Αποκλεισμός
+                    </button>
+                </div>
+                <div className="divide-y divide-brand-100">
+                    {(!blockedTimes || blockedTimes.length === 0) ? (
+                        <p className="text-center text-brand-400 py-8 text-sm">Δεν υπάρχουν αποκλεισμοί</p>
+                    ) : blockedTimes.map(bt => (
+                        <div key={bt.id} className="px-5 py-3 flex items-center gap-4 group hover:bg-orange-50/50 transition-colors">
+                            <div className="font-medium text-brand-900 w-28 text-sm">{format(parseISO(bt.start_at), 'dd/MM/yyyy')}</div>
+                            <span className="text-xs font-bold px-2 py-0.5 rounded-full border bg-orange-100 text-orange-700 border-orange-200">
+                                {format(parseISO(bt.start_at), 'HH:mm')} – {format(parseISO(bt.end_at), 'HH:mm')}
+                            </span>
+                            {bt.reason && <span className="text-sm text-brand-500">{bt.reason}</span>}
+                            <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button onClick={() => handleDeleteBlock(bt.id)} className="p-1.5 text-red-400 hover:bg-red-50 rounded-lg"><Trash2 className="w-4 h-4" /></button>
                             </div>
                         </div>
                     ))}

@@ -19,8 +19,6 @@ export const BUSINESS = {
     sms: {
         senderName: 'MuskyPaws',
     },
-    /** When true, new bookings are automatically confirmed (skip "pending") */
-    autoConfirm: false,
     /** Number of days in advance customers can book */
     maxBookingDaysAhead: 30,
 } as const

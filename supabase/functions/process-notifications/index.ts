@@ -58,6 +58,10 @@ function smsBody(template: string, p: Record<string, string>): string {
       return `[${B}] Νέο αίτημα ραντεβού: ${p.customer_name}, ${svc}, ${dateGr} ${timeGr}. Τηλ: ${p.customer_phone}`
     case 'booking_confirmed_business':
       return `[${B}] Επιβεβαιώθηκε: ${p.customer_name}, ${svc}, ${dateGr} ${timeGr}.`
+    case 'booking_rescheduled_customer': {
+      const nd = p.new_date_gr ?? dateGr, nt = p.new_time_gr ?? timeGr
+      return `«Το ραντεβού σας στο "${B}" μεταφέρθηκε στις ${nd} ${nt}. Για αλλαγές καλέστε ${PH}.»`
+    }
     default:
       return `[${B}] Ενημέρωση ραντεβού: ${dateGr} ${timeGr}.`
   }
@@ -123,6 +127,19 @@ function emailContent(template: string, p: Record<string, string>): { subject: s
         <p style="color:#374151">Γεια σας, <strong>${name}</strong>! Υπενθυμίζουμε ότι <strong>αύριο</strong> έχετε ραντεβού:</p>
         ${detailBox('#fefce8', '#fde68a', '#92400e')}
         <p style="color:#6b7280;font-size:14px">📍 Σόλωνος 28Β, Περαία · Ακύρωση: <a href="tel:${BUSINESS.phone}" style="color:#6366f1">${PH}</a></p>`)
+
+    case 'booking_rescheduled_customer': {
+      const nd = p.new_date_gr ?? dateGr, nt = p.new_time_gr ?? timeGr
+      return wrap('Αλλαγή Ώρας Ραντεβού 🔄', '#8b5cf6', `
+        <p style="color:#374151;font-size:16px">Γεια σας, <strong>${name}</strong>!</p>
+        <p style="color:#6b7280">Το ραντεβού σας μεταφέρθηκε στη νέα ώρα:</p>
+        <div style="background:#f5f3ff;border:1px solid #c4b5fd;border-radius:10px;padding:16px;margin:16px 0">
+          <p style="margin:6px 0;color:#5b21b6"><strong>📋 Υπηρεσία:</strong> ${svc}</p>
+          <p style="margin:6px 0;color:#5b21b6"><strong>📅 Νέα Ημερομηνία:</strong> ${nd}</p>
+          <p style="margin:6px 0;color:#5b21b6"><strong>🕐 Νέα Ώρα:</strong> ${nt}</p>
+        </div>
+        <p style="color:#6b7280;font-size:14px">Για αλλαγή/ακύρωση: <a href="tel:${BUSINESS.phone}" style="color:#6366f1">${PH}</a></p>`)
+    }
 
     default:
       return wrap('Ενημέρωση Ραντεβού', '#6366f1',

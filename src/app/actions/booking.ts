@@ -7,7 +7,6 @@ import { revalidatePath } from "next/cache";
 import { formatGreekPhone } from "@/lib/utils/phone";
 import { BUSINESS } from "@/config/business";
 
-// ── Validation ────────────────────────────────────────────────────────────────
 const bookingSchema = z.object({
     petType: z.enum(["dog", "cat", "other"]),
     breed: z.string().optional(),
@@ -22,19 +21,13 @@ const bookingSchema = z.object({
     acceptPolicy: z.string().optional(),
 });
 
-// ── Notification helper ───────────────────────────────────────────────────────
 function makePayload(name: string, service: string, startIso: string) {
-    const asDate = new Date(startIso)
+    const d = new Date(startIso);
     return {
-        customer_name: name,
-        service,
-        date_gr: asDate.toLocaleDateString('el-GR', {
-            weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Athens'
-        }),
-        time_gr: asDate.toLocaleTimeString('el-GR', {
-            hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Athens'
-        }),
-    }
+        customer_name: name, service,
+        date_gr: d.toLocaleDateString('el-GR', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Athens' }),
+        time_gr: d.toLocaleTimeString('el-GR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Athens' }),
+    };
 }
 
 export async function submitBooking(formData: FormData) {
@@ -64,35 +57,25 @@ export async function submitBooking(formData: FormData) {
         if (existing) {
             customerId = existing.id;
             await supabase.from("customers").update({
-                name: validated.ownerName,
-                email: validated.email || null,
-                phone_e164: phoneE164,
+                name: validated.ownerName, email: validated.email || null, phone_e164: phoneE164,
             }).eq("id", customerId);
         } else {
             const { data: nc, error: ce } = await supabase.from("customers").insert({
-                name: validated.ownerName,
-                phone: validated.phone,
-                phone_e164: phoneE164,
-                email: validated.email || null,
+                name: validated.ownerName, phone: validated.phone, phone_e164: phoneE164, email: validated.email || null,
             }).select("id").single();
             if (ce) throw new Error("Αποτυχία εγγραφής πελάτη.");
             customerId = nc.id;
         }
 
-        // 4. Create booking
-        const status = BUSINESS.autoConfirm ? "confirmed" : "pending";
+        // 4. Create booking — ALWAYS pending for public bookings (request-based)
         const { data: booking, error: be } = await supabase
             .from("bookings").insert({
-                customer_id: customerId,
-                service_id: service.id,
+                customer_id: customerId, service_id: service.id,
                 staff_id: "00000000-0000-0000-0000-000000000001",
-                start_at: startAt.toISOString(),
-                end_at: endAt.toISOString(),
-                status,
-                pet_type: validated.petType,
-                breed: validated.breed || null,
-                weight_kg: validated.weightKg || null,
-                notes: validated.notes || null,
+                start_at: startAt.toISOString(), end_at: endAt.toISOString(),
+                status: "pending",
+                pet_type: validated.petType, breed: validated.breed || null,
+                weight_kg: validated.weightKg || null, notes: validated.notes || null,
                 source: "website",
             }).select("id").single();
 
@@ -102,31 +85,18 @@ export async function submitBooking(formData: FormData) {
             throw new Error("Σφάλμα κατά την καταχώρηση του ραντεβού.");
         }
 
-        // 5. Queue notifications
-        const payload = makePayload(validated.ownerName, service.name, startAt.toISOString())
-        const customerTemplate = status === "confirmed"
-            ? "booking_confirmed_customer"
-            : "booking_pending_customer"
-
+        // 5. Queue notifications — always pending templates
+        const payload = makePayload(validated.ownerName, service.name, startAt.toISOString());
         const outbox: any[] = [
-            // Customer SMS (always)
-            { booking_id: booking.id, channel: "sms", to: phoneE164, template: customerTemplate, payload },
-        ]
-        // Customer Email (if provided)
-        if (validated.email) {
-            outbox.push({ booking_id: booking.id, channel: "email", to: validated.email, template: customerTemplate, payload })
-        }
-        // Business owner notifications (if configured)
-        if (BUSINESS.phone) {
-            outbox.push({
-                booking_id: booking.id, channel: "sms", to: BUSINESS.phone,
-                template: status === "confirmed" ? "booking_confirmed_business" : "booking_pending_business",
-                payload: { ...payload, customer_phone: phoneE164 }
-            })
-        }
+            { booking_id: booking.id, channel: "sms", to: phoneE164, template: "booking_pending_customer", payload },
+        ];
+        if (validated.email)
+            outbox.push({ booking_id: booking.id, channel: "email", to: validated.email, template: "booking_pending_customer", payload });
+        // Business owner notification
+        if (BUSINESS.phone)
+            outbox.push({ booking_id: booking.id, channel: "sms", to: BUSINESS.phone, template: "booking_pending_business", payload: { ...payload, customer_phone: phoneE164 } });
 
         await supabase.from("notification_outbox").insert(outbox);
-
         revalidatePath("/admin/bookings");
         return { success: true, bookingId: booking.id };
 

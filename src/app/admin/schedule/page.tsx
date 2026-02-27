@@ -8,15 +8,16 @@ export const metadata: Metadata = { title: 'Ωράριο | Musky Paws Admin' }
 export default async function AdminSchedulePage() {
     const supabase = await createAdminClient()
 
-    const [{ data: schedules }, { data: exceptions }] = await Promise.all([
+    const [{ data: schedules }, { data: exceptions }, { data: blockedTimes }] = await Promise.all([
         supabase.from('schedules').select('*').order('day_of_week'),
         supabase.from('schedule_exceptions').select('*').order('date', { ascending: false }).limit(30),
+        supabase.from('blocked_times').select('*').order('start_at', { ascending: false }).limit(50),
     ])
 
     return (
         <div className="space-y-6">
             <h1 className="text-2xl font-bold text-brand-950">Ωράριο & Εξαιρέσεις</h1>
-            <ScheduleManager schedules={schedules ?? []} exceptions={exceptions ?? []} />
+            <ScheduleManager schedules={schedules ?? []} exceptions={exceptions ?? []} blockedTimes={blockedTimes ?? []} />
         </div>
     )
 }

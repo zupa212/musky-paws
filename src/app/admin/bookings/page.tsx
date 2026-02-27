@@ -28,6 +28,13 @@ export default async function AdminBookingsPage({
 
     const { data: bookings, error } = await query
 
+    // Fetch active services for manual booking modal
+    const { data: services } = await supabase
+        .from('services')
+        .select('id, name, slug, duration_min, price_from')
+        .eq('active', true)
+        .order('name')
+
     // Filter by phone/email/name client-side search
     const filtered = params.q
         ? bookings?.filter((b: any) => {
@@ -48,7 +55,7 @@ export default async function AdminBookingsPage({
                     {filtered?.length ?? 0} αποτελέσματα
                 </p>
             </div>
-            <BookingsTable bookings={filtered ?? []} />
+            <BookingsTable bookings={filtered ?? []} services={services ?? []} />
         </div>
     )
 }
