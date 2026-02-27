@@ -1,4 +1,5 @@
-supabase
+# Ignore Supabase Edge Functions directory (not src/lib/supabase)
+/supabase
 .vscode
 .gemini
 bookings-db.json
