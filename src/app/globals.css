@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #f6f6f6;
-  --color-brand-100: #e7e7e7;
-  --color-brand-200: #d1d1d1;
-  --color-brand-300: #b0b0b0;
-  --color-brand-400: #888888;
-  --color-brand-500: #6d6d6d;
-  --color-brand-600: #5d5d5d;
-  --color-brand-700: #4f4f4f;
-  --color-brand-800: #454545;
-  --color-brand-900: #3d3d3d;
-  --color-brand-950: #262626; /* Dark Charcoal */
+  /* Warm cream/navy palette – inspired by Doggie Inn */
+  --color-brand-50: #fef9f3;
+  --color-brand-100: #fdf0e3;
+  --color-brand-200: #f9dcc6;
+  --color-brand-300: #f0c5a0;
+  --color-brand-400: #d4a373;
+  --color-brand-500: #b8865a;
+  --color-brand-600: #9a6d44;
+  --color-brand-700: #7a5636;
+  --color-brand-800: #5e422b;
+  --color-brand-900: #3d2c1d;
+  --color-brand-950: #1e1640;
+  /* Deep navy */
 
-  --color-accent-400: #d4af37;
-  --color-accent-500: #c5a017;
-  --color-accent-600: #aa8809;
+  /* Accent: warm coral/pink for CTAs */
+  --color-accent-400: #f08c7a;
+  --color-accent-500: #e07460;
+  --color-accent-600: #c95e4a;
+
+  /* Navy: deep blues for headings & hero text */
+  --color-navy-800: #2a2356;
+  --color-navy-900: #1e1640;
+
+  /* Paw pink: soft pink for decorative elements */
+  --color-paw-100: #fce4e4;
+  --color-paw-200: #f8c8c8;
+  --color-paw-300: #f0a8a8;
+
+  /* Sage/mint: for trust badges and secondary elements */
+  --color-sage-100: #e6f2e6;
+  --color-sage-200: #c8e0c8;
+  --color-sage-400: #7bb87b;
 }
 
 :root {
-  --background: #fafafa; /* Soft neutral background */
-  --foreground: #171717;
+  --background: #fef9f3;
+  /* Warm cream */
+  --foreground: #1e1640;
+  /* Deep navy */
 }
 
 @theme inline {
@@ -30,16 +49,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #111111; /* Dark charcoal */
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, sans-serif;
   scroll-behavior: smooth;
+}
+
+/* Smooth scroll anchoring */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Paw print decoration */
+.paw-bg {
+  background-image: radial-gradient(circle at 80% 20%, var(--color-paw-100) 0, transparent 40%),
+    radial-gradient(circle at 20% 70%, var(--color-paw-100) 0, transparent 35%);
 }
