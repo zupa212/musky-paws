@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Calendar, Clock, User, Phone, PawPrint, CheckCircle2, ChevronDown, MapPin, Mail, Loader2, ArrowRight } from 'lucide-react';
-import { submitBooking } from '@/app/actions/booking';
+import { submitBooking, getServices } from '@/app/actions/booking';
 import { generateICS } from '@/lib/utils/calendar';
 
 // Analytics helper
@@ -12,19 +12,20 @@ const trackEvent = (name: string, params?: object) => {
     }
 };
 
-// Move to DB fetching in a real scenario, hardcoding for this UI MVP
-const SERVICES = [
-    { id: '11111111-1111-1111-1111-111111111111', slug: 'full-grooming', name: "Πλήρης Καλλωπισμός", duration: 120 },
-    { id: '22222222-2222-2222-2222-222222222222', slug: 'bath-brush', name: "Μπάνιο & Βούρτσισμα", duration: 60 },
-    { id: '33333333-3333-3333-3333-333333333333', slug: 'deshedding', name: "Deshedding", duration: 90 },
-    { id: '44444444-4444-4444-4444-444444444444', slug: 'puppy', name: "Περιποίηση Κουταβιού", duration: 60 },
-    { id: '55555555-5555-5555-5555-555555555555', slug: 'nails-ears', name: "Νύχια & Αυτιά", duration: 15 }
-];
+// Replaced hardcoded SERVICES with dynamic fetching from DB
+interface Service {
+    id: string;
+    name: string;
+    slug: string;
+    duration_min: number;
+}
 
 export default function BookingPageWrapper() {
     const [step, setStep] = useState(1);
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState("");
+    const [services, setServices] = useState<Service[]>([]);
+    const [loadingServices, setLoadingServices] = useState(true);
 
     // Form State
     const [formData, setFormData] = useState({
@@ -40,9 +41,18 @@ export default function BookingPageWrapper() {
         notes: ''
     });
 
-    // Track Start
+    // Track Start & Load Services
     useEffect(() => {
         trackEvent('booking_start');
+        getServices().then(res => {
+            if (res.success && res.services) {
+                setServices(res.services);
+            } else {
+                console.error("Failed to load services", res.error);
+                setErrorMessage("Αποτυχία φόρτωσης υπηρεσιών. Παρακαλώ ανανεώστε τη σελίδα.");
+            }
+            setLoadingServices(false);
+        });
     }, []);
 
     // Available Slots state
@@ -140,8 +150,8 @@ export default function BookingPageWrapper() {
                     <div className="space-y-3">
                         <button
                             onClick={() => {
-                                const srv = SERVICES.find(s => s.id === formData.serviceId);
-                                generateICS(formData.date, formData.time, srv?.name || "Grooming", srv?.duration || 60);
+                                const srv = services.find(s => s.id === formData.serviceId);
+                                generateICS(formData.date, formData.time, srv?.name || "Grooming", srv?.duration_min || 60);
                             }}
                             className="inline-flex justify-center items-center gap-2 rounded-full border-2 border-brand-900 text-brand-900 bg-transparent px-8 py-3.5 font-bold hover:bg-brand-50 transition-colors w-full"
                         >
@@ -224,7 +234,7 @@ export default function BookingPageWrapper() {
                                 <div className="pt-6 border-t border-brand-100 dark:border-brand-800">
                                     <label className="block text-sm font-semibold mb-4">Επιλέξτε Υπηρεσία <span className="text-red-500">*</span></label>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {SERVICES.map(srv => (
+                                        {services.map(srv => (
                                             <label
                                                 key={srv.id}
                                                 className={`relative flex cursor-pointer rounded-xl border p-4 shadow-sm focus:outline-none transition-all ${formData.serviceId === srv.id ? 'border-accent-500 ring-1 ring-accent-500 bg-accent-50/50 dark:bg-accent-950/30' : 'border-brand-200 dark:border-brand-700 bg-white dark:bg-brand-950 hover:bg-brand-50 dark:hover:bg-brand-900/50'
@@ -234,12 +244,17 @@ export default function BookingPageWrapper() {
                                                 <span className="flex flex-1">
                                                     <span className="flex flex-col">
                                                         <span id={`service-label-${srv.id}`} className="block text-sm font-bold text-brand-900 dark:text-brand-100">{srv.name}</span>
-                                                        <span className="mt-1 flex items-center text-xs text-brand-500 dark:text-brand-400 gap-1"><Clock className="w-3 h-3" /> ~{srv.duration} λεπτά</span>
+                                                        <span className="mt-1 flex items-center text-xs text-brand-500 dark:text-brand-400 gap-1"><Clock className="w-3 h-3" /> ~{srv.duration_min} λεπτά</span>
                                                     </span>
                                                 </span>
                                                 <CheckCircle2 className={`h-5 w-5 ${formData.serviceId === srv.id ? 'text-accent-600' : 'text-transparent'}`} aria-hidden="true" />
                                             </label>
                                         ))}
+                                        {loadingServices && (
+                                            <div className="col-span-1 sm:col-span-2 flex justify-center py-4">
+                                                <Loader2 className="w-6 h-6 animate-spin text-accent-500" />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>

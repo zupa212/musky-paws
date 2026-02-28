@@ -106,3 +106,18 @@ export async function submitBooking(formData: FormData) {
         return { success: false, error: error.message ?? "Παρουσιάστηκε άγνωστο σφάλμα." };
     }
 }
+
+export async function getServices() {
+    try {
+        const supabase = await createAdminClient();
+        const { data, error } = await supabase
+            .from("services")
+            .select("id, name, slug, duration_min")
+            .order("id", { ascending: true });
+
+        if (error) throw error;
+        return { success: true, services: data };
+    } catch (error: any) {
+        return { success: false, error: error.message };
+    }
+}
