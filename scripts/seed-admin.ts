@@ -1,4 +1,4 @@
-// Seed Admin User Script
+export { } // Make this a module
 // Run with: npx tsx scripts/seed-admin.ts
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://gowgutmkaifhkhjuzhaj.supabase.co'

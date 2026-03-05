@@ -1,4 +1,4 @@
-// Reset Admin Password Script
+export { } // Make this a module to avoid Top-level declarations conflicts
 // Run with: npx tsx scripts/reset-admin-password.ts
 
 const SUPABASE_URL = 'https://gowgutmkaifhkhjuzhaj.supabase.co'

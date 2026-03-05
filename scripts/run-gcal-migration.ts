@@ -1,4 +1,4 @@
-// Run Google Calendar Migration
+export { } // Make this a module
 // Adds google_calendar_event_id column to bookings table
 
 const SUPABASE_URL = 'https://gowgutmkaifhkhjuzhaj.supabase.co'

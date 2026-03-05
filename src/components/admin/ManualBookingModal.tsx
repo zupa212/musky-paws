@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation'
 
 export default function ManualBookingModal({
     services,
+    defaultDate,
+    defaultTime,
     onClose,
 }: {
     services: { id: string; name: string; slug: string; duration_min: number; price_from: number }[]

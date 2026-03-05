@@ -1,0 +1,75 @@
+﻿git : remote: error: GH013: 
+Repository rule violations found 
+for refs/heads/master.        
+At line:1 char:1
++ git push origin master > 
+push_error2.txt 2>&1 ; cat 
+push_error2.txt
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
+    + CategoryInfo          : No 
+   tSpecified: (remote: error:   
+  ...master.        :String) [   
+ ], RemoteException
+    + FullyQualifiedErrorId : Na 
+   tiveCommandError
+ 
+remote: 
+remote: - GITHUB PUSH PROTECTION 
+       
+remote:   ΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+ö        
+remote:     Resolve the 
+following violations before 
+pushing again        
+remote: 
+remote:     - Push cannot 
+contain secrets        
+remote: 
+remote:             
+remote:      (?) Learn how to 
+resolve a blocked push        
+remote:      https://docs.github.
+com/code-security/secret-scanning
+/working-with-secret-scanning-and
+-push-protection/working-with-pus
+h-protection-from-the-command-lin
+e#resolving-a-blocked-push       
+ 
+remote:             
+remote:             
+remote:       ΓÇöΓÇö Google 
+Cloud Service Account 
+Credentials 
+ΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇö   
+     
+remote:        locations:        
+remote:          - commit: 67f745
+47271c74c14ff00ca99ebb80661953f90
+7        
+remote:            path: secrets/
+gcal-service-account.json:1      
+  
+remote:             
+remote:        (?) To push, 
+remove secret from commit(s) or 
+follow this URL to allow the 
+secret.        
+remote:        https://github.com
+/zupa212/musky-paws/security/secr
+et-scanning/unblock-secret/3AXBkH
+hn0B07gSdaWK8SF9uU0IT        
+remote:             
+remote: 
+remote: 
+To https://github.com/zupa212/mus
+ky-paws.git
+ ! [remote rejected] master -> 
+master (push declined due to 
+repository rule violations)
+error: failed to push some refs 
+to 'https://github.com/zupa212/mu
+sky-paws.git'
