@@ -12,7 +12,8 @@ export default async function AdminCustomersPage() {
         .from('customers')
         .select(`
       id, name, phone, phone_e164, email, admin_notes, created_at,
-      bookings (id, status, start_at, services (name))
+      bookings (id, status, start_at, services (name)),
+      pets (id, name, type, breed, weight_kg, birth_date, medical_notes, behavioral_notes, pet_gallery (id, image_url, type, notes, created_at))
     `)
         .order('created_at', { ascending: false })
 

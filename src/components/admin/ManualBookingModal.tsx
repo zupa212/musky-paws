@@ -10,6 +10,8 @@ export default function ManualBookingModal({
     onClose,
 }: {
     services: { id: string; name: string; slug: string; duration_min: number; price_from: number }[]
+    defaultDate?: string
+    defaultTime?: string
     onClose: () => void
 }) {
     const router = useRouter()
@@ -21,7 +23,7 @@ export default function ManualBookingModal({
 
     const [form, setForm] = useState({
         customerName: '', customerPhone: '', customerEmail: '',
-        serviceId: services[0]?.id ?? '', date: '', time: '',
+        serviceId: services[0]?.id ?? '', date: defaultDate || '', time: defaultTime || '',
         petType: 'dog', breed: '', weightKg: '', notes: '',
         forceBooking: false, sendNotification: true,
     })

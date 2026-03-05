@@ -13,6 +13,12 @@
   --color-brand-800: #5e422b;
   --color-brand-900: #3d2c1d;
   --color-brand-950: #1e1640;
+
+  /* Modern Booking UI Palette */
+  --color-ui-taupe: #bcafa4;
+  --color-ui-navy: #292446;
+  --color-ui-coral: #de7363;
+  --color-ui-coral-hover: #c95e4a;
   /* Deep navy */
 
   /* Accent: warm coral/pink for CTAs */

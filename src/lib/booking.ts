@@ -1,5 +1,6 @@
 import { createAdminClient, createClient } from "@/lib/supabase/server";
 import { format, parse, addMinutes, isBefore, isAfter, getDay, startOfDay, endOfDay } from "date-fns";
+import { getCalendarEvents } from "./google-calendar";
 
 type Slot = {
     time: string; // "09:00"
@@ -62,11 +63,17 @@ export async function getAvailableSlots(dateString: string, serviceId: string): 
         .gte('end_at', tStart.toISOString())
         .lte('start_at', tEnd.toISOString());
 
+    // 6.5 Google Calendar Events (Two-way sync)
+    const gcalEvents = await getCalendarEvents(tStart, tEnd);
+
     // 7. Generate slots
     let currentSlot = parse(startStr, "HH:mm:ss", targetDate);
     const endWorkTime = parse(endStr, "HH:mm:ss", targetDate);
     const slots: Slot[] = [];
-    const now = new Date();
+
+    // Evaluate 'now' in the Athens timezone to correctly compare against local slots
+    const athensNowStr = new Date().toLocaleString("en-US", { timeZone: "Europe/Athens" });
+    const now = new Date(athensNowStr);
 
     // Breaks from schedule
     const breaks = (schedule?.breaks as { start: string; end: string }[]) || [];
@@ -96,6 +103,15 @@ export async function getAvailableSlots(dateString: string, serviceId: string): 
                 const btStart = new Date(bt.start_at);
                 const btEnd = new Date(bt.end_at);
                 if (currentSlot < btEnd && slotEnd > btStart) { available = false; break; }
+            }
+        }
+
+        // Check Google Calendar overlap
+        if (available) {
+            for (const ge of gcalEvents) {
+                const geStart = new Date(ge.start);
+                const geEnd = ge.end.length === 10 ? parse(ge.end, 'yyyy-MM-dd', new Date()) : new Date(ge.end); // Handle all-day vs time
+                if (currentSlot < geEnd && slotEnd > geStart) { available = false; break; }
             }
         }
 

@@ -190,26 +190,88 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ TESTIMONIALS ═══════════════ */}
-      <section className="py-20 bg-navy-900 text-white">
+      <section className="py-24 bg-navy-900 overflow-hidden relative">
+        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent opacity-10" />
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-16">Τι Λένε για εμάς</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">Τι Λένε οι Πελάτες μας</h2>
+            <div className="flex items-center justify-center gap-2 text-accent-400">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
+              </div>
+              <span className="text-white/80 font-medium">4.9/5 στο Google Maps</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { text: "Ο Μάξ είναι δύσκολος στο κούρεμα, αλλά στο Musky Paws του φέρθηκαν με τόση υπομονή! Εξαιρετικό αποτέλεσμα.", author: "Μαρία Π.", dog: "Poodle" },
-              { text: "Ο καθαρότερος χώρος που έχω πάει τον σκύλο μου. Η ποιότητα φαίνεται στη λεπτομέρεια.", author: "Γιώργος Α.", dog: "Golden Retriever" },
-              { text: "Άψογη εξυπηρέτηση! Το κουτάβι μου έφυγε χαρούμενο και μοσχομυριστό. Ανεπιφύλακτα!", author: "Ελένη Μ.", dog: "Maltese" }
+              {
+                text: "Η εμπειρία μου με την Στέλλα εξαιρετική! Είναι φιλική και επαγγελματική, κάνοντάς μας να αισθανθούμε άνετα. Ο Bruno μου έμοιαζε πιο όμορφος και υγιής από ποτέ!",
+                author: "Baso Arapoglou",
+                meta: "Local Guide · 18 κριτικές",
+                stars: 5
+              },
+              {
+                text: "Απίστευτη δουλειά. Επαγγελματίες και πιο συγκεκριμένα το σκυλί αισθάνθηκε πολύ οικεία και πέρασε ευχάριστα. Θα την προτιμήσουμε ξανά!",
+                author: "Dimitris Dolianitis",
+                meta: "Local Guide · 9 κριτικές",
+                stars: 5
+              },
+              {
+                text: "Ειλικρινά δεν έχω λόγια!! Η Στέλλα είναι καταπληκτική στην δουλειά της αλλά και σαν άνθρωπος!! Η φουσκίτσα μου την λατρεύει!!!!",
+                author: "R. R",
+                meta: "Local Guide · 189 κριτικές",
+                stars: 5
+              },
+              {
+                text: "Καταπληκτικό περιβάλλον, άψογη εξυπηρέτηση. Ό,τι καλύτερο για την περιποίηση σκυλιών. We love you Stella! 🫶🏻❤️",
+                author: "Pinelopi Angelaki",
+                meta: "2 κριτικές",
+                stars: 5
+              },
+              {
+                text: "Εξαιρετική επαγγελματίας!! Η Στέλλα είναι πολύ προσεκτική, αγαπά πραγματικά τα ζώα και το αποτέλεσμα στο grooming ήταν άψογο!!",
+                author: "Sofia Mpinazi",
+                meta: "8 κριτικές",
+                stars: 5
+              },
+              {
+                text: "Η Στέλλα είναι καταπληκτική μέσα στο χαμόγελο, σου εξηγεί όλη την διαδικασία και κοιτάει μόνο το καλό του σκύλου! Το κομμωτήριο πεντακάθαρο!",
+                author: "Anastasia Παπαδοπούλου",
+                meta: "Local Guide · 8 κριτικές",
+                stars: 5
+              }
             ].map((review, idx) => (
-              <div key={idx} className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                <div className="flex text-accent-400 mb-4">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
+              <div key={idx} className="group p-8 rounded-[32px] bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 flex flex-col h-full hover:-translate-y-2">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="flex text-accent-500 gap-1">
+                    {[...Array(review.stars)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                  </div>
+                  <div className="bg-white/10 px-2 py-1 rounded text-[10px] font-bold text-white/40 uppercase tracking-widest">Google</div>
                 </div>
-                <p className="text-lg leading-relaxed mb-6 font-medium text-white/90">&ldquo;{review.text}&rdquo;</p>
-                <div>
-                  <p className="font-bold text-white">{review.author}</p>
-                  <p className="text-white/50 text-sm">{review.dog}</p>
+                <p className="text-lg leading-relaxed mb-6 font-medium text-white/90 italic flex-grow">&ldquo;{review.text}&rdquo;</p>
+                <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5">
+                  <div className="w-10 h-10 rounded-full bg-accent-500/20 flex items-center justify-center text-accent-500 font-bold">
+                    {review.author[0]}
+                  </div>
+                  <div>
+                    <p className="font-bold text-white text-base">{review.author}</p>
+                    <p className="text-white/40 text-xs font-medium">{review.meta}</p>
+                  </div>
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <a
+              href="https://www.google.com/search?q=Musky+Paws+Peraia+reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-bold text-accent-400 hover:text-accent-300 transition-colors"
+            >
+              Δείτε όλες τις κριτικές στο Google Maps <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </section>

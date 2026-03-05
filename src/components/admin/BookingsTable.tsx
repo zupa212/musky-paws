@@ -6,10 +6,11 @@ import { format, parseISO, isToday, differenceInHours } from 'date-fns'
 import {
     Search, Download, CheckCircle2, XCircle, Clock, User, Phone as PhoneIcon,
     Mail, PawPrint, CheckCheck, AlertCircle, MoreHorizontal, Send, Plus,
-    CalendarClock, RefreshCw, Loader2, PhoneCall
+    CalendarClock, RefreshCw, Loader2, PhoneCall, Calendar
 } from 'lucide-react'
 import { updateBookingStatus, resendNotification, rescheduleBooking } from '@/app/actions/admin'
 import ManualBookingModal from './ManualBookingModal'
+import AdminCalendarView from './AdminCalendarView'
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
     pending: { label: 'Αναμονή', color: 'bg-yellow-100 text-yellow-800 border-yellow-200' },
@@ -19,7 +20,7 @@ const STATUS_LABELS: Record<string, { label: string; color: string }> = {
     no_show: { label: 'No Show', color: 'bg-gray-100 text-gray-700 border-gray-200' },
 }
 
-type Tab = 'all' | 'pending' | 'today' | 'needs_action'
+type Tab = 'all' | 'today' | 'calendar'
 
 export default function BookingsTable({ bookings, services }: { bookings: any[]; services?: any[] }) {
     const router = useRouter()
@@ -30,8 +31,10 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
     const [actionPending, setActionPending] = useState<string | null>(null)
     const [resendBusy, setResendBusy] = useState<string | null>(null)
     const [resendDone, setResendDone] = useState<string | null>(null)
-    const [activeTab, setActiveTab] = useState<Tab>('all')
+    const [activeTab, setActiveTab] = useState<Tab>('calendar')
     const [showManualModal, setShowManualModal] = useState(false)
+    const [modalDefaultDate, setModalDefaultDate] = useState('')
+    const [modalDefaultTime, setModalDefaultTime] = useState('')
     const [showReschedule, setShowReschedule] = useState(false)
     const [rescheduleDate, setRescheduleDate] = useState('')
     const [rescheduleTime, setRescheduleTime] = useState('')
@@ -44,6 +47,12 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
         if (value) params.set(key, value)
         else params.delete(key)
         startTransition(() => router.push(`${pathname}?${params.toString()}`))
+    }
+
+    const handleAddBookingFromCalendar = (date: string, time: string) => {
+        setModalDefaultDate(date)
+        setModalDefaultTime(time)
+        setShowManualModal(true)
     }
 
     const handleStatusChange = async (id: string, status: string) => {
@@ -113,30 +122,17 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
         }
 
         switch (activeTab) {
-            case 'pending': return b.status === 'pending'
-            case 'today': return isToday(parseISO(b.start_at)) && ['pending', 'confirmed'].includes(b.status)
-            case 'needs_action': {
-                if (b.status === 'pending' && differenceInHours(now, parseISO(b.created_at)) > 2) return true
-                if (isToday(parseISO(b.start_at)) && b.status === 'pending') return true
-                return false
-            }
+            case 'today': return isToday(parseISO(b.start_at))
             default: return true
         }
     })
 
-    const pendingCount = bookings.filter(b => b.status === 'pending').length
-    const todayCount = bookings.filter(b => isToday(parseISO(b.start_at)) && ['pending', 'confirmed'].includes(b.status)).length
-    const needsActionCount = bookings.filter(b => {
-        if (b.status === 'pending' && differenceInHours(now, parseISO(b.created_at)) > 2) return true
-        if (isToday(parseISO(b.start_at)) && b.status === 'pending') return true
-        return false
-    }).length
+    const todayCount = bookings.filter(b => isToday(parseISO(b.start_at))).length
 
     const tabs: { key: Tab; label: string; count?: number }[] = [
-        { key: 'all', label: 'Όλα' },
-        { key: 'pending', label: 'Αναμονή', count: pendingCount },
+        { key: 'calendar', label: 'Ημερολόγιο (GCal)' },
+        { key: 'all', label: 'Λίστα Ραντεβού' },
         { key: 'today', label: 'Σήμερα', count: todayCount },
-        { key: 'needs_action', label: 'Χρειάζεται Ενέργ.', count: needsActionCount },
     ]
 
     return (
@@ -145,7 +141,11 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
             <div className="flex items-center justify-between mb-4">
                 <div />
                 <button
-                    onClick={() => setShowManualModal(true)}
+                    onClick={() => {
+                        setModalDefaultDate('')
+                        setModalDefaultTime('')
+                        setShowManualModal(true)
+                    }}
                     className="flex items-center gap-2 px-4 py-2.5 bg-accent-500 text-white text-sm font-bold rounded-xl hover:bg-accent-600 transition-colors shadow-sm"
                 >
                     <Plus className="w-4 h-4" /> Νέο Ραντεβού
@@ -195,9 +195,15 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
                 </button>
             </div>
 
-            {/* Mobile Cards + Desktop Table */}
-            <div className="bg-white rounded-2xl border border-brand-200 overflow-hidden">
-                {filteredBookings.length === 0 ? (
+            {/* Mobile Cards + Desktop Table OR Calendar */}
+            <div className={`bg-white rounded-2xl border border-brand-200 overflow-hidden ${activeTab === 'calendar' ? 'border-none bg-transparent rounded-none' : ''}`}>
+                {activeTab === 'calendar' ? (
+                    <AdminCalendarView
+                        bookings={filteredBookings}
+                        onAddBooking={handleAddBookingFromCalendar}
+                        onBookingClick={setDrawerBooking}
+                    />
+                ) : filteredBookings.length === 0 ? (
                     <div className="py-20 text-center text-brand-400">
                         <AlertCircle className="w-8 h-8 mx-auto mb-3 opacity-50" />
                         <p className="font-medium">Δεν βρέθηκαν ραντεβού</p>
@@ -213,6 +219,7 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
                                         <th className="px-4 py-3 font-semibold">Πελάτης</th>
                                         <th className="px-4 py-3 font-semibold">Υπηρεσία</th>
                                         <th className="px-4 py-3 font-semibold">Κατοικίδιο</th>
+                                        <th className="px-4 py-3 font-semibold">Συγχρονισμός</th>
                                         <th className="px-4 py-3 font-semibold">Κατάσταση</th>
                                         <th className="px-4 py-3 font-semibold text-right">Ενέργειες</th>
                                     </tr>
@@ -242,13 +249,19 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
                                                     </span>
                                                 </td>
                                                 <td className="px-4 py-3">
+                                                    {b.google_calendar_event_id ? (
+                                                        <a href={`https://calendar.google.com/calendar/u/0/r/eventedit/${b.google_calendar_event_id.replace('_', '')}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors bg-blue-50 px-2 py-1 rounded-md" onClick={e => e.stopPropagation()} title="Προβολή στο Google Calendar">
+                                                            <Calendar className="w-3 h-3" /> GCal
+                                                        </a>
+                                                    ) : (
+                                                        <span className="text-xs text-brand-400 font-medium">-</span>
+                                                    )}
+                                                </td>
+                                                <td className="px-4 py-3">
                                                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold border ${st.color}`}>{st.label}</span>
                                                 </td>
                                                 <td className="px-4 py-3 text-right" onClick={e => e.stopPropagation()}>
                                                     <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                        {b.status === 'pending' && (
-                                                            <button disabled={actionPending === b.id} onClick={() => handleStatusChange(b.id, 'confirmed')} title="Επιβεβαίωση" className="p-2 bg-green-50 text-green-600 hover:bg-green-100 rounded-lg transition-colors"><CheckCircle2 className="w-4 h-4" /></button>
-                                                        )}
                                                         {isToday(parseISO(b.start_at)) && b.status === 'confirmed' && (
                                                             <button disabled={actionPending === b.id} onClick={() => handleStatusChange(b.id, 'completed')} title="Walk-in / Check-in" className="p-2 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"><CheckCheck className="w-4 h-4" /></button>
                                                         )}
@@ -278,7 +291,14 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
                                                 <p className="font-bold text-brand-900">{b.customers?.name}</p>
                                                 <p className="text-xs text-brand-500 mt-0.5">{b.services?.name} · {b.pet_type === 'dog' ? '🐶' : '🐱'}{b.breed ? ` ${b.breed}` : ''}</p>
                                             </div>
-                                            <span className={`px-2 py-0.5 rounded-full text-xs font-bold border ${st.color}`}>{st.label}</span>
+                                            <div className="flex flex-col items-end gap-1">
+                                                <span className={`px-2 py-0.5 rounded-full text-xs font-bold border ${st.color}`}>{st.label}</span>
+                                                {b.google_calendar_event_id && (
+                                                    <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded flex items-center gap-1">
+                                                        <Calendar className="w-2.5 h-2.5" /> GCal
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                         <div className="flex items-center gap-4 text-sm text-brand-600">
                                             <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {format(start, 'dd/MM HH:mm')}</span>
@@ -286,12 +306,6 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
                                         </div>
                                         {/* One-tap mobile actions */}
                                         <div className="flex gap-2" onClick={e => e.stopPropagation()}>
-                                            {b.status === 'pending' && (
-                                                <button disabled={actionPending === b.id} onClick={() => handleStatusChange(b.id, 'confirmed')}
-                                                    className="flex-1 py-2 text-xs font-bold bg-green-100 text-green-700 rounded-xl hover:bg-green-200 transition-colors">
-                                                    ✓ Επιβεβαίωση
-                                                </button>
-                                            )}
                                             {isTodayBooking && b.status === 'confirmed' && (
                                                 <button disabled={actionPending === b.id} onClick={() => handleStatusChange(b.id, 'completed')}
                                                     className="flex-1 py-2 text-xs font-bold bg-blue-100 text-blue-700 rounded-xl hover:bg-blue-200 transition-colors">
@@ -368,6 +382,18 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
                             <div>
                                 <span className="text-brand-400 font-semibold text-xs uppercase">Παρατηρήσεις</span>
                                 <p className="mt-1 text-sm bg-brand-50 rounded-xl p-3">{drawerBooking.notes}</p>
+                            </div>
+                        )}
+
+                        {/* Google Calendar Link */}
+                        {drawerBooking.google_calendar_event_id && (
+                            <div>
+                                <span className="text-brand-400 font-semibold text-xs uppercase">Google Calendar</span>
+                                <div className="mt-1">
+                                    <a href={`https://calendar.google.com/calendar/u/0/r/eventedit/${drawerBooking.google_calendar_event_id.replace('_', '')}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors bg-blue-50 px-3 py-2 rounded-xl">
+                                        <Calendar className="w-4 h-4" /> Προβολή στο Ημερολόγιο Google
+                                    </a>
+                                </div>
                             </div>
                         )}
 

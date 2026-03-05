@@ -48,6 +48,6 @@ export async function GET(request: NextRequest) {
         })
     } catch (error: any) {
         console.error('Error fetching slots:', error)
-        return NextResponse.json({ error: 'Σφάλμα κατά τον υπολογισμό διαθεσιμότητας.' }, { status: 500 })
+        return NextResponse.json({ error: 'Σφάλμα κατά τον υπολογισμό διαθεσιμότητας.', details: error.message, stack: error.stack }, { status: 500 })
     }
 }

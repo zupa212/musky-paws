@@ -6,6 +6,8 @@ import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import { formatGreekPhone } from "@/lib/utils/phone";
 import { addMinutes, parseISO } from "date-fns";
+import { createCalendarEvent, updateCalendarEvent, deleteCalendarEvent } from "@/lib/google-calendar";
+import { sendBookingConfirmedNotification } from "@/lib/notifications";
 
 // ── Auth helper ───────────────────────────────────────────────────────────────
 async function getAdminUserId(): Promise<string | null> {
@@ -25,14 +27,7 @@ async function writeAuditLog(action: string, tableName: string, recordId: string
     await supabase.from("audit_log").insert({ admin_id: adminId, action, table_name: tableName, record_id: recordId, payload: payload ?? {} });
 }
 
-function makePayload(name: string, service: string, startIso: string, customerPhone?: string) {
-    const d = new Date(startIso);
-    return {
-        customer_name: name, customer_phone: customerPhone ?? '', service,
-        date_gr: d.toLocaleDateString("el-GR", { weekday: "long", day: "numeric", month: "long", timeZone: "Europe/Athens" }),
-        time_gr: d.toLocaleTimeString("el-GR", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Athens" }),
-    };
-}
+// Removed makePayload as we use the real-time notification functions now
 
 // ── Update Booking Status ─────────────────────────────────────────────────────
 export async function updateBookingStatus(
@@ -43,6 +38,30 @@ export async function updateBookingStatus(
     const { error } = await supabase.from("bookings").update({ status }).eq("id", bookingId);
     if (error) return { success: false, error: "Αποτυχία ενημέρωσης ραντεβού" };
 
+    if (status === 'confirmed') {
+        // Create event in Google Calendar if not exists
+        await createCalendarEvent(bookingId);
+    } else if (status === 'canceled') {
+        // Delete from Google Calendar
+        await deleteCalendarEvent(bookingId);
+    } else if (status === 'completed') {
+        // Schedule Review Request in 24h
+        const { data: b } = await supabase
+            .from("bookings")
+            .select("*, customers(name, email, phone_e164, phone)")
+            .eq("id", bookingId).single();
+
+        if (b) {
+            const runAt = new Date();
+            runAt.setHours(runAt.getHours() + 24);
+
+            await supabase.from("notification_outbox").insert([
+                { booking_id: bookingId, channel: "sms", to: b.customers.phone_e164 || b.customers.phone, template: "review_request", run_at: runAt.toISOString(), payload: { customer_name: b.customers.name } },
+                ...(b.customers.email ? [{ booking_id: bookingId, channel: "email", to: b.customers.email, template: "review_request", run_at: runAt.toISOString(), payload: { customer_name: b.customers.name } }] : [])
+            ]);
+        }
+    }
+
     await writeAuditLog("booking.status_changed", "bookings", bookingId, { status });
 
     const { data: b } = await supabase
@@ -50,22 +69,15 @@ export async function updateBookingStatus(
         .select("*, customers(name, email, phone_e164, phone), services(name)")
         .eq("id", bookingId).single();
 
-    if (b) {
-        const phone = b.customers.phone_e164 || formatGreekPhone(b.customers.phone);
-        const payload = makePayload(b.customers.name, b.services.name, b.start_at, phone);
-        const templateMap: Record<string, string | null> = {
-            confirmed: "booking_confirmed_customer",
-            canceled: "booking_canceled_customer",
-            completed: null,
-            no_show: null,
+    if (b && status === 'confirmed') {
+        const bd = {
+            id: b.id, start_at: b.start_at, pet_type: b.pet_type, breed: b.breed,
+            services: { name: b.services.name, duration_min: 60, price_from: 0 }
         };
-        const template = templateMap[status];
-        if (template) {
-            const outbox: any[] = [{ booking_id: bookingId, channel: "sms", to: phone, template, payload }];
-            if (b.customers.email)
-                outbox.push({ booking_id: bookingId, channel: "email", to: b.customers.email, template, payload });
-            await supabase.from("notification_outbox").insert(outbox);
-        }
+        const cd = {
+            name: b.customers.name, phone: b.customers.phone, phone_e164: b.customers.phone_e164, email: b.customers.email
+        };
+        sendBookingConfirmedNotification(bd, cd).catch(e => console.error("Notification Error:", e));
     }
 
     revalidatePath("/admin/bookings");
@@ -81,13 +93,13 @@ export async function resendNotification(bookingId: string, channel: "sms" | "em
         .eq("id", bookingId).single();
     if (!b) return { success: false, error: "Ραντεβού δεν βρέθηκε" };
 
-    const phone = b.customers.phone_e164 || formatGreekPhone(b.customers.phone);
-    const to = channel === "sms" ? phone : b.customers.email;
-    if (!to) return { success: false, error: "Δεν υπάρχει τηλέφωνο/email" };
+    const bd = { id: b.id, start_at: b.start_at, pet_type: b.pet_type, breed: b.breed, services: { name: b.services.name, duration_min: 60, price_from: 0 } };
+    const cd = { name: b.customers.name, phone: b.customers.phone, phone_e164: b.customers.phone_e164, email: b.customers.email };
 
-    const payload = makePayload(b.customers.name, b.services.name, b.start_at, phone);
-    await supabase.from("notification_outbox").insert({ booking_id: bookingId, channel, to, template, payload, run_at: new Date().toISOString() });
-    await writeAuditLog("notification.resent", "notification_outbox", bookingId, { channel, template });
+    // Simplification for the new realtime API
+    await sendBookingConfirmedNotification(bd, cd).catch(e => console.log(e));
+
+    await writeAuditLog("notification.resent", "realtime_api", bookingId, { channel, template });
     return { success: true };
 }
 
@@ -157,15 +169,14 @@ export async function createManualBooking(data: {
 
     await writeAuditLog("booking.manual_created", "bookings", booking.id, { source: "phone", customerPhone: phoneE164 });
 
+    // Sync to Google Calendar
+    await createCalendarEvent(booking.id);
+
     // 4. Notification (optional)
     if (data.sendNotification !== false) {
-        const payload = makePayload(data.customerName, service.name, startAt.toISOString(), phoneE164);
-        const outbox: any[] = [
-            { booking_id: booking.id, channel: "sms", to: phoneE164, template: "booking_confirmed_customer", payload },
-        ];
-        if (data.customerEmail)
-            outbox.push({ booking_id: booking.id, channel: "email", to: data.customerEmail, template: "booking_confirmed_customer", payload });
-        await supabase.from("notification_outbox").insert(outbox);
+        const bd = { id: booking.id, start_at: startAt.toISOString(), pet_type: data.petType || 'dog', breed: data.breed || null, services: { name: service.name, duration_min: service.duration_min, price_from: service.price_from } };
+        const cd = { name: data.customerName, phone: data.customerPhone, phone_e164: phoneE164, email: data.customerEmail || null };
+        sendBookingConfirmedNotification(bd, cd).catch(e => console.error("Notification Error:", e));
     }
 
     revalidatePath("/admin/bookings");
@@ -215,20 +226,13 @@ export async function rescheduleBooking(bookingId: string, newDate: string, newT
         old_start_at: oldStartAt, new_start_at: newStartAt.toISOString()
     });
 
-    // Send rescheduled notification
-    const phone = b.customers.phone_e164 || formatGreekPhone(b.customers.phone);
-    const payload = {
-        ...makePayload(b.customers.name, b.services.name, newStartAt.toISOString(), phone),
-        new_date_gr: newStartAt.toLocaleDateString("el-GR", { weekday: "long", day: "numeric", month: "long", timeZone: "Europe/Athens" }),
-        new_time_gr: newStartAt.toLocaleTimeString("el-GR", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Athens" }),
-    };
+    // Update event in Google Calendar
+    await updateCalendarEvent(bookingId);
 
-    const outbox: any[] = [
-        { booking_id: bookingId, channel: "sms", to: phone, template: "booking_rescheduled_customer", payload },
-    ];
-    if (b.customers.email)
-        outbox.push({ booking_id: bookingId, channel: "email", to: b.customers.email, template: "booking_rescheduled_customer", payload });
-    await supabase.from("notification_outbox").insert(outbox);
+    // Send rescheduled notification
+    const bd = { id: b.id, start_at: newStartAt.toISOString(), pet_type: b.pet_type, breed: b.breed, services: { name: b.services.name, duration_min: 60, price_from: 0 } };
+    const cd = { name: b.customers.name, phone: b.customers.phone, phone_e164: b.customers.phone_e164, email: b.customers.email };
+    sendBookingConfirmedNotification(bd, cd).catch(err => console.error(err));
 
     revalidatePath("/admin/bookings");
     return { success: true };
@@ -267,6 +271,57 @@ export async function updateCustomerNotes(customerId: string, notes: string) {
     await writeAuditLog("customer.notes_updated", "customers", customerId);
     revalidatePath("/admin/customers");
     return { success: true };
+}
+
+// ── Coupons ───────────────────────────────────────────────────────────────────
+export async function createCoupon(data: {
+    code: string;
+    discount_type: 'fixed' | 'percentage';
+    discount_value: number;
+    min_booking_amount?: number;
+    max_uses?: number;
+    expires_at?: string;
+}) {
+    const supabase = await createAdminClient();
+    const { error } = await supabase.from("coupons").insert({
+        ...data,
+        code: data.code.toUpperCase(),
+    });
+    if (error) return { success: false, error: "Αποτυχία δημιουργίας κουπονιού" };
+    revalidatePath("/admin/marketing");
+    return { success: true };
+}
+
+export async function deleteCoupon(id: string) {
+    const supabase = await createAdminClient();
+    const { error } = await supabase.from("coupons").delete().eq("id", id);
+    if (error) return { success: false, error: "Αποτυχία διαγραφής" };
+    revalidatePath("/admin/marketing");
+    return { success: true };
+}
+
+export async function validateCoupon(code: string, amount: number) {
+    const supabase = await createAdminClient();
+    const { data: coupon, error } = await supabase
+        .from("coupons")
+        .select("*")
+        .eq("code", code.toUpperCase())
+        .eq("active", true)
+        .single();
+
+    if (error || !coupon) return { success: false, error: "Το κουπόνι δεν βρέθηκε ή είναι ανενεργό" };
+    if (coupon.expires_at && new Date(coupon.expires_at) < new Date()) return { success: false, error: "Το κουπόνι έχει λήξει" };
+    if (coupon.max_uses && coupon.used_count >= coupon.max_uses) return { success: false, error: "Το κουπόνι έχει εξαντληθεί" };
+    if (amount < coupon.min_booking_amount) return { success: false, error: `Ελάχιστο ποσό κράτησης: ${coupon.min_booking_amount}€` };
+
+    let discount = 0;
+    if (coupon.discount_type === 'fixed') {
+        discount = Number(coupon.discount_value);
+    } else {
+        discount = amount * (Number(coupon.discount_value) / 100);
+    }
+
+    return { success: true, coupon, discount };
 }
 
 // ── Services ──────────────────────────────────────────────────────────────────
@@ -314,11 +369,21 @@ export async function upsertScheduleException(data: { date: string; is_closed: b
     revalidatePath("/admin/schedule");
     return { success: true };
 }
-
 export async function deleteScheduleException(id: string) {
     const supabase = await createAdminClient();
     const { error } = await supabase.from("schedule_exceptions").delete().eq("id", id);
     if (error) return { success: false, error: error.message };
     revalidatePath("/admin/schedule");
     return { success: true };
+}
+
+// ── Export ────────────────────────────────────────────────────────────────────
+export async function exportCustomers() {
+    const supabase = await createAdminClient();
+    const { data: customers } = await supabase
+        .from('customers')
+        .select('name, phone, phone_e164, email, created_at, admin_notes')
+        .order('created_at', { ascending: false });
+
+    return { success: true, customers: customers || [] };
 }

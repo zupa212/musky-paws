@@ -2,13 +2,11 @@
 
 import { useState } from 'react'
 import { format, parseISO } from 'date-fns'
-import { Phone, Mail, Clock, Star, Search, FileText, ChevronRight } from 'lucide-react'
-import { updateCustomerNotes } from '@/app/actions/admin'
+import { Phone, Mail, Clock, Star, Search, ChevronRight } from 'lucide-react'
+import CustomerProfileDrawer from './CustomerProfileDrawer'
 
 export default function CustomersTable({ customers }: { customers: any[] }) {
     const [selected, setSelected] = useState<any>(null)
-    const [notes, setNotes] = useState('')
-    const [savingNotes, setSavingNotes] = useState(false)
     const [search, setSearch] = useState('')
 
     const filtered = customers.filter(c => {
@@ -18,14 +16,6 @@ export default function CustomersTable({ customers }: { customers: any[] }) {
 
     const openCustomer = (c: any) => {
         setSelected(c)
-        setNotes(c.admin_notes || '')
-    }
-
-    const handleSaveNotes = async () => {
-        if (!selected) return
-        setSavingNotes(true)
-        await updateCustomerNotes(selected.id, notes)
-        setSavingNotes(false)
     }
 
     const bookingCount = (c: any) => c.bookings?.length ?? 0
@@ -99,66 +89,7 @@ export default function CustomersTable({ customers }: { customers: any[] }) {
 
             {/* Customer Detail Drawer */}
             {selected && (
-                <div className="fixed inset-0 z-50 flex justify-end" onClick={() => setSelected(null)}>
-                    <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
-                    <div
-                        className="relative w-full max-w-md bg-white h-full overflow-y-auto shadow-2xl p-6 space-y-6"
-                        onClick={e => e.stopPropagation()}
-                    >
-                        <div className="flex items-center justify-between">
-                            <h2 className="text-xl font-bold">{selected.name}</h2>
-                            <button onClick={() => setSelected(null)} className="text-brand-400 hover:text-brand-700 text-2xl">&times;</button>
-                        </div>
-
-                        {/* Contact */}
-                        <div className="bg-brand-50 rounded-2xl p-4 space-y-2 text-sm">
-                            <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-brand-400" /><span className="font-medium">{selected.phone_e164 || selected.phone}</span></div>
-                            {selected.email && <div className="flex items-center gap-2"><Mail className="w-4 h-4 text-brand-400" /><span>{selected.email}</span></div>}
-                            <div className="text-xs text-brand-400">Εγγραφή: {format(parseISO(selected.created_at), 'dd/MM/yyyy')}</div>
-                        </div>
-
-                        {/* Booking History */}
-                        <div>
-                            <h3 className="font-bold text-brand-900 mb-3">Ιστορικό Ραντεβού ({bookingCount(selected)})</h3>
-                            <div className="space-y-2">
-                                {selected.bookings?.sort((a: any, b: any) => b.start_at.localeCompare(a.start_at)).map((b: any) => (
-                                    <div key={b.id} className="flex items-center justify-between bg-brand-50 rounded-xl px-4 py-3 text-sm">
-                                        <div>
-                                            <div className="font-semibold text-brand-900">{b.services?.name}</div>
-                                            <div className="text-brand-500 text-xs">{format(parseISO(b.start_at), 'dd/MM/yyyy HH:mm')}</div>
-                                        </div>
-                                        <span className={`text-xs font-bold px-2 py-0.5 rounded-full border ${b.status === 'confirmed' ? 'bg-green-100 text-green-800 border-green-200' :
-                                                b.status === 'completed' ? 'bg-blue-100 text-blue-800 border-blue-200' :
-                                                    b.status === 'canceled' ? 'bg-red-100 text-red-800 border-red-200' :
-                                                        'bg-yellow-100 text-yellow-800 border-yellow-200'
-                                            }`}>{b.status}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Admin Notes */}
-                        <div>
-                            <label className="font-bold text-brand-900 text-sm flex items-center gap-2 mb-2">
-                                <FileText className="w-4 h-4 text-brand-400" /> Σημειώσεις Admin
-                            </label>
-                            <textarea
-                                value={notes}
-                                onChange={e => setNotes(e.target.value)}
-                                rows={4}
-                                placeholder="Προσωπικές σημειώσεις για αυτόν τον πελάτη…"
-                                className="w-full text-sm border border-brand-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-accent-500 outline-none resize-none"
-                            />
-                            <button
-                                onClick={handleSaveNotes}
-                                disabled={savingNotes}
-                                className="mt-2 px-4 py-2 bg-brand-950 text-white rounded-xl text-sm font-bold hover:bg-brand-800 transition-colors disabled:opacity-60"
-                            >
-                                {savingNotes ? 'Αποθήκευση…' : 'Αποθήκευση Σημειώσεων'}
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <CustomerProfileDrawer customer={selected} onClose={() => setSelected(null)} />
             )}
         </>
     )
