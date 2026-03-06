@@ -84,6 +84,7 @@ export default function BookingPage() {
     const [errorMessage, setErrorMessage] = useState("");
     const [services, setServices] = useState<Service[]>([]);
     const [loadingServices, setLoadingServices] = useState(true);
+    const [closedDays, setClosedDays] = useState<number[]>([0]); // Default: only Sunday closed
 
     // Form State
     const [formData, setFormData] = useState({
@@ -112,7 +113,7 @@ export default function BookingPage() {
         return d;
     });
 
-    // Track Start & Load Services
+    // Track Start & Load Services + Closed Days
     useEffect(() => {
         trackEvent('booking_start');
         getServices().then(res => {
@@ -124,6 +125,11 @@ export default function BookingPage() {
             }
             setLoadingServices(false);
         });
+        // Fetch which days of the week are closed
+        fetch('/api/closed-days')
+            .then(r => r.json())
+            .then(data => { if (data.closedDays) setClosedDays(data.closedDays); })
+            .catch(() => { });
     }, []);
 
     // Available Slots state
@@ -400,7 +406,7 @@ export default function BookingPage() {
                                     <div>
                                         <label className="block text-[13px] font-bold text-ui-navy/80 mb-2">Μέγεθος</label>
                                         <div className="relative">
-                                            <select name="weightKg" value={formData.weightKg} onChange={updateForm} className="w-full appearance-none rounded-xl border-2 border-white/30 bg-white/20 px-4 py-3 text-sm font-semibold text-ui-navy focus:border-ui-navy focus:bg-white/40 outline-none transition-colors">
+                                            <select name="weightKg" value={formData.weightKg} onChange={updateForm} className="w-full appearance-none rounded-xl border-2 border-ui-navy/20 bg-white px-4 py-3 text-sm font-bold text-ui-navy focus:border-ui-navy outline-none transition-colors shadow-sm">
                                                 <option value="">Επιλέξτε...</option>
                                                 <option value="small">Μικρό (≤10 kg)</option>
                                                 <option value="medium">Μεσαίο (11-25 kg)</option>
@@ -418,7 +424,7 @@ export default function BookingPage() {
                                     value={formData.breed}
                                     onChange={updateForm}
                                     placeholder="Ράτσα (προαιρετικό)"
-                                    className="w-full rounded-xl border-2 border-white/30 bg-white/20 px-4 py-3 text-sm font-semibold text-ui-navy placeholder-ui-navy/50 focus:border-ui-navy focus:bg-white/40 outline-none transition-colors"
+                                    className="w-full rounded-xl border-2 border-ui-navy/20 bg-white px-4 py-3 text-sm font-bold text-ui-navy placeholder-ui-navy/50 focus:border-ui-navy outline-none transition-colors shadow-sm"
                                 />
 
                                 {/* Service Cards */}
@@ -440,20 +446,20 @@ export default function BookingPage() {
                                                     <label
                                                         key={srv.id}
                                                         className={`flex items-center gap-4 cursor-pointer rounded-2xl border-2 p-4 transition-all duration-200 ${isSelected
-                                                            ? 'border-ui-navy bg-ui-navy text-white shadow-lg scale-[1.02]'
+                                                            ? 'border-ui-navy bg-white shadow-lg scale-[1.02] ring-2 ring-ui-navy'
                                                             : 'border-white/30 bg-white/20 hover:border-ui-navy/40 hover:bg-white/30 text-ui-navy'
                                                             }`}
                                                     >
                                                         <input type="radio" name="serviceId" value={srv.id} checked={isSelected} onChange={updateForm} className="sr-only" />
-                                                        <span className="text-3xl w-14 h-14 flex items-center justify-center rounded-xl bg-white/10">{icon}</span>
+                                                        <span className={`text-3xl w-14 h-14 flex items-center justify-center rounded-xl bg-white/50 border border-ui-navy/10 ${isSelected ? 'scale-110 shadow-sm transition-transform' : ''}`}>{icon}</span>
                                                         <div className="flex-1 min-w-0">
-                                                            <p className="font-bold text-base">{srv.name}</p>
-                                                            <p className={`text-xs flex items-center gap-1 mt-1 font-medium ${isSelected ? 'text-white/80' : 'text-ui-navy/70'}`}>
+                                                            <p className="font-bold text-base text-ui-navy">{srv.name}</p>
+                                                            <p className={`text-xs flex items-center gap-1 mt-1 font-medium ${isSelected ? 'text-ui-navy/80' : 'text-ui-navy/70'}`}>
                                                                 <Clock className="w-3.5 h-3.5" /> ~{srv.duration_min} λεπτά
                                                                 {srv.price_from && <span className="ml-2">• από {srv.price_from}€</span>}
                                                             </p>
                                                         </div>
-                                                        <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all ${isSelected ? 'border-ui-coral bg-ui-coral' : 'border-ui-navy/30'}`}>
+                                                        <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all ${isSelected ? 'border-ui-navy bg-ui-coral' : 'border-ui-navy/30'}`}>
                                                             {isSelected && <CheckCircle2 className="w-4 h-4 text-ui-navy stroke-[3]" />}
                                                         </div>
                                                     </label>
@@ -490,10 +496,10 @@ export default function BookingPage() {
                                         {weekDays.map(day => {
                                             const dateStr = formatDateStr(day);
                                             const isPast = day < today;
-                                            const isSunday = day.getDay() === 0;
+                                            const isClosed = closedDays.includes(day.getDay());
                                             const isSelected = formData.date === dateStr;
                                             const isTodayDate = isToday(day);
-                                            const disabled = isPast || isSunday;
+                                            const disabled = isPast || isClosed;
 
                                             return (
                                                 <button
@@ -622,7 +628,7 @@ export default function BookingPage() {
                                     <label className="block text-[13px] font-bold text-ui-navy/80 mb-2">
                                         Ονοματεπώνυμο <span className="text-ui-coral">*</span>
                                     </label>
-                                    <input type="text" name="ownerName" value={formData.ownerName} onChange={updateForm} required placeholder="π.χ. Κώστας Παπαδόπουλος" className="w-full rounded-xl bg-ui-navy text-white placeholder-white/40 px-4 py-3.5 text-sm font-medium focus:ring-2 focus:ring-ui-coral border border-transparent outline-none transition-all shadow-inner" />
+                                    <input type="text" name="ownerName" value={formData.ownerName} onChange={updateForm} required placeholder="π.χ. Κώστας Παπαδόπουλος" className="w-full rounded-xl bg-white border-2 border-ui-navy/20 text-ui-navy placeholder-ui-navy/40 px-4 py-3.5 text-sm font-bold focus:border-ui-navy outline-none transition-all shadow-sm" />
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -630,19 +636,19 @@ export default function BookingPage() {
                                         <label className="block text-[13px] font-bold text-ui-navy/80 mb-2">
                                             Κινητό <span className="text-ui-coral">*</span>
                                         </label>
-                                        <input type="tel" name="phone" value={formData.phone} onChange={updateForm} required placeholder="69..." className="w-full rounded-xl bg-ui-navy text-white placeholder-white/40 px-4 py-3.5 text-sm font-medium focus:ring-2 focus:ring-ui-coral border border-transparent outline-none transition-all shadow-inner" />
+                                        <input type="tel" name="phone" value={formData.phone} onChange={updateForm} required placeholder="69..." className="w-full rounded-xl bg-white border-2 border-ui-navy/20 text-ui-navy placeholder-ui-navy/40 px-4 py-3.5 text-sm font-bold focus:border-ui-navy outline-none transition-all shadow-sm" />
                                     </div>
                                     <div>
                                         <label className="block text-[13px] font-bold text-ui-navy/80 mb-2">
                                             Email <span className="text-ui-coral">*</span>
                                         </label>
-                                        <input type="email" name="email" value={formData.email} onChange={updateForm} required placeholder="π.χ. email@google.com" className="w-full rounded-xl bg-ui-navy text-white placeholder-white/40 px-4 py-3.5 text-sm font-medium focus:ring-2 focus:ring-ui-coral border border-transparent outline-none transition-all shadow-inner" />
+                                        <input type="email" name="email" value={formData.email} onChange={updateForm} required placeholder="π.χ. email@google.com" className="w-full rounded-xl bg-white border-2 border-ui-navy/20 text-ui-navy placeholder-ui-navy/40 px-4 py-3.5 text-sm font-bold focus:border-ui-navy outline-none transition-all shadow-sm" />
                                     </div>
                                 </div>
 
                                 <div>
                                     <label className="block text-[13px] font-bold text-ui-navy/80 mb-2">Σημειώσεις</label>
-                                    <textarea name="notes" rows={3} value={formData.notes} onChange={updateForm} placeholder="Αλλεργίες, ιδιαιτερότητες κτλ." className="w-full rounded-xl bg-ui-navy text-white placeholder-white/40 px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-ui-coral border border-transparent outline-none resize-none transition-all shadow-inner" />
+                                    <textarea name="notes" rows={3} value={formData.notes} onChange={updateForm} placeholder="Αλλεργίες, ιδιαιτερότητες κτλ." className="w-full rounded-xl bg-white border-2 border-ui-navy/20 text-ui-navy placeholder-ui-navy/40 px-4 py-3 text-sm font-bold focus:border-ui-navy outline-none resize-none transition-all shadow-sm" />
                                 </div>
 
                                 {/* Coupon Code Field */}
@@ -655,7 +661,7 @@ export default function BookingPage() {
                                             value={formData.couponCode}
                                             onChange={updateForm}
                                             placeholder="EX. WELCOME10"
-                                            className="flex-1 rounded-xl bg-ui-navy text-white placeholder-white/40 px-4 py-3 text-sm font-medium uppercase focus:ring-2 focus:ring-ui-coral border border-transparent outline-none transition-all shadow-inner"
+                                            className="flex-1 rounded-xl bg-white border-2 border-ui-navy/20 text-ui-navy placeholder-ui-navy/40 px-4 py-3 text-sm font-bold uppercase focus:border-ui-navy outline-none transition-all shadow-sm"
                                         />
                                         <button
                                             type="button"

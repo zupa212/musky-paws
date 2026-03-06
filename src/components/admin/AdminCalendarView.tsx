@@ -6,7 +6,7 @@ import {
     setHours, setMinutes, isBefore, startOfToday,
 } from 'date-fns'
 import { el } from 'date-fns/locale'
-import { ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react'
+import { ChevronLeft, ChevronRight, CheckCircle2, Calendar } from 'lucide-react'
 
 // Define working hours for the calendar grid
 const START_HOUR = 9  // 09:00
@@ -14,11 +14,12 @@ const END_HOUR = 21   // 21:00
 
 interface AdminCalendarViewProps {
     bookings: any[]
+    gcalEvents?: { start: string; end: string; summary?: string }[]
     onAddBooking: (date: string, time: string) => void
     onBookingClick: (booking: any) => void
 }
 
-export default function AdminCalendarView({ bookings, onAddBooking, onBookingClick }: AdminCalendarViewProps) {
+export default function AdminCalendarView({ bookings, gcalEvents = [], onAddBooking, onBookingClick }: AdminCalendarViewProps) {
     const [currentWeekStart, setCurrentWeekStart] = useState(() => startOfWeek(new Date(), { weekStartsOn: 1 })) // Monday
 
     // Generate week days
@@ -187,6 +188,56 @@ export default function AdminCalendarView({ bookings, onAddBooking, onBookingCli
                                                         G
                                                     </span>
                                                 )}
+                                            </div>
+                                        )
+                                    })}
+
+                                {/* Render Absolute Overlay GCal Events for this day */}
+                                {gcalEvents
+                                    .filter(e => isSameDay(parseISO(e.start), day))
+                                    .map((e, idx) => {
+                                        const start = parseISO(e.start)
+                                        let end = e.end.length === 10 ? addDays(parseISO(e.end), 1) : parseISO(e.end)
+
+                                        // Bound to grid hours
+                                        const gridStart = setMinutes(setHours(day, START_HOUR), 0)
+                                        const gridEnd = setMinutes(setHours(day, END_HOUR), 0)
+
+                                        const actualStart = isBefore(start, gridStart) ? gridStart : start
+                                        const actualEnd = isBefore(gridEnd, end) ? gridEnd : end
+
+                                        if (isBefore(actualEnd, actualStart)) return null
+
+                                        // Find start slot index
+                                        const startHour = actualStart.getHours()
+                                        const startMin = actualStart.getMinutes()
+                                        const startIdx = (startHour - START_HOUR) * 2 + (startMin >= 30 ? 1 : 0)
+
+                                        const durationMins = (actualEnd.getTime() - actualStart.getTime()) / (1000 * 60)
+                                        const slotCount = Math.max(0.5, durationMins / 30)
+
+                                        const topOffset = startIdx * 48
+                                        const heightPixel = (slotCount * 48) - 2
+
+                                        return (
+                                            <div
+                                                key={`gcal-${idx}`}
+                                                className="absolute left-1 right-1 z-5 rounded-lg border-2 border-dashed border-brand-300 bg-brand-50/80 text-brand-500 overflow-hidden select-none pointer-events-none p-1.5 flex flex-col justify-start"
+                                                style={{
+                                                    top: topOffset + 1,
+                                                    height: heightPixel,
+                                                    minHeight: 24,
+                                                    opacity: 0.7
+                                                }}
+                                            >
+                                                <div className="flex items-center gap-1 mb-0.5">
+                                                    <Calendar className="w-2.5 h-2.5" />
+                                                    <span className="text-[9px] font-bold uppercase tracking-tighter">Google Calendar</span>
+                                                    <span className="text-[9px] font-bold ml-auto">{format(start, 'HH:mm')}</span>
+                                                </div>
+                                                <div className="text-[10px] font-bold leading-tight truncate">
+                                                    {e.summary || 'Εξωτερικό Συμβάν'}
+                                                </div>
                                             </div>
                                         )
                                     })}

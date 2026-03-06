@@ -3,10 +3,11 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { PawPrint, CalendarDays, Users, Wrench, Clock, LogOut, ChevronRight, Megaphone, Menu, X } from 'lucide-react'
+import { PawPrint, CalendarDays, Users, Wrench, Clock, LogOut, ChevronRight, Megaphone, Menu, X, TrendingUp } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 const navItems = [
+    { href: '/admin', label: 'Dashboard', icon: TrendingUp },
     { href: '/admin/bookings', label: 'Ραντεβού', icon: CalendarDays },
     { href: '/admin/customers', label: 'Πελάτες', icon: Users },
     { href: '/admin/services', label: 'Υπηρεσίες', icon: Wrench },

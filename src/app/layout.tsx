@@ -1,42 +1,34 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit } from "next/font/google";
 import Script from "next/script";
 import { PublicShell } from "@/components/layout/PublicShell";
+import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Musky Paws | Dog Grooming & Pet Shop Περαία",
-  description: "Premium υπηρεσίες καλλωπισμού σκύλων (dog grooming) και pet shop στην Περαία Θεσσαλονίκης. Κλείστε ραντεβού σήμερα για την καλύτερη φροντίδα του αγαπημένου σας κατοικίδιου.",
-  keywords: ["dog grooming", "pet shop", "Περαία", "Θεσσαλονίκη", "κούρεμα σκύλου", "μπάνιο σκύλου", "Musky Paws"],
+  title: "Musky Paws | Dog Grooming Περαία Θεσσαλονίκη",
+  description: "Premium υπηρεσίες καλλωπισμού σκύλων (dog grooming) στην Περαία Θεσσαλονίκης. Κλείστε ραντεβού σήμερα για την καλύτερη φροντίδα του αγαπημένου σας κατοικίδιου.",
+  keywords: ["dog grooming", "grooming σκύλων", "Περαία", "Θεσσαλονίκη", "κούρεμα σκύλου", "μπάνιο σκύλου", "Musky Paws"],
   openGraph: {
-    title: "Musky Paws | Dog Grooming & Pet Shop Περαία",
-    description: "Premium υπηρεσίες καλλωπισμού σκύλων και pet shop στην Περαία Θεσσαλονίκης.",
-    url: "https://muskypaws.gr", // Αντικαταστήστε με το τελικό domain
+    title: "Musky Paws | Dog Grooming Περαία",
+    description: "Premium υπηρεσίες καλλωπισμού σκύλων στην Περαία Θεσσαλονίκης.",
+    url: "https://muskypaws.gr",
     siteName: "Musky Paws",
     images: [
       {
-        url: "/og-image.jpg", // Create an og-image.jpg in the public folder
-        width: 1200,
-        height: 630,
+        url: "/logo.png",
+        width: 800,
+        height: 800,
         alt: "Musky Paws Dog Grooming Περαία",
       },
     ],
     locale: "el_GR",
     type: "website",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -48,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="el" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col font-sans`}
+        className={`${outfit.variable} antialiased min-h-screen flex flex-col font-sans`}
         suppressHydrationWarning
       >
         {/* Google Analytics & Google Ads Tag */}
@@ -91,6 +83,7 @@ export default function RootLayout({
         <PublicShell>
           {children}
         </PublicShell>
+        <WhatsAppButton />
       </body>
     </html>
   );

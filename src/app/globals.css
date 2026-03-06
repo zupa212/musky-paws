@@ -1,58 +1,53 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
-  /* Warm cream/navy palette – inspired by Doggie Inn */
-  --color-brand-50: #fef9f3;
-  --color-brand-100: #fdf0e3;
-  --color-brand-200: #f9dcc6;
-  --color-brand-300: #f0c5a0;
-  --color-brand-400: #d4a373;
-  --color-brand-500: #b8865a;
-  --color-brand-600: #9a6d44;
-  --color-brand-700: #7a5636;
-  --color-brand-800: #5e422b;
-  --color-brand-900: #3d2c1d;
-  --color-brand-950: #1e1640;
+  /* Vetic-style Palette */
+  --color-brand-50: #ffffff;
+  --color-brand-100: #f8f9fa;
+  --color-brand-200: #f1f3f5;
+  --color-brand-300: #dee2e6;
+  --color-brand-400: #ced4da;
+  --color-brand-500: #adb5bd;
+  --color-brand-600: #6c757d;
+  --color-brand-700: #495057;
+  --color-brand-800: #212529;
+  --color-brand-900: #1a1b1e;
+  --color-brand-950: #0f1115;
 
-  /* Modern Booking UI Palette */
-  --color-ui-taupe: #bcafa4;
-  --color-ui-navy: #292446;
-  --color-ui-coral: #de7363;
-  --color-ui-coral-hover: #c95e4a;
-  /* Deep navy */
+  /* Vetic Accents */
+  --color-vetic-pink: #ffb8d8;
+  --color-vetic-pink-hover: #ffa8d0;
+  --color-vetic-yellow: #ffe600;
+  --color-vetic-green: #69f0ae;
+  --color-vetic-blue: #b3e5fc;
 
-  /* Accent: warm coral/pink for CTAs */
-  --color-accent-400: #f08c7a;
-  --color-accent-500: #e07460;
-  --color-accent-600: #c95e4a;
+  /* Accent mapping for existing classes */
+  --color-accent-400: #ffb8d8;
+  --color-accent-500: #f472b6;
+  --color-accent-600: #db2777;
 
-  /* Navy: deep blues for headings & hero text */
-  --color-navy-800: #2a2356;
-  --color-navy-900: #1e1640;
+  /* Typography */
+  --color-navy-800: #212529;
+  --color-navy-900: #0f1115;
 
-  /* Paw pink: soft pink for decorative elements */
-  --color-paw-100: #fce4e4;
-  --color-paw-200: #f8c8c8;
-  --color-paw-300: #f0a8a8;
-
-  /* Sage/mint: for trust badges and secondary elements */
-  --color-sage-100: #e6f2e6;
-  --color-sage-200: #c8e0c8;
-  --color-sage-400: #7bb87b;
+  /* Booking UI Custom Colors */
+  --color-ui-navy: #1C2331;
+  --color-ui-coral: #DE7363;
+  --color-ui-taupe: #F8F4F0;
 }
 
 :root {
-  --background: #fef9f3;
-  /* Warm cream */
-  --foreground: #1e1640;
-  /* Deep navy */
+  --background: #f8f9fa;
+  /* Off-white Vetic background */
+  --foreground: #111827;
+  /* Dark black */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-outfit);
 }
 
 body {
@@ -60,15 +55,65 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), Arial, sans-serif;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scroll anchoring */
 html {
   scroll-behavior: smooth;
 }
 
-/* Paw print decoration */
-.paw-bg {
-  background-image: radial-gradient(circle at 80% 20%, var(--color-paw-100) 0, transparent 40%),
-    radial-gradient(circle at 20% 70%, var(--color-paw-100) 0, transparent 35%);
+/* Custom Animations */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Wavy underline effect */
+.wavy-underline {
+  position: relative;
+  display: inline-block;
+  z-index: 10;
+}
+
+.wavy-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M0,10 Q25,20 50,10 T100,10' fill='none' stroke='%23ffb8d8' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 50px 10px;
+  z-index: -1;
+}
+
+/* Pill buttons */
+.btn-pill {
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Squircle containers */
+.squircle {
+  border-radius: 24px;
 }

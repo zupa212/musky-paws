@@ -22,7 +22,7 @@ const STATUS_LABELS: Record<string, { label: string; color: string }> = {
 
 type Tab = 'all' | 'today' | 'calendar'
 
-export default function BookingsTable({ bookings, services }: { bookings: any[]; services?: any[] }) {
+export default function BookingsTable({ bookings, services, gcalEvents = [] }: { bookings: any[]; services?: any[]; gcalEvents?: { start: string; end: string; summary?: string }[] }) {
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
@@ -200,6 +200,7 @@ export default function BookingsTable({ bookings, services }: { bookings: any[];
                 {activeTab === 'calendar' ? (
                     <AdminCalendarView
                         bookings={filteredBookings}
+                        gcalEvents={gcalEvents}
                         onAddBooking={handleAddBookingFromCalendar}
                         onBookingClick={setDrawerBooking}
                     />

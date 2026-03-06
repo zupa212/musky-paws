@@ -28,6 +28,14 @@ export default async function AdminBookingsPage({
 
     const { data: bookings, error } = await query
 
+    // Fetch Google Calendar events for the visible range (+/- 30 days)
+    const { getCalendarEvents } = await import('@/lib/google-calendar')
+    const tStart = new Date()
+    tStart.setDate(tStart.getDate() - 30)
+    const tEnd = new Date()
+    tEnd.setDate(tEnd.getDate() + 30)
+    const gcalEvents = await getCalendarEvents(tStart, tEnd)
+
     // Fetch active services for manual booking modal
     const { data: services } = await supabase
         .from('services')
@@ -55,7 +63,11 @@ export default async function AdminBookingsPage({
                     {filtered?.length ?? 0} αποτελέσματα
                 </p>
             </div>
-            <BookingsTable bookings={filtered ?? []} services={services ?? []} />
+            <BookingsTable
+                bookings={filtered ?? []}
+                services={services ?? []}
+                gcalEvents={gcalEvents || []}
+            />
         </div>
     )
 }
