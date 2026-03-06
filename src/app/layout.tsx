@@ -43,6 +43,47 @@ export default function RootLayout({
         className={`${outfit.variable} antialiased min-h-screen flex flex-col font-sans`}
         suppressHydrationWarning
       >
+        <Script id="json-ld" type="application/ld+json" strategy="afterInteractive">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "DogGrooming",
+            "name": "Musky Paws",
+            "image": "https://muskypaws.gr/logo.png",
+            "@id": "https://muskypaws.gr",
+            "url": "https://muskypaws.gr",
+            "telephone": "+306948965371",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Solonos 28B",
+              "addressLocality": "Peraia",
+              "postalCode": "57019",
+              "addressCountry": "GR"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 40.50,
+              "longitude": 22.92
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "09:00",
+                "closes": "18:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Saturday",
+                "opens": "10:00",
+                "closes": "15:00"
+              }
+            ],
+            "sameAs": [
+              "https://www.facebook.com/p/Musky-Paws-61558785775782/",
+              "https://instagram.com/muskypaws_dog_grooming"
+            ]
+          })}
+        </Script>
         {/* Google Analytics & Google Ads Tag */}
         {(process.env.NEXT_PUBLIC_GA_ID || process.env.NEXT_PUBLIC_GOOGLE_ADS_ID) && (
           <>

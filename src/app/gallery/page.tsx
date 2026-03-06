@@ -10,11 +10,48 @@ export const metadata: Metadata = {
 };
 
 export default function GalleryPage() {
-    const images = Array.from({ length: 12 }, (_, i) => ({
-        id: i + 1,
-        url: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80",
-        alt: `Grooming Before and After ${i + 1}`
-    }));
+    const images = [
+        {
+            id: 1,
+            url: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80",
+            alt: "Pomeranian Grooming Transformation"
+        },
+        {
+            id: 2,
+            url: "https://images.unsplash.com/photo-1591768575198-88dac53fbd0a?auto=format&fit=crop&q=80",
+            alt: "Maltese Summer Cut"
+        },
+        {
+            id: 3,
+            url: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80",
+            alt: "Golden Retriever Deshedding Result"
+        },
+        {
+            id: 4,
+            url: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&q=80",
+            alt: "Poodle Teddy Bear Cut"
+        },
+        {
+            id: 5,
+            url: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80",
+            alt: "Dog Spa Therapy"
+        },
+        {
+            id: 6,
+            url: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80",
+            alt: "Puppy's First Grooming"
+        },
+        {
+            id: 7,
+            url: "https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?auto=format&fit=crop&q=80",
+            alt: "Nail Trimming and Paw Care"
+        },
+        {
+            id: 8,
+            url: "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80",
+            alt: "Smooth Coat Shine"
+        }
+    ];
 
     return (
         <section className="py-20 bg-background text-foreground min-h-screen">

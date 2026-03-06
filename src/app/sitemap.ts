@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
+import { getAllPosts } from '@/lib/blog';
 
 const BASE_URL = 'https://muskypaws.gr';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const routes = ['', '/about', '/contact', '/gallery', '/pricing', '/services', '/booking', '/areas'].map((route) => ({
+    const routes = ['', '/about', '/contact', '/gallery', '/pricing', '/services', '/booking', '/areas', '/blog'].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
@@ -24,5 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7,
     }));
 
-    return [...routes, ...services, ...areas];
+    const posts = getAllPosts().map((post) => ({
+        url: `${BASE_URL}/blog/${post.slug}`,
+        lastModified: new Date(post.updated_at || post.published_at),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }));
+
+    return [...routes, ...services, ...areas, ...posts];
 }
