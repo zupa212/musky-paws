@@ -50,14 +50,18 @@ const translations: Record<Locale, Record<string, string>> = {
         'testimonials.badge': 'Testimonials',
         'testimonials.title1': 'Τι λένε οι χαρούμενοι',
         'testimonials.title2': 'ιδιοκτήτες',
+        'testimonials.q1': 'Η Στέλλα είναι καταπληκτική! Ο Μπρούνο μας γυρνάει πάντα σαν καινούργιος — μυρωδάτος και πανέμορφος. Δεν αλλάζουμε groomer με τίποτα!',
+        'testimonials.q2': 'Πρώτο κούρεμα για τον Τζάκι μας και η εμπειρία ήταν εξαιρετική. Ήπιος χειρισμός, χωρίς στρες. Τον αγαπήσαμε ακόμα πιο πολύ μετά!',
+        'testimonials.q3': 'Online κράτηση σε 2 λεπτά, τέλεια εξυπηρέτηση και η Λούλα μας βγήκε σαν μοντέλο! Συστήνω ανεπιφύλακτα σε όλους τους φίλους μου.',
+        'testimonials.q4': 'Φέρνω τον Ρέξ εδώ και 2 χρόνια. Πάντα πεντακάθαρος, με τα νύχια του κομμένα και τα αυτάκια του καθαρά. Η καλύτερη επιλογή στη Θεσσαλονίκη!',
+        'testimonials.q5': 'Η μικρή μας Κανέλα φοβόταν πολύ, αλλά η Στέλλα την ηρέμησε αμέσως. Τώρα χαίρεται κάθε φορά που πάμε! Επαγγελματισμός και αγάπη.',
+        'testimonials.q6': 'Deshedding στον Τόμπυ μας και δεν πιστεύαμε πόση τρίχα έφυγε! Το σπίτι μας είναι πλέον καθαρότερο. Ευχαριστούμε Musky Paws!',
 
         // Footer CTA
-        'cta.title1': 'Κλείσε',
-        'cta.title2': 'ραντεβού',
-        'cta.title3': 'σήμερα',
-        'cta.desc': 'Online κράτηση σε λιγότερο από 2 λεπτά. Επιλέξτε υπηρεσία, ημέρα και ώρα — εμείς αναλαμβάνουμε τα υπόλοιπα.',
-        'cta.button': 'Κλείσε Ραντεβού',
-        'cta.call': 'Ή καλέστε μας',
+        'cta.title1': 'Γιατί τα κατοικίδιά σας',
+        'cta.title2': 'αξίζουν τα',
+        'cta.title3': 'καλύτερα, πάντα',
+        'cta.button': 'Επικοινωνήστε μαζί μας',
 
         // Footer
         'footer.desc': 'Premium υπηρεσίες καλλωπισμού σκύλων στην Περαία Θεσσαλονίκης. Με αγάπη, φροντίδα και επαγγελματισμό.',
@@ -109,14 +113,18 @@ const translations: Record<Locale, Record<string, string>> = {
         'testimonials.badge': 'Testimonials',
         'testimonials.title1': 'What our happy',
         'testimonials.title2': 'owners say',
+        'testimonials.q1': 'Stella is amazing! Our Bruno always comes back like new — smelling great and looking beautiful. We wouldn\'t change groomers for anything!',
+        'testimonials.q2': 'First haircut for our Jackie and the experience was excellent. Gentle handling, no stress. We loved him even more after!',
+        'testimonials.q3': 'Online booking in 2 minutes, perfect service and our Lula came out like a model! I highly recommend to all my friends.',
+        'testimonials.q4': 'I\'ve been bringing Rex here for 2 years. Always spotless, with his nails trimmed and his ears clean. The best choice in Thessaloniki!',
+        'testimonials.q5': 'Our little Kanela was very scared, but Stella calmed her down immediately. Now she is happy every time we go! Professionalism and love.',
+        'testimonials.q6': 'Deshedding for our Toby and we couldn\'t believe how much hair was removed! Our home is cleaner now. Thank you Musky Paws!',
 
         // Footer CTA
-        'cta.title1': 'Book your',
-        'cta.title2': 'appointment',
-        'cta.title3': 'today',
-        'cta.desc': 'Online booking in less than 2 minutes. Choose a service, day and time — we take care of the rest.',
-        'cta.button': 'Book Appointment',
-        'cta.call': 'Or call us',
+        'cta.title1': 'Because your',
+        'cta.title2': 'pets deserve the',
+        'cta.title3': 'best, always',
+        'cta.button': 'Contact us',
 
         // Footer
         'footer.desc': 'Premium dog grooming services in Peraia, Thessaloniki. With love, care and professionalism.',

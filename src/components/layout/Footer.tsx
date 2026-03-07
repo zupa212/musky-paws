@@ -1,8 +1,13 @@
+"use client";
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Phone, AtSign, PawPrint } from 'lucide-react';
+import { useLanguage } from '@/lib/language';
 
 export function Footer() {
+    const { t } = useLanguage();
+
     return (
         <footer className="bg-brand-50 pt-10 pb-6 px-4 md:px-6 w-full overflow-hidden">
             <div className="container mx-auto max-w-7xl relative bg-[#151515] rounded-[40px] p-10 md:p-16 overflow-hidden flex flex-col md:flex-row justify-between gap-16 md:gap-12">
@@ -31,30 +36,30 @@ export function Footer() {
                     </Link>
 
                     <div className="mt-16 md:mt-32 text-sm text-gray-400">
-                        © {new Date().getFullYear()} Musky Paws. All rights reserved.
+                        © {new Date().getFullYear()} Musky Paws. {t('footer.rights')}
                     </div>
                 </div>
 
                 {/* Middle Links Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 z-10 text-[15px] font-medium w-full md:w-1/2">
                     <div className="flex flex-col gap-4">
-                        <Link href="/" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Αρχική</Link>
-                        <Link href="/services" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Υπηρεσίες</Link>
-                        <Link href="/pricing" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Τιμοκατάλογος</Link>
+                        <Link href="/" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.home')}</Link>
+                        <Link href="/services" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.services')}</Link>
+                        <Link href="/pricing" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.pricing')}</Link>
                         <Link href="/gallery" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Gallery</Link>
                     </div>
 
                     <div className="flex flex-col gap-4">
-                        <Link href="/about" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Σχετικά</Link>
-                        <Link href="/blog" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Blog</Link>
-                        <Link href="/contact" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Επικοινωνία</Link>
-                        <Link href="/terms" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Όροι & Privacy</Link>
+                        <Link href="/about" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.about')}</Link>
+                        <Link href="/blog" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.blog')}</Link>
+                        <Link href="/contact" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.contact')}</Link>
+                        <Link href="/terms" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('footer.terms')}</Link>
                     </div>
 
                     <div className="flex flex-col gap-4 col-span-2 md:col-span-1 border-t border-gray-800 pt-6 md:border-0 md:pt-0">
-                        <Link href="/admin/login" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Σύνδεση</Link>
-                        <Link href="/booking" className="text-gray-300 hover:text-vetic-pink font-semibold hover:translate-x-1 transition-all">Δημιουργία Ραντεβού</Link>
-                        <Link href="/admin/customers" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">User Page</Link>
+                        <Link href="/admin/login" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('footer.login')}</Link>
+                        <Link href="/booking" className="text-gray-300 hover:text-vetic-pink font-semibold hover:translate-x-1 transition-all">{t('footer.createBooking')}</Link>
+                        <Link href="/admin/customers" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('footer.userPage')}</Link>
                     </div>
                 </div>
 
@@ -65,7 +70,7 @@ export function Footer() {
                             <MapPin className="w-[18px] h-[18px] fill-[#151515]" />
                         </div>
                         <span className="text-gray-300 text-sm font-medium pr-4 leading-relaxed group-hover:text-white transition-colors">
-                            Σόλωνος 28Β, Περαία 57019
+                            {t('footer.address')}
                         </span>
                     </a>
 

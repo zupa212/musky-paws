@@ -260,8 +260,8 @@ export default function Home() {
             Testimonials
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-navy-900 tracking-tight leading-[1.15]">
-            Τι λένε οι χαρούμενοι<br />
-            <span className="wavy-underline">ιδιοκτήτες</span>
+            {t('testimonials.title1')}<br />
+            <span className="wavy-underline">{t('testimonials.title2')}</span>
           </h2>
         </div>
 
@@ -270,37 +270,37 @@ export default function Home() {
           <div className="animate-marquee">
             {[
               {
-                quote: "Η Στέλλα είναι καταπληκτική! Ο Μπρούνο μας γυρνάει πάντα σαν καινούργιος — μυρωδάτος και πανέμορφος. Δεν αλλάζουμε groomer με τίποτα!",
+                quote: t('testimonials.q1'),
                 name: "Μαρία Κ.",
                 location: "Περαία",
                 img: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
-                quote: "Πρώτο κούρεμα για τον Τζάκι μας και η εμπειρία ήταν εξαιρετική. Ήπιος χειρισμός, χωρίς στρες. Τον αγαπήσαμε ακόμα πιο πολύ μετά!",
+                quote: t('testimonials.q2'),
                 name: "Γιώργος Π.",
                 location: "Τρίλοφος",
                 img: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
-                quote: "Online κράτηση σε 2 λεπτά, τέλεια εξυπηρέτηση και η Λούλα μας βγήκε σαν μοντέλο! Συστήνω ανεπιφύλακτα σε όλους τους φίλους μου.",
+                quote: t('testimonials.q3'),
                 name: "Ελένη Σ.",
                 location: "Καλαμαριά",
                 img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
-                quote: "Φέρνω τον Ρέξ εδώ και 2 χρόνια. Πάντα πεντακάθαρος, με τα νύχια του κομμένα και τα αυτάκια του καθαρά. Η καλύτερη επιλογή στη Θεσσαλονίκη!",
+                quote: t('testimonials.q4'),
                 name: "Δημήτρης Α.",
                 location: "Αγία Τριάδα",
                 img: "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
-                quote: "Η μικρή μας Κανέλα φοβόταν πολύ, αλλά η Στέλλα την ηρέμησε αμέσως. Τώρα χαίρεται κάθε φορά που πάμε! Επαγγελματισμός και αγάπη.",
+                quote: t('testimonials.q5'),
                 name: "Κατερίνα Μ.",
                 location: "Μηχανιώνα",
                 img: "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
-                quote: "Deshedding στον Τόμπυ μας και δεν πιστεύαμε πόση τρίχα έφυγε! Το σπίτι μας είναι πλέον καθαρότερο. Ευχαριστούμε Musky Paws!",
+                quote: t('testimonials.q6'),
                 name: "Νίκος Β.",
                 location: "Περαία",
                 img: "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?auto=format&fit=crop&q=80&w=200&h=200"
@@ -338,37 +338,37 @@ export default function Home() {
             {/* Duplicate for seamless loop */}
             {[
               {
-                quote: "Η Στέλλα είναι καταπληκτική! Ο Μπρούνο μας γυρνάει πάντα σαν καινούργιος — μυρωδάτος και πανέμορφος. Δεν αλλάζουμε groomer με τίποτα!",
+                quote: t('testimonials.q1'),
                 name: "Μαρία Κ.",
                 location: "Περαία",
                 img: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
-                quote: "Πρώτο κούρεμα για τον Τζάκι μας και η εμπειρία ήταν εξαιρετική. Ήπιος χειρισμός, χωρίς στρες. Τον αγαπήσαμε ακόμα πιο πολύ μετά!",
+                quote: t('testimonials.q2'),
                 name: "Γιώργος Π.",
                 location: "Τρίλοφος",
                 img: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
-                quote: "Online κράτηση σε 2 λεπτά, τέλεια εξυπηρέτηση και η Λούλα μας βγήκε σαν μοντέλο! Συστήνω ανεπιφύλακτα σε όλους τους φίλους μου.",
+                quote: t('testimonials.q3'),
                 name: "Ελένη Σ.",
                 location: "Καλαμαριά",
                 img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
-                quote: "Φέρνω τον Ρέξ εδώ και 2 χρόνια. Πάντα πεντακάθαρος, με τα νύχια του κομμένα και τα αυτάκια του καθαρά. Η καλύτερη επιλογή στη Θεσσαλονίκη!",
+                quote: t('testimonials.q4'),
                 name: "Δημήτρης Α.",
                 location: "Αγία Τριάδα",
                 img: "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
-                quote: "Η μικρή μας Κανέλα φοβόταν πολύ, αλλά η Στέλλα την ηρέμησε αμέσως. Τώρα χαίρεται κάθε φορά που πάμε! Επαγγελματισμός και αγάπη.",
+                quote: t('testimonials.q5'),
                 name: "Κατερίνα Μ.",
                 location: "Μηχανιώνα",
                 img: "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
-                quote: "Deshedding στον Τόμπυ μας και δεν πιστεύαμε πόση τρίχα έφυγε! Το σπίτι μας είναι πλέον καθαρότερο. Ευχαριστούμε Musky Paws!",
+                quote: t('testimonials.q6'),
                 name: "Νίκος Β.",
                 location: "Περαία",
                 img: "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?auto=format&fit=crop&q=80&w=200&h=200"
@@ -420,8 +420,8 @@ export default function Home() {
             {/* Center Content */}
             <div className="flex flex-col items-center justify-center text-center py-12 lg:w-[30%] shrink-0">
               <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-navy-900 tracking-tight leading-[1.1] mb-10">
-                Because your<br />pets deserve the<br /><span className="relative inline-block z-10 font-black mt-2">
-                  best, always
+                {t('cta.title1')}<br />{t('cta.title2')}<br /><span className="relative inline-block z-10 font-black mt-2">
+                  {t('cta.title3')}
                   <svg className="absolute -bottom-3 left-0 w-full z-[-1]" viewBox="0 0 100 20" preserveAspectRatio="none">
                     <path d="M0,10 Q25,20 50,10 T100,10" fill="none" stroke="#ffb8d8" strokeWidth="6" strokeLinecap="round" />
                   </svg>
@@ -429,7 +429,7 @@ export default function Home() {
               </h2>
 
               <Link href="/booking" className="inline-flex items-center bg-navy-900 rounded-full pl-8 pr-2 py-2 group shadow-xl hover:-translate-y-1 transition-transform">
-                <span className="text-white font-bold mr-6 text-xl tracking-wide">Contact us</span>
+                <span className="text-white font-bold mr-6 text-xl tracking-wide">{t('cta.button')}</span>
                 <div className="w-12 h-12 lg:w-14 lg:h-14 bg-vetic-pink rounded-full flex items-center justify-center shrink-0 relative">
                   <span className="absolute top-0 right-0 flex h-3.5 w-3.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-vetic-green opacity-75"></span>
