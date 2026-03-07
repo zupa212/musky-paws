@@ -29,8 +29,8 @@ export default function AboutPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
                             <Image
-                                src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?auto=format&fit=crop&q=80"
-                                alt="Musky Paws Grooming In Action"
+                                src="/images/stella.webp"
+                                alt="Η Στέλλα, Head Groomer στο Musky Paws"
                                 fill
                                 className="object-cover"
                             />
