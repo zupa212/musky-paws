@@ -24,7 +24,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'hero.badge': 'Dog Grooming Περαία',
         'hero.title1': 'Dog Grooming',
         'hero.title2': 'Θεσσαλονίκη',
-        'hero.subtitle': 'Premium περιποίηση σκύλων & γατών στην Περαία. Κλείσε ραντεβού online ή κάλεσε τώρα για άμεση επιβεβαίωση.',
+        'hero.subtitle': 'Κορυφαίο κούρεμα και πλύσιμο σκύλων & γατών στην Ανατολική Θεσσαλονίκη (Περαία, Καλαμαριά και γύρω περιοχές). Κλείσε ραντεβού online ή κάλεσε τώρα για άμεση επιβεβαίωση.',
         'hero.cta': 'Κλείσε Ραντεβού Online',
         'hero.gallery': 'Before/After Αποτελέσματα',
         'hero.online': 'Online Κράτηση',
@@ -36,7 +36,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'about.badge': 'Κομμωτήριο Σκύλων Θεσσαλονίκη',
         'about.title1': 'Υγιεινή, Ασφάλεια &',
         'about.title2': 'Φροντίδα',
-        'about.desc': 'Full grooming, μπάνιο, deshedding, νύχια και αυτιά. Εύκολη πρόσβαση από Θεσσαλονίκη με premium υπηρεσίες, καθαρό αποτέλεσμα και ήπιο χειρισμό χωρίς στρες για τους μικρούς μας φίλους.',
+        'about.desc': 'Full grooming, πλύσιμο σκύλου, deshedding, νύχια και αυτιά. Εξυπηρετούμε όλη την Ανατολική Θεσσαλονίκη (Περαία, Καλαμαριά, Τρίλοφος, Επανομή, Θέρμη) με premium υπηρεσίες, καθαρό αποτέλεσμα και ήπιο χειρισμό χωρίς στρες για τους μικρούς μας φίλους.',
 
         // Team section
         'team.badge': 'Pet Grooming Θεσσαλονίκη',
@@ -64,7 +64,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'cta.button': 'Επικοινωνήστε μαζί μας',
 
         // Footer
-        'footer.desc': 'Premium υπηρεσίες καλλωπισμού σκύλων στην Περαία Θεσσαλονίκης. Με αγάπη, φροντίδα και επαγγελματισμό.',
+        'footer.desc': 'Premium υπηρεσίες καλλωπισμού - κούρεμα και πλύσιμο σκύλων στην Ανατολική Θεσσαλονίκη (Περαία, Καλαμαριά, Τρίλοφος κ.ά.). Με αγάπη, φροντίδα και επαγγελματισμό.',
         'footer.services': 'Υπηρεσίες',
         'footer.company': 'Εταιρεία',
         'footer.about': 'Σχετικά',
@@ -87,7 +87,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'hero.badge': 'Dog Grooming Peraia',
         'hero.title1': 'Dog Grooming',
         'hero.title2': 'Thessaloniki',
-        'hero.subtitle': 'Premium dog & cat grooming in Peraia, Thessaloniki. Book online or call now for instant confirmation.',
+        'hero.subtitle': 'Top dog grooming & dog washing in Eastern Thessaloniki (Peraia, Kalamaria and surrounding areas). Book online or call now for instant confirmation.',
         'hero.cta': 'Book Appointment Online',
         'hero.gallery': 'Before/After Results',
         'hero.online': 'Online Booking',
@@ -99,7 +99,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'about.badge': 'Dog Grooming Thessaloniki',
         'about.title1': 'Hygiene, Safety &',
         'about.title2': 'Care',
-        'about.desc': 'Full grooming, bathing, deshedding, nails and ears. Easy access from Thessaloniki with premium services, clean results and gentle handling without stress for our little friends.',
+        'about.desc': 'Full grooming, dog washing, bathing, deshedding, nails and ears. Serving all of Eastern Thessaloniki (Peraia, Kalamaria, Trilofos, Epanomi, Thermi) with premium services, clean results and gentle handling without stress for our little friends.',
 
         // Team section
         'team.badge': 'Pet Grooming Thessaloniki',
@@ -127,7 +127,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'cta.button': 'Contact us',
 
         // Footer
-        'footer.desc': 'Premium dog grooming services in Peraia, Thessaloniki. With love, care and professionalism.',
+        'footer.desc': 'Premium dog grooming and dog washing services in Eastern Thessaloniki (Peraia, Kalamaria, Trilofos, etc.). With love, care and professionalism.',
         'footer.services': 'Services',
         'footer.company': 'Company',
         'footer.about': 'About',
