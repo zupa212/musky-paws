@@ -5,19 +5,22 @@ import Image from 'next/image';
 import { Menu, X, Phone, PawPrint } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { useLanguage } from '@/lib/language';
+import { LanguageToggle } from './LanguageToggle';
 
-const navLinks = [
-    { name: 'Αρχική', href: '/' },
-    { name: 'Υπηρεσίες', href: '/services' },
-    { name: 'Τιμοκατάλογος', href: '/pricing' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Επικοινωνία', href: '/contact' },
+const navLinkKeys = [
+    { key: 'nav.home', href: '/' },
+    { key: 'nav.services', href: '/services' },
+    { key: 'nav.pricing', href: '/pricing' },
+    { key: 'nav.blog', href: '/blog' },
+    { key: 'nav.contact', href: '/contact' },
 ];
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
+    const { t } = useLanguage();
 
     useEffect(() => {
         const handler = () => setScrolled(window.scrollY > 20);
@@ -55,7 +58,7 @@ export function Header() {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden lg:flex items-center gap-8">
-                    {navLinks.map((link) => {
+                    {navLinkKeys.map((link) => {
                         const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
                         return (
                             <Link
@@ -64,19 +67,20 @@ export function Header() {
                                 className={`text-[15px] font-medium transition-colors hover:text-vetic-pink ${isActive ? 'text-navy-900 font-bold' : 'text-navy-800/70'
                                     }`}
                             >
-                                {link.name}
+                                {t(link.key)}
                             </Link>
                         );
                     })}
                 </nav>
 
                 {/* Right Side CTA & Mobile Toggle */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
+                    <LanguageToggle />
                     <Link
                         href="/booking"
                         className="hidden md:inline-flex btn-pill bg-navy-900 text-white px-6 py-2.5 text-sm font-semibold hover:bg-navy-800 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
                     >
-                        Κλείσε Ραντεβού
+                        {t('nav.booking')}
                     </Link>
 
                     {/* Mobile Menu Toggle (Black Rounded Square) */}
@@ -95,13 +99,13 @@ export function Header() {
                 <div className="container mx-auto mt-2">
                     <div className="bg-white rounded-3xl p-6 shadow-xl border border-gray-100 animate-in slide-in-from-top-4 duration-300">
                         <nav className="flex flex-col gap-4">
-                            {navLinks.map((link) => (
+                            {navLinkKeys.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
                                     className="text-lg font-semibold text-navy-900 hover:text-vetic-pink transition-colors"
                                 >
-                                    {link.name}
+                                    {t(link.key)}
                                 </Link>
                             ))}
                         </nav>
@@ -110,7 +114,7 @@ export function Header() {
                                 href="/booking"
                                 className="btn-pill bg-navy-900 text-white px-8 py-3.5 text-base w-full shadow-lg"
                             >
-                                Κλείσε Ραντεβού
+                                {t('nav.booking')}
                             </Link>
                             <a href="tel:+306948965371" className="flex items-center justify-center gap-2 text-navy-800/70 py-2 font-medium">
                                 <Phone className="w-4 h-4" /> 694 896 5371

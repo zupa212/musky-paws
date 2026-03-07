@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, MapPin, PawPrint, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/lib/language';
 
 // Mock Services for Marquee
 const marqueeServices = [
@@ -18,6 +19,7 @@ const marqueeServices = [
 ];
 
 export default function Home() {
+  const { t } = useLanguage();
   return (
     <>
       <div className="pt-24 pb-8 overflow-hidden">
@@ -32,7 +34,7 @@ export default function Home() {
             className="flex items-center gap-2 bg-white rounded-full px-4 py-1.5 shadow-sm text-sm font-semibold text-navy-800 mb-8 border border-brand-200"
           >
             <div className="w-2 h-2 rounded-full bg-red-500" />
-            Dog Grooming Περαία
+            {t('hero.badge')}
           </motion.div>
 
           {/* Headline */}
@@ -42,9 +44,9 @@ export default function Home() {
             transition={{ delay: 0.1 }}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-bold text-navy-900 tracking-tight leading-[1.1] max-w-4xl mx-auto relative z-20"
           >
-            Dog Grooming
+            {t('hero.title1')}
             <br />
-            <span className="wavy-underline">Θεσσαλονίκη</span>
+            <span className="wavy-underline">{t('hero.title2')}</span>
           </motion.h1>
 
           <motion.p
@@ -53,7 +55,7 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="mt-8 text-navy-800/60 max-w-xl mx-auto text-lg leading-relaxed relative z-20"
           >
-            Premium περιποίηση σκύλων & γατών στην Περαία. Κλείσε ραντεβού online ή κάλεσε τώρα για άμεση επιβεβαίωση.
+            {t('hero.subtitle')}
           </motion.p>
 
           {/* Floating Badges (Framer Motion) */}
@@ -98,7 +100,7 @@ export default function Home() {
           >
             <div className="flex items-center bg-navy-900 rounded-full pl-6 pr-2 py-2 shadow-xl hover:bg-navy-800 transition-colors">
               <Link href="/booking" className="text-white font-semibold mr-4">
-                Κλείσε Ραντεβού Online
+                {t('hero.cta')}
               </Link>
               <div className="w-10 h-10 bg-vetic-pink rounded-full flex items-center justify-center shrink-0">
                 <PawPrint className="w-5 h-5 text-navy-900 fill-navy-900" />
@@ -106,7 +108,7 @@ export default function Home() {
             </div>
 
             <Link href="/gallery" className="flex items-center gap-2 font-semibold text-navy-900 hover:text-vetic-pink transition-colors">
-              Before/After Αποτελέσματα <ArrowRight className="w-4 h-4" />
+              {t('hero.gallery')} <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
 
@@ -119,10 +121,10 @@ export default function Home() {
           >
             {/* Callouts */}
             <div className="flex flex-wrap justify-center items-center gap-4 text-sm font-medium text-navy-800/80">
-              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> Online Κράτηση</span>
-              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> Άμεση Επικοινωνία</span>
-              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> Premium Παροχές</span>
-              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> 100% Υγιεινή</span>
+              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> {t('hero.online')}</span>
+              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> {t('hero.contact')}</span>
+              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> {t('hero.premium')}</span>
+              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> {t('hero.hygiene')}</span>
             </div>
             {/* Sitelinks */}
             <div className="w-full h-px bg-brand-200 my-2 opacity-50" />
@@ -148,7 +150,7 @@ export default function Home() {
               <Image src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800" alt="Σκύλος grooming Θεσσαλονίκη" fill className="object-cover hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="relative aspect-[4/3] md:aspect-auto md:h-[400px] w-full col-span-2 md:col-span-1 rounded-3xl md:rounded-[40px] overflow-hidden bg-[#b3e5fc] md:-mt-8">
-              <Image src="/images/stella.webp" alt="Στέλλα - Head Groomer Musky Paws" fill className="object-cover hover:scale-105 transition-transform duration-700" />
+              <Image src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800" alt="Groomer με κουτάβι Musky Paws" fill className="object-cover hover:scale-105 transition-transform duration-700" />
             </div>
           </motion.div>
         </section>
@@ -161,15 +163,15 @@ export default function Home() {
             <div className="max-w-2xl">
               <div className="flex items-center gap-2 text-sm font-semibold text-navy-800 mb-6">
                 <div className="w-2 h-2 rounded-full bg-red-500" />
-                Κομμωτήριο Σκύλων Θεσσαλονίκη
+                {t('about.badge')}
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 tracking-tight leading-[1.1]">
-                Υγιεινή, Ασφάλεια & <span className="wavy-underline">Φροντίδα</span>
+                {t('about.title1')} <span className="wavy-underline">{t('about.title2')}</span>
               </h2>
             </div>
             <div className="max-w-lg">
               <p className="text-navy-800/60 leading-relaxed text-lg">
-                Full grooming, μπάνιο, deshedding, νύχια και αυτιά. Εύκολη πρόσβαση από Θεσσαλονίκη με premium υπηρεσίες, καθαρό αποτέλεσμα και ήπιο χειρισμό χωρίς στρες για τους μικρούς μας φίλους.
+                {t('about.desc')}
               </p>
             </div>
           </div>
@@ -210,14 +212,14 @@ export default function Home() {
               <div className="lg:col-span-4 flex flex-col justify-center">
                 <div className="flex items-center gap-2 text-sm font-semibold text-navy-800 mb-6">
                   <div className="w-2 h-2 rounded-full bg-red-500" />
-                  Pet Grooming Θεσσαλονίκη
+                  {t('team.badge')}
                 </div>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 tracking-tight leading-[1.1] mb-10">
-                  Η έμπειρη <span className="wavy-underline">ομάδα</span> μας
+                  {t('team.title1')} <span className="wavy-underline">{t('team.title2')}</span> {t('team.title3')}
                 </h2>
                 <div>
                   <Link href="/about" className="inline-flex items-center bg-navy-900 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:bg-navy-800 transition-colors">
-                    Γνωρίστε μας
+                    {t('team.cta')}
                   </Link>
                 </div>
               </div>
@@ -237,7 +239,7 @@ export default function Home() {
                   <div className="absolute bottom-6 left-6 right-6 bg-white rounded-3xl p-5 flex items-center justify-between shadow-xl">
                     <div>
                       <h3 className="font-bold text-navy-900 text-xl">Στέλλα</h3>
-                      <p className="text-navy-800/60 text-sm font-medium">Head Groomer</p>
+                      <p className="text-navy-800/60 text-sm font-medium">{t('team.role')}</p>
                     </div>
                     <Link href="/booking" className="w-12 h-12 rounded-full bg-vetic-pink flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md">
                       <ArrowRight className="w-5 h-5" />
