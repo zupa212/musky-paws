@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.9,
     }));
 
-    const areas = ['peraea', 'neoi-epivates', 'agia-triada', 'kalamaria', 'thessaloniki'].map((slug) => ({
+    const areas = ['peraea', 'neoi-epivates', 'agia-triada', 'kalamaria', 'thessaloniki', 'trilofos', 'epanomi', 'nea-michaniona', 'thermi', 'plagiari'].map((slug) => ({
         url: `${BASE_URL}/areas/${slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
