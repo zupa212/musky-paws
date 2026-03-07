@@ -148,7 +148,7 @@ export default function Home() {
               <Image src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800" alt="Σκύλος grooming Θεσσαλονίκη" fill className="object-cover hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="relative aspect-[4/3] md:aspect-auto md:h-[400px] w-full col-span-2 md:col-span-1 rounded-3xl md:rounded-[40px] overflow-hidden bg-[#b3e5fc] md:-mt-8">
-              <Image src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800" alt="Groomer με κουτάβι Musky Paws" fill className="object-cover hover:scale-105 transition-transform duration-700" />
+              <Image src="/images/stella.webp" alt="Στέλλα - Head Groomer Musky Paws" fill className="object-cover hover:scale-105 transition-transform duration-700" />
             </div>
           </motion.div>
         </section>
