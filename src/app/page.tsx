@@ -228,8 +228,8 @@ export default function Home() {
                 {/* Team member 1 */}
                 <div className="relative w-full max-w-md h-[450px] squircle overflow-hidden bg-vetic-blue group shadow-xl">
                   <Image
-                    src="https://images.unsplash.com/photo-1594149929949-a29d5b79659f?auto=format&fit=crop&q=80&w=800"
-                    alt="Stella Groomer"
+                    src="/images/stella.webp"
+                    alt="Στέλλα - Head Groomer Musky Paws"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
