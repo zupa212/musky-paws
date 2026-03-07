@@ -57,9 +57,17 @@ export function Footer() {
                     </div>
 
                     <div className="flex flex-col gap-4 col-span-2 md:col-span-1 border-t border-gray-800 pt-6 md:border-0 md:pt-0">
-                        <Link href="/admin/login" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('footer.login')}</Link>
-                        <Link href="/booking" className="text-gray-300 hover:text-vetic-pink font-semibold hover:translate-x-1 transition-all">{t('footer.createBooking')}</Link>
-                        <Link href="/admin/customers" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('footer.userPage')}</Link>
+                        <p className="text-white font-bold mb-1">{t('footer.areas')}</p>
+                        <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                            <Link href="/areas/peraea" className="text-gray-300 text-sm hover:text-white hover:translate-x-1 transition-all">Περαία</Link>
+                            <Link href="/areas/kalamaria" className="text-gray-300 text-sm hover:text-white hover:translate-x-1 transition-all">Καλαμαριά</Link>
+                            <Link href="/areas/trilofos" className="text-gray-300 text-sm hover:text-white hover:translate-x-1 transition-all">Τρίλοφος</Link>
+                            <Link href="/areas/thermi" className="text-gray-300 text-sm hover:text-white hover:translate-x-1 transition-all">Θέρμη</Link>
+                            <Link href="/areas/epanomi" className="text-gray-300 text-sm hover:text-white hover:translate-x-1 transition-all">Επανομή</Link>
+                            <Link href="/areas/nea-michaniona" className="text-gray-300 text-sm hover:text-white hover:translate-x-1 transition-all">Μηχανιώνα</Link>
+                            <Link href="/areas/plagiari" className="text-gray-300 text-sm hover:text-white hover:translate-x-1 transition-all">Πλαγιάρι</Link>
+                            <Link href="/areas" className="text-vetic-pink text-sm font-semibold hover:text-white transition-all">Όλες οι περιοχές</Link>
+                        </div>
                     </div>
                 </div>
 

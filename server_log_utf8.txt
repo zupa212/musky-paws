@@ -1,0 +1,23 @@
+﻿
+> musky-paws@0.1.0 dev
+> next dev -p 3020
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3020
+- Network:       http://172.16.0.2:3020
+- Environments: .env.local
+
+Γ£ô Starting...
+node.exe : ΓÜá The "middleware" file convention is deprecated. 
+Please use "proxy" instead. Learn more: 
+https://nextjs.org/docs/messages/middleware-to-proxy
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~
+    + CategoryInfo          : NotSpecified: (ΓÜá The "middle...l 
+   eware-to-proxy:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Γ£ô Ready in 862ms

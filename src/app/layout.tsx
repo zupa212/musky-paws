@@ -13,7 +13,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Musky Paws | Dog Grooming Περαία Θεσσαλονίκη",
   description: "Premium υπηρεσίες καλλωπισμού σκύλων (dog grooming) στην Περαία Θεσσαλονίκης. Κλείστε ραντεβού σήμερα για την καλύτερη φροντίδα του αγαπημένου σας κατοικίδιου.",
-  keywords: ["dog grooming", "grooming σκύλων", "Περαία", "Θεσσαλονίκη", "κούρεμα σκύλου", "μπάνιο σκύλου", "Musky Paws"],
+  keywords: ["dog grooming", "grooming σκύλων", "Περαία", "Θεσσαλονίκη", "Τρίλοφος", "Επανομή", "Μηχανιώνα", "Θέρμη", "Πλαγιάρι", "Ανατολική Θεσσαλονίκη", "κούρεμα σκύλου", "μπάνιο σκύλου", "Musky Paws"],
   openGraph: {
     title: "Musky Paws | Dog Grooming Περαία",
     description: "Premium υπηρεσίες καλλωπισμού σκύλων στην Περαία Θεσσαλονίκης.",
