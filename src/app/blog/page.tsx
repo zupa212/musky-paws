@@ -27,7 +27,7 @@ export default function BlogIndex() {
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <div className="inline-flex items-center gap-2 text-sm font-semibold text-navy-800 mb-6 bg-white px-4 py-1.5 rounded-full border border-brand-200">
                         <div className="w-2 h-2 rounded-full bg-vetic-pink" />
-                        Vetic Pet Care Blog
+                        Musky Paws Blog
                     </div>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 tracking-tight leading-[1.1] mb-6">
                         Οδηγοί για χαρούμενα & <span className="wavy-underline">υγιή κατοικίδια</span>

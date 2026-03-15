@@ -109,7 +109,7 @@ export default function ContactPage() {
                             <h2 className="text-2xl font-bold tracking-tight mb-4 px-2">Πώς θα μας βρείτε</h2>
                             <div className="flex-grow w-full rounded-2xl overflow-hidden relative">
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3032.091178!2d22.92345!3d40.50!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDMwJzAwLjAiTiAyMsKwNTUnMjQuNCJF!5e0!3m2!1sen!2sgr!4v1620000000000!5m2!1sen!2sgr"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3032.0911!2d22.92345!3d40.50!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a8157d8e728873%3A0xdcebed07995b9773!2sMusky%20Paws%20Dog%20Grooming!5e0!3m2!1sen!2sgr!4v1700000000000!5m2!1sen!2sgr"
                                     width="100%"
                                     height="100%"
                                     style={{ border: 0 }}

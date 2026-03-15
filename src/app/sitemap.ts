@@ -4,7 +4,7 @@ import { getAllPosts } from '@/lib/blog';
 const BASE_URL = 'https://muskypaws.gr';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const routes = ['', '/about', '/contact', '/gallery', '/pricing', '/services', '/booking', '/areas', '/blog'].map((route) => ({
+    const routes = ['', '/about', '/contact', '/gallery', '/services', '/booking', '/areas', '/blog'].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,

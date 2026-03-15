@@ -264,7 +264,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
               <div className="max-w-2xl">
                 <div className="flex items-center gap-2 text-sm font-semibold text-navy-800 mb-6">
                   <div className="w-2 h-2 rounded-full bg-red-500" />
-                  Vetic Pet Care Blog
+                  Musky Paws Blog
                 </div>
                 <h2 className="text-4xl md:text-5xl font-bold text-navy-900 tracking-tight leading-[1.1]">
                   Τελευταία <span className="wavy-underline">Άρθρα</span>

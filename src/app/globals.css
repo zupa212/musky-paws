@@ -2,7 +2,7 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Vetic-style Palette */
+  /* Musky Paws-style Palette */
   --color-brand-50: #ffffff;
   --color-brand-100: #f8f9fa;
   --color-brand-200: #f1f3f5;
@@ -15,7 +15,7 @@
   --color-brand-900: #1a1b1e;
   --color-brand-950: #0f1115;
 
-  /* Vetic Accents */
+  /* Musky Paws Accents */
   --color-vetic-pink: #ffb8d8;
   --color-vetic-pink-hover: #ffa8d0;
   --color-vetic-yellow: #ffe600;
@@ -39,7 +39,7 @@
 
 :root {
   --background: #f8f9fa;
-  /* Off-white Vetic background */
+  /* Off-white background */
   --foreground: #111827;
   /* Dark black */
 }
