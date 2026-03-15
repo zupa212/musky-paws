@@ -1,19 +1,34 @@
 "use client";
 
-import { useLanguage, Locale } from '@/lib/language';
+import { useLanguage } from '@/lib/language';
 
 export function LanguageToggle() {
     const { locale, setLocale } = useLanguage();
 
     return (
-        <button
-            onClick={() => setLocale(locale === 'el' ? 'en' : 'el')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-100 hover:bg-brand-200 transition-colors text-sm font-semibold text-navy-900 border border-brand-200"
-            aria-label="Switch Language"
-        >
-            <span className={locale === 'el' ? 'opacity-100' : 'opacity-40'}>🇬🇷</span>
-            <span className="text-brand-400">/</span>
-            <span className={locale === 'en' ? 'opacity-100' : 'opacity-40'}>🇬🇧</span>
-        </button>
+        <div className="flex items-center p-1 bg-navy-50/50 backdrop-blur-sm rounded-full border border-navy-100/50">
+            <button
+                onClick={() => setLocale('el')}
+                className={`
+                    px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300
+                    ${locale === 'el' 
+                        ? 'bg-navy-900 text-white shadow-md' 
+                        : 'text-navy-900/40 hover:text-navy-900 hover:bg-white/50'}
+                `}
+            >
+                GR
+            </button>
+            <button
+                onClick={() => setLocale('en')}
+                className={`
+                    px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300
+                    ${locale === 'en' 
+                        ? 'bg-navy-900 text-white shadow-md' 
+                        : 'text-navy-900/40 hover:text-navy-900 hover:bg-white/50'}
+                `}
+            >
+                EN
+            </button>
+        </div>
     );
 }

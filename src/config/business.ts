@@ -10,7 +10,7 @@ export const BUSINESS = {
     city: 'Θεσσαλονίκη',
     timezone: 'Europe/Athens',
     address: 'Σόλωνος 28Β, Περαία 570 19',
-    addressUrl: 'https://maps.google.com/?q=Solonos+28B,+Peraia+57019',
+    addressUrl: 'https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8157d8e728873:0xdcebed07995b9773?sa=X&ved=1t:8290&ictx=111',
     bookingUrl: 'https://muskypaws.gr/booking',
     email: {
         fromName: 'Musky Paws',

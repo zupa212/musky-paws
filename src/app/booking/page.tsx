@@ -724,7 +724,7 @@ export default function BookingPage() {
                         <a href="tel:+306948965371" className="flex items-center justify-center gap-2 py-3 px-6 bg-ui-taupe border-2 border-white/30 rounded-full text-sm font-bold text-ui-navy hover:shadow-lg transition-all">
                             <Phone className="w-4 h-4 text-ui-coral" /> Κάλεσε Τώρα
                         </a>
-                        <a href="https://maps.google.com/?q=Solonos+28B,+Peraia,+Greece+57019" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 py-3 px-6 bg-ui-taupe border-2 border-white/30 rounded-full text-sm font-bold text-ui-navy hover:shadow-lg transition-all">
+                        <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8157d8e728873:0xdcebed07995b9773?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 py-3 px-6 bg-ui-taupe border-2 border-white/30 rounded-full text-sm font-bold text-ui-navy hover:shadow-lg transition-all">
                             <MapPin className="w-4 h-4 text-ui-coral" /> Οδηγίες
                         </a>
                     </div>

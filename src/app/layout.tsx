@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import Script from "next/script";
 import { PublicShell } from "@/components/layout/PublicShell";
+import { SiteProtection } from "@/components/layout/SiteProtection";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -121,6 +122,7 @@ export default function RootLayout({
           </Script>
         )}
 
+        <SiteProtection />
         <PublicShell>
           {children}
         </PublicShell>

@@ -228,7 +228,7 @@ export default async function AreaPage({ params }: Props) {
                                     <p className="font-bold flex items-center gap-2 mb-1"><Clock className="w-4 h-4" /> Παράδοση & Παραλαβή</p>
                                     <p className="text-sm text-brand-600 dark:text-brand-400">Ενημερώνουμε έγκαιρα για να μην ταλαιπωρείται ο σκύλος στην αναμονή.</p>
                                 </div>
-                                <a href="https://maps.google.com/?q=Solonos+28B,+Peraia,+Greece+57019" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-white dark:bg-brand-950 px-4 py-2 rounded-full text-sm font-bold shadow-sm hover:shadow-md transition-shadow">
+                                <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8157d8e728873:0xdcebed07995b9773?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-white dark:bg-brand-950 px-4 py-2 rounded-full text-sm font-bold shadow-sm hover:shadow-md transition-shadow">
                                     Οδηγίες
                                 </a>
                             </div>

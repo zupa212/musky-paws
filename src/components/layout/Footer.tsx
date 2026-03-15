@@ -59,7 +59,7 @@ export function Footer() {
 
                 {/* Right Contact Details */}
                 <div className="flex flex-col gap-6 z-10 w-full md:w-[280px]">
-                    <a href="https://www.google.com/maps/place/Musky+Paws+Dog+Grooming/@40.4925,22.9243,17z" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
+                    <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8157d8e728873:0xdcebed07995b9773?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
                         <div className="w-10 h-10 rounded-full bg-vetic-pink flex items-center justify-center text-[#151515] group-hover:scale-110 shadow-lg shadow-vetic-pink/20 transition-all shrink-0">
                             <MapPin className="w-[18px] h-[18px] fill-[#151515]" />
                         </div>

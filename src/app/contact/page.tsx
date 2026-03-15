@@ -121,7 +121,7 @@ export default function ContactPage() {
                             </div>
                             <div className="pt-6 pb-2 px-2 flex justify-between items-center gap-4">
                                 <p className="text-sm font-medium text-brand-600 dark:text-brand-400">Εύκολο πάρκινγκ στους γύρω δρόμους.</p>
-                                <a href="https://maps.google.com/?q=Solonos+28B,+Peraia,+Greece+57019" target="_blank" rel="noopener noreferrer" className="text-accent-600 dark:text-accent-400 font-bold hover:underline text-sm uppercase tracking-wide">
+                                <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8157d8e728873:0xdcebed07995b9773?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" className="text-accent-600 dark:text-accent-400 font-bold hover:underline text-sm uppercase tracking-wide">
                                     Ανοιγμα στo Google Maps
                                 </a>
                             </div>
