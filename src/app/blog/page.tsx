@@ -7,7 +7,7 @@ import { ArrowRight, Clock, CalendarDays } from 'lucide-react';
 
 export const metadata = {
     title: 'Blog | Musky Paws Dog Grooming Περαία',
-    description: 'Συμβουλές, Tips και Οδηγοί για το grooming, την υγεία και την περιποίηση του σκύλου σας στο Musky Paws.',
+    description: 'Οδηγοί και πληροφορίες για το grooming, την υγεία και την περιποίηση του σκύλου σας στο Musky Paws.',
     alternates: {
         canonical: 'https://muskypaws.gr/blog',
     },
@@ -30,10 +30,10 @@ export default function BlogIndex() {
                         Vetic Pet Care Blog
                     </div>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 tracking-tight leading-[1.1] mb-6">
-                        Συμβουλές για χαρούμενα & <span className="wavy-underline">υγιή κατοικίδια</span>
+                        Οδηγοί για χαρούμενα & <span className="wavy-underline">υγιή κατοικίδια</span>
                     </h1>
                     <p className="text-navy-900/60 text-lg leading-relaxed">
-                        Ανακαλύψτε τα πάντα για το grooming, την υγεία του τριχώματος και έξυπνα tips από την ομάδα των ειδικών του Musky Paws.
+                        Ανακαλύψτε τα πάντα για το grooming, την υγεία του τριχώματος και χρήσιμες πληροφορίες από την ομάδα των ειδικών του Musky Paws.
                     </p>
                 </div>
 

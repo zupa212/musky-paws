@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import Script from "next/script";
 import { PublicShell } from "@/components/layout/PublicShell";
-import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -70,7 +69,7 @@ export default function RootLayout({
                 "@type": "OpeningHoursSpecification",
                 "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
                 "opens": "09:00",
-                "closes": "18:00"
+                "closes": "21:00"
               },
               {
                 "@type": "OpeningHoursSpecification",
@@ -125,7 +124,6 @@ export default function RootLayout({
         <PublicShell>
           {children}
         </PublicShell>
-        <WhatsAppButton />
       </body>
     </html>
   );

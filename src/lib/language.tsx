@@ -73,6 +73,8 @@ const translations: Record<Locale, Record<string, string>> = {
         'footer.terms': 'Όροι Χρήσης',
         'footer.privacy': 'Πολιτική Απορρήτου',
         'footer.rights': 'Με επιφύλαξη παντός δικαιώματος.',
+        'footer.address': 'Σόλωνος 28Β, Περαία 57019, Θεσσαλονίκη',
+        'nav.about': 'Σχετικά',
     },
     en: {
         // Header
@@ -136,6 +138,8 @@ const translations: Record<Locale, Record<string, string>> = {
         'footer.terms': 'Terms of Use',
         'footer.privacy': 'Privacy Policy',
         'footer.rights': 'All rights reserved.',
+        'footer.address': 'Solonos 28B, Peraia 57019, Thessaloniki',
+        'nav.about': 'About',
     },
 };
 

@@ -17,7 +17,6 @@ const services = [
         slug: "full-grooming",
         desc: "Η απόλυτη εμπειρία περιποίησης. Μπάνιο, κούρεμα φυλής ή δικής σας επιλογής, καθαρισμός αυτιών & κόψιμο νυχιών.",
         duration: "1.5 - 3 ώρες",
-        price: "Από 35€",
         img: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80"
     },
     {
@@ -25,7 +24,6 @@ const services = [
         slug: "bath-brush",
         desc: "Εξειδικευμένα σαμπουάν, βαθύς καθαρισμός και βούρτσισμα για αφαίρεση νεκρής τρίχας. Για λαμπερό και υγιές τρίχωμα.",
         duration: "1 - 2 ώρες",
-        price: "Από 20€",
         img: "https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&q=80"
     },
     {
@@ -33,7 +31,6 @@ const services = [
         slug: "deshedding",
         desc: "Ειδική θεραπεία για φυλές με διπλό μανδύα που μαδάνε έντονα. Μειώνει την τριχόπτωση στο σπίτι έως και 80%.",
         duration: "1.5 - 2.5 ώρες",
-        price: "Από 30€",
         img: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80"
     },
     {
@@ -41,15 +38,20 @@ const services = [
         slug: "puppy-grooming",
         desc: "Ήπια εισαγωγή στον κόσμο του grooming. Μπάνιο, απαλό χτένισμα, καθαρισμός προσώπου και αυτιών με πολλή θετική ενίσχυση.",
         duration: "1 - 1.5 ώρες",
-        price: "Από 20€",
         img: "https://images.unsplash.com/photo-1591160690555-5debfba289f0?auto=format&fit=crop&q=80"
+    },
+    {
+        title: "Furminator (Βούρτσισμα)",
+        slug: "furminator",
+        desc: "Επαγγελματικό βούρτσισμα με εργαλείο Furminator για αφαίρεση υπερβολικής τρίχας. Ιδανικό για σκύλους με πυκνό τρίχωμα.",
+        duration: "45 - 90 λεπτά",
+        img: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80"
     },
     {
         title: "Κόψιμο Νυχιών & Καθαρισμός Αυτιών",
         slug: "nails-ears",
         desc: "Απαραίτητη υγιεινή φροντίδα. Περιλαμβάνεται δωρεάν στις κύριες υπηρεσίες μας, αλλά προσφέρεται και μεμονωμένα.",
         duration: "15 λεπτά",
-        price: "5€",
         img: "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&q=80"
     }
 ];
@@ -82,9 +84,6 @@ export default function ServicesPage() {
                                         <div className="flex items-center gap-2">
                                             <Clock className="w-5 h-5 text-brand-500" />
                                             <span>{service.duration}</span>
-                                        </div>
-                                        <div className="px-3 py-1 rounded-full bg-accent-100 dark:bg-accent-900/50 text-accent-700 dark:text-accent-400">
-                                            {service.price}
                                         </div>
                                     </div>
 

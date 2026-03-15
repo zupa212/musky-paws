@@ -62,7 +62,7 @@ export default function ContactPage() {
                                         <div>
                                             <h3 className="font-semibold text-xl mb-1">Ωράριο</h3>
                                             <p className="text-brand-600 dark:text-brand-400">
-                                                Δευ-Παρ: 09:00 - 18:00<br />
+                                                Δευ-Παρ: 09:00 - 21:00<br />
                                                 Σάββατο: 10:00 - 15:00<br />
                                                 Κυριακή: Κλειστά
                                             </p>
@@ -75,8 +75,8 @@ export default function ContactPage() {
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-xl mb-1">Email</h3>
-                                            <a href="mailto:info@muskypaws.gr" className="text-brand-600 dark:text-brand-400 hover:text-accent-500 transition-colors">
-                                                info@muskypaws.gr
+                                            <a href="mailto:muskypawsdg@gmail.com" className="text-brand-600 dark:text-brand-400 hover:text-accent-500 transition-colors">
+                                                muskypawsdg@gmail.com
                                             </a>
                                         </div>
                                     </div>
