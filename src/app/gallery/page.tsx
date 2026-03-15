@@ -5,7 +5,7 @@ export const metadata: Metadata = {
     title: 'Gallery - Πριν & Μετά | Musky Paws',
     description: 'Δείτε τη δουλειά μας! Φωτογραφίες πριν και μετά από τα κουρέματα και τα μπάνια των σκύλων πελατών μας.',
     alternates: {
-        canonical: '/gallery',
+        canonical: 'https://muskypaws.gr/gallery',
     },
 };
 

@@ -11,7 +11,7 @@ export default function NotFound() {
                         404
                     </h1>
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <PawPrint className="w-20 h-20 text-vetic-pink fill-vetic-pink/20" />
+                        <PawPrint className="w-20 h-20 text-brand-accent-pink fill-brand-accent-pink/20" />
                     </div>
                 </div>
 

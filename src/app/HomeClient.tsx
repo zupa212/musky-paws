@@ -12,13 +12,13 @@ import { el } from 'date-fns/locale';
 // Mock Services for Marquee
 const marqueeServices = [
   { text: 'Full Grooming', color: 'bg-red-500' },
-  { text: 'Λύσιμο - Ξεκόμπιασμα', color: 'bg-vetic-blue' },
-  { text: 'Μπάνιο & Βούρτσισμα', color: 'bg-vetic-green' },
-  { text: 'Κόψιμο Νυχιών', color: 'bg-vetic-yellow' },
-  { text: 'Pomeranian Grooming', color: 'bg-vetic-blue' },
+  { text: 'Λύσιμο - Ξεκόμπιασμα', color: 'bg-brand-accent-blue' },
+  { text: 'Μπάνιο & Βούρτσισμα', color: 'bg-brand-accent-green' },
+  { text: 'Κόψιμο Νυχιών', color: 'bg-brand-accent-yellow' },
+  { text: 'Pomeranian Grooming', color: 'bg-brand-accent-blue' },
   { text: 'Αφαίρεση Νεκρής Τρίχας', color: 'bg-red-500' },
-  { text: 'Καθαρισμός Αυτιών', color: 'bg-vetic-green' },
-  { text: 'Spa & Υγιεινή', color: 'bg-vetic-yellow' },
+  { text: 'Καθαρισμός Αυτιών', color: 'bg-brand-accent-green' },
+  { text: 'Spa & Υγιεινή', color: 'bg-brand-accent-yellow' },
 ];
 
 export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
@@ -27,7 +27,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
     <>
       <div className="pt-24 pb-8 overflow-hidden">
 
-        {/* ═══════════════ VETIC HERO SECTION ═══════════════ */}
+        {/* ═══════════════ HERO SECTION ═══════════════ */}
         <section className="relative px-4 max-w-7xl mx-auto flex flex-col items-center text-center mt-8 lg:mt-16 z-10">
 
           {/* Subtle top pill */}
@@ -65,7 +65,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
           <motion.div
             animate={{ y: [0, -15, 0] }}
             transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="hidden md:flex absolute top-12 left-[10%] xl:left-[15%] w-14 h-14 bg-vetic-blue rounded-full items-center justify-center shadow-lg"
+            className="hidden md:flex absolute top-12 left-[10%] xl:left-[15%] w-14 h-14 bg-brand-accent-blue rounded-full items-center justify-center shadow-lg"
           >
             <PawPrint className="w-6 h-6 text-navy-900" />
           </motion.div>
@@ -73,7 +73,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
           <motion.div
             animate={{ y: [0, 15, 0] }}
             transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
-            className="hidden md:flex absolute top-2 right-[20%] w-12 h-12 bg-vetic-yellow rounded-full items-center justify-center shadow-lg transform rotate-12"
+            className="hidden md:flex absolute top-2 right-[20%] w-12 h-12 bg-brand-accent-yellow rounded-full items-center justify-center shadow-lg transform rotate-12"
           >
             <PawPrint className="w-5 h-5 text-navy-900" />
           </motion.div>
@@ -81,7 +81,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
           <motion.div
             animate={{ y: [0, -20, 0] }}
             transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 2 }}
-            className="hidden lg:flex absolute bottom-[30%] right-[10%] w-16 h-16 bg-vetic-green rounded-full items-center justify-center shadow-lg -rotate-12"
+            className="hidden lg:flex absolute bottom-[30%] right-[10%] w-16 h-16 bg-brand-accent-green rounded-full items-center justify-center shadow-lg -rotate-12"
           >
             <PawPrint className="w-7 h-7 text-navy-900" />
           </motion.div>
@@ -89,7 +89,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 0.5 }}
-            className="hidden lg:flex absolute bottom-[35%] left-[15%] w-12 h-12 bg-vetic-yellow rounded-full items-center justify-center shadow-lg"
+            className="hidden lg:flex absolute bottom-[35%] left-[15%] w-12 h-12 bg-brand-accent-yellow rounded-full items-center justify-center shadow-lg"
           >
             <PawPrint className="w-5 h-5 text-navy-900" />
           </motion.div>
@@ -105,12 +105,12 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
               <Link href="/booking" className="text-white font-semibold mr-4">
                 {t('hero.cta')}
               </Link>
-              <div className="w-10 h-10 bg-vetic-pink rounded-full flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 bg-brand-accent-pink rounded-full flex items-center justify-center shrink-0">
                 <PawPrint className="w-5 h-5 text-navy-900 fill-navy-900" />
               </div>
             </div>
 
-            <Link href="/gallery" className="flex items-center gap-2 font-semibold text-navy-900 hover:text-vetic-pink transition-colors">
+            <Link href="/gallery" className="flex items-center gap-2 font-semibold text-navy-900 hover:text-brand-accent-pink transition-colors">
               {t('hero.gallery')} <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -124,18 +124,17 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
           >
             {/* Callouts */}
             <div className="flex flex-wrap justify-center items-center gap-4 text-sm font-medium text-navy-800/80">
-              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> {t('hero.online')}</span>
-              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> {t('hero.contact')}</span>
-              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> {t('hero.premium')}</span>
-              <span className="flex items-center gap-1"><span className="text-vetic-green">✔</span> {t('hero.hygiene')}</span>
+              <span className="flex items-center gap-1"><span className="text-brand-accent-green">✔</span> {t('hero.online')}</span>
+              <span className="flex items-center gap-1"><span className="text-brand-accent-green">✔</span> {t('hero.contact')}</span>
+              <span className="flex items-center gap-1"><span className="text-brand-accent-green">✔</span> {t('hero.premium')}</span>
+              <span className="flex items-center gap-1"><span className="text-brand-accent-green">✔</span> {t('hero.hygiene')}</span>
             </div>
             {/* Sitelinks */}
             <div className="w-full h-px bg-brand-200 my-2 opacity-50" />
             <div className="flex flex-wrap justify-center items-center gap-4 text-sm font-bold text-navy-900">
-              <Link href="/booking" className="hover:text-vetic-pink underline decoration-vetic-pink/30 underline-offset-4">Booking</Link>
-              <Link href="/pricing" className="hover:text-vetic-pink underline decoration-vetic-pink/30 underline-offset-4">Τιμές</Link>
-              <Link href="/services" className="hover:text-vetic-pink underline decoration-vetic-pink/30 underline-offset-4">Υπηρεσίες</Link>
-              <Link href="/gallery" className="hover:text-vetic-pink underline decoration-vetic-pink/30 underline-offset-4">Before/After</Link>
+              <Link href="/booking" className="hover:text-brand-accent-pink underline decoration-brand-accent-pink/30 underline-offset-4">Booking</Link>
+              <Link href="/services" className="hover:text-brand-accent-pink underline decoration-brand-accent-pink/30 underline-offset-4">Υπηρεσίες</Link>
+              <Link href="/gallery" className="hover:text-brand-accent-pink underline decoration-brand-accent-pink/30 underline-offset-4">Before/After</Link>
             </div>
           </motion.div>
 
@@ -197,7 +196,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
           <div className="animate-marquee gap-6 py-2 px-3">
             {[...marqueeServices, ...marqueeServices].reverse().map((service, idx) => (
               <div key={idx} className="flex items-center gap-3 bg-white px-8 py-4 rounded-full shadow-sm border border-brand-200 shrink-0 hover:-translate-y-1 transition-transform cursor-pointer" dir="ltr">
-                <div className={`w-3 h-3 rounded-full ${service.color === 'bg-vetic-green' ? 'bg-vetic-pink' : service.color}`} />
+                <div className={`w-3 h-3 rounded-full ${service.color === 'bg-brand-accent-green' ? 'bg-brand-accent-pink' : service.color}`} />
                 <span className="font-semibold text-navy-900 text-lg">{service.text}</span>
               </div>
             ))}
@@ -231,7 +230,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
               <div className="lg:col-span-8 flex justify-center items-center">
 
                 {/* Team member 1 */}
-                <div className="relative w-full max-w-md h-[450px] squircle overflow-hidden bg-vetic-blue group shadow-xl">
+                <div className="relative w-full max-w-md h-[450px] squircle overflow-hidden bg-brand-accent-blue group shadow-xl">
                   <Image
                     src="/images/stella.webp"
                     alt="Στέλλα - Head Groomer Musky Paws"
@@ -244,7 +243,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                       <h3 className="font-bold text-navy-900 text-xl">Στέλλα</h3>
                       <p className="text-navy-800/60 text-sm font-medium">{t('team.role')}</p>
                     </div>
-                    <Link href="/booking" className="w-12 h-12 rounded-full bg-vetic-pink flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md">
+                    <Link href="/booking" className="w-12 h-12 rounded-full bg-brand-accent-pink flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md">
                       <ArrowRight className="w-5 h-5" />
                     </Link>
                   </div>
@@ -270,7 +269,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                   Τελευταία <span className="wavy-underline">Άρθρα</span>
                 </h2>
               </div>
-              <Link href="/blog" className="inline-flex items-center gap-2 font-bold text-navy-900 hover:text-vetic-pink transition-colors">
+              <Link href="/blog" className="inline-flex items-center gap-2 font-bold text-navy-900 hover:text-brand-accent-pink transition-colors">
                 Δείτε όλα τα άρθρα <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
@@ -300,7 +299,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                         {post.reading_time} min
                       </div>
                     </div>
-                    <h4 className="text-[19px] font-bold text-navy-900 leading-snug mb-3 group-hover:text-vetic-pink transition-colors line-clamp-3">
+                    <h4 className="text-[19px] font-bold text-navy-900 leading-snug mb-3 group-hover:text-brand-accent-pink transition-colors line-clamp-3">
                       {post.title}
                     </h4>
                     <p className="text-navy-900/60 text-sm leading-relaxed line-clamp-2 mb-6 mt-auto">
@@ -313,7 +312,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                         </div>
                         <span className="text-[11px] font-semibold text-navy-900 uppercase tracking-wider">{post.author}</span>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-navy-900/40 group-hover:text-vetic-pink group-hover:translate-x-1 transition-all" />
+                      <ArrowRight className="w-4 h-4 text-navy-900/40 group-hover:text-brand-accent-pink group-hover:translate-x-1 transition-all" />
                     </div>
                   </div>
                 </Link>
@@ -387,7 +386,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                         <Image src={t.img} alt={t.name} fill className="object-cover" />
                       </div>
                       {/* Pink quote SVG bubble */}
-                      <div className="absolute -top-2 -right-3 w-9 h-9 bg-vetic-pink rounded-full flex items-center justify-center shadow-md">
+                      <div className="absolute -top-2 -right-3 w-9 h-9 bg-brand-accent-pink rounded-full flex items-center justify-center shadow-md">
                         <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M6.4 0H0V5.6C0 8.8 1.6 11.2 4.8 12L5.6 10.4C3.6 9.6 2.8 8 2.8 6.4H6.4V0ZM16 0H9.6V5.6C9.6 8.8 11.2 11.2 14.4 12L15.2 10.4C13.2 9.6 12.4 8 12.4 6.4H16V0Z" fill="white" />
                         </svg>
@@ -452,7 +451,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                       <div className="relative w-24 h-24 rounded-2xl overflow-hidden bg-brand-200">
                         <Image src={t.img} alt={t.name} fill className="object-cover" />
                       </div>
-                      <div className="absolute -top-2 -right-3 w-9 h-9 bg-vetic-pink rounded-full flex items-center justify-center shadow-md">
+                      <div className="absolute -top-2 -right-3 w-9 h-9 bg-brand-accent-pink rounded-full flex items-center justify-center shadow-md">
                         <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M6.4 0H0V5.6C0 8.8 1.6 11.2 4.8 12L5.6 10.4C3.6 9.6 2.8 8 2.8 6.4H6.4V0ZM16 0H9.6V5.6C9.6 8.8 11.2 11.2 14.4 12L15.2 10.4C13.2 9.6 12.4 8 12.4 6.4H16V0Z" fill="white" />
                         </svg>
@@ -501,10 +500,10 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
 
               <Link href="/booking" className="inline-flex items-center bg-navy-900 rounded-full pl-8 pr-2 py-2 group shadow-xl hover:-translate-y-1 transition-transform">
                 <span className="text-white font-bold mr-6 text-xl tracking-wide">{t('cta.button')}</span>
-                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-vetic-pink rounded-full flex items-center justify-center shrink-0 relative">
+                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-brand-accent-pink rounded-full flex items-center justify-center shrink-0 relative">
                   <span className="absolute top-0 right-0 flex h-3.5 w-3.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-vetic-green opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-vetic-green border-2 border-white"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent-green opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-brand-accent-green border-2 border-white"></span>
                   </span>
                   <PawPrint className="w-6 h-6 lg:w-7 lg:h-7 text-navy-900 fill-navy-900" />
                 </div>

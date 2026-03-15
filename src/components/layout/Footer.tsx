@@ -15,19 +15,19 @@ export function Footer() {
                 {/* Decorative Paw at Bottom Right — smaller to avoid overlap */}
                 <div className="absolute -bottom-16 -right-16 pointer-events-none z-0 opacity-30">
                     {/* Main Pad */}
-                    <div className="absolute bottom-0 right-0 w-36 h-36 md:w-48 md:h-48 bg-vetic-pink rounded-full" />
+                    <div className="absolute bottom-0 right-0 w-36 h-36 md:w-48 md:h-48 bg-brand-accent-pink rounded-full" />
                     {/* Left Toe */}
-                    <div className="absolute bottom-[120px] md:bottom-[155px] right-[125px] md:right-[165px] w-12 h-12 md:w-16 md:h-16 bg-vetic-pink rounded-full" />
+                    <div className="absolute bottom-[120px] md:bottom-[155px] right-[125px] md:right-[165px] w-12 h-12 md:w-16 md:h-16 bg-brand-accent-pink rounded-full" />
                     {/* Middle Toe */}
-                    <div className="absolute bottom-[155px] md:bottom-[200px] right-[50px] md:right-[70px] w-14 h-14 md:w-[70px] md:h-[70px] bg-vetic-pink rounded-full" />
+                    <div className="absolute bottom-[155px] md:bottom-[200px] right-[50px] md:right-[70px] w-14 h-14 md:w-[70px] md:h-[70px] bg-brand-accent-pink rounded-full" />
                     {/* Right Toe */}
-                    <div className="absolute bottom-[100px] md:bottom-[130px] -right-4 md:-right-6 w-12 h-12 md:w-16 md:h-16 bg-vetic-pink rounded-full" />
+                    <div className="absolute bottom-[100px] md:bottom-[130px] -right-4 md:-right-6 w-12 h-12 md:w-16 md:h-16 bg-brand-accent-pink rounded-full" />
                 </div>
 
                 {/* Left Section: Logo & Copyright */}
                 <div className="flex flex-col justify-between z-10 w-full md:w-auto">
                     <Link href="/" className="flex items-center gap-3 group inline-block">
-                        <div className="w-12 h-12 rounded-2xl bg-vetic-pink flex items-center justify-center shrink-0">
+                        <div className="w-12 h-12 rounded-2xl bg-brand-accent-pink flex items-center justify-center shrink-0">
                             <PawPrint className="w-7 h-7 text-navy-900 group-hover:scale-110 transition-transform duration-300" />
                         </div>
                         <span className="font-extrabold text-2xl tracking-tight text-white">
@@ -59,7 +59,7 @@ export function Footer() {
                 {/* Right Contact Details */}
                 <div className="flex flex-col gap-6 z-10 w-full md:w-[280px]">
                     <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8157d8e728873:0xdcebed07995b9773?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
-                        <div className="w-10 h-10 rounded-full bg-vetic-pink flex items-center justify-center text-[#151515] group-hover:scale-110 shadow-lg shadow-vetic-pink/20 transition-all shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-brand-accent-pink flex items-center justify-center text-[#151515] group-hover:scale-110 shadow-lg shadow-brand-accent-pink/20 transition-all shrink-0">
                             <MapPin className="w-[18px] h-[18px] fill-[#151515]" />
                         </div>
                         <span className="text-gray-300 text-sm font-medium pr-4 leading-relaxed group-hover:text-white transition-colors">
@@ -68,7 +68,7 @@ export function Footer() {
                     </a>
 
                     <a href="tel:+306948965371" className="flex items-center gap-4 group cursor-pointer">
-                        <div className="w-10 h-10 rounded-full bg-vetic-pink flex items-center justify-center text-[#151515] group-hover:scale-110 shadow-lg shadow-vetic-pink/20 transition-all shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-brand-accent-pink flex items-center justify-center text-[#151515] group-hover:scale-110 shadow-lg shadow-brand-accent-pink/20 transition-all shrink-0">
                             <Phone className="w-[18px] h-[18px] fill-[#151515]" />
                         </div>
                         <span className="text-gray-300 text-sm font-medium group-hover:text-white transition-colors">
@@ -77,7 +77,7 @@ export function Footer() {
                     </a>
 
                     <a href="mailto:muskypawsdg@gmail.com" className="flex items-center gap-4 group cursor-pointer">
-                        <div className="w-10 h-10 rounded-full bg-vetic-pink flex items-center justify-center text-[#151515] group-hover:scale-110 shadow-lg shadow-vetic-pink/20 transition-all shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-brand-accent-pink flex items-center justify-center text-[#151515] group-hover:scale-110 shadow-lg shadow-brand-accent-pink/20 transition-all shrink-0">
                             <AtSign className="w-[18px] h-[18px]" />
                         </div>
                         <span className="text-gray-300 text-sm font-medium truncate pr-4 group-hover:text-white transition-colors">

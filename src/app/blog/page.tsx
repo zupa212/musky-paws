@@ -26,7 +26,7 @@ export default function BlogIndex() {
                 {/* Header Section */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <div className="inline-flex items-center gap-2 text-sm font-semibold text-navy-800 mb-6 bg-white px-4 py-1.5 rounded-full border border-brand-200">
-                        <div className="w-2 h-2 rounded-full bg-vetic-pink" />
+                        <div className="w-2 h-2 rounded-full bg-brand-accent-pink" />
                         Musky Paws Blog
                     </div>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 tracking-tight leading-[1.1] mb-6">
@@ -65,13 +65,13 @@ export default function BlogIndex() {
                                                 {featuredPost.reading_time} λεπτά
                                             </div>
                                         </div>
-                                        <h2 className="text-3xl md:text-4xl font-bold text-navy-900 leading-tight mb-6 group-hover:text-vetic-pink transition-colors">
+                                        <h2 className="text-3xl md:text-4xl font-bold text-navy-900 leading-tight mb-6 group-hover:text-brand-accent-pink transition-colors">
                                             {featuredPost.title}
                                         </h2>
                                         <p className="text-navy-900/70 text-lg leading-relaxed mb-8 line-clamp-3">
                                             {featuredPost.excerpt}
                                         </p>
-                                        <div className="flex items-center gap-2 font-bold text-navy-900 group-hover:text-vetic-pink transition-colors">
+                                        <div className="flex items-center gap-2 font-bold text-navy-900 group-hover:text-brand-accent-pink transition-colors">
                                             Διαβάστε Περισσότερα <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                         </div>
                                     </div>
@@ -84,7 +84,7 @@ export default function BlogIndex() {
                 {/* Recent Posts Grid */}
                 <div className="mb-12">
                     <h3 className="text-2xl font-bold text-navy-900 mb-8 flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-vetic-blue" />
+                        <div className="w-3 h-3 rounded-full bg-brand-accent-blue" />
                         Πρόσφατα Άρθρα
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -112,7 +112,7 @@ export default function BlogIndex() {
                                             {post.reading_time} min
                                         </div>
                                     </div>
-                                    <h4 className="text-xl font-bold text-navy-900 leading-snug mb-3 group-hover:text-vetic-pink transition-colors line-clamp-3">
+                                    <h4 className="text-xl font-bold text-navy-900 leading-snug mb-3 group-hover:text-brand-accent-pink transition-colors line-clamp-3">
                                         {post.title}
                                     </h4>
                                     <p className="text-navy-900/60 text-sm leading-relaxed line-clamp-3 mb-6">
@@ -125,7 +125,7 @@ export default function BlogIndex() {
                                             </div>
                                             <span className="text-xs font-semibold text-navy-900">{post.author}</span>
                                         </div>
-                                        <ArrowRight className="w-5 h-5 text-navy-900/40 group-hover:text-vetic-pink group-hover:translate-x-1 transition-all" />
+                                        <ArrowRight className="w-5 h-5 text-navy-900/40 group-hover:text-brand-accent-pink group-hover:translate-x-1 transition-all" />
                                     </div>
                                 </div>
                             </Link>

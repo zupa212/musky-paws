@@ -16,11 +16,11 @@
   --color-brand-950: #0f1115;
 
   /* Musky Paws Accents */
-  --color-vetic-pink: #ffb8d8;
-  --color-vetic-pink-hover: #ffa8d0;
-  --color-vetic-yellow: #ffe600;
-  --color-vetic-green: #69f0ae;
-  --color-vetic-blue: #b3e5fc;
+  --color-brand-accent-pink: #ffb8d8;
+  --color-brand-accent-pink-hover: #ffa8d0;
+  --color-brand-accent-yellow: #ffe600;
+  --color-brand-accent-green: #69f0ae;
+  --color-brand-accent-blue: #b3e5fc;
 
   /* Accent mapping for existing classes */
   --color-accent-400: #ffb8d8;

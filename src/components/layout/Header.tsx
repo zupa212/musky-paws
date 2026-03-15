@@ -73,7 +73,7 @@ export function Header() {
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className={`text-[15px] font-medium transition-colors hover:text-vetic-pink ${isActive ? 'text-navy-900 font-bold' : 'text-navy-800/70'
+                                className={`text-[15px] font-medium transition-colors hover:text-brand-accent-pink ${isActive ? 'text-navy-900 font-bold' : 'text-navy-800/70'
                                     }`}
                             >
                                 {t(link.key)}
@@ -122,8 +122,8 @@ export function Header() {
                                     <Link
                                         key={link.href}
                                         href={link.href}
-                                        className={`text-2xl font-bold transition-all duration-400 hover:text-vetic-pink hover:translate-x-2 ${
-                                            isActive ? 'text-vetic-pink' : 'text-navy-900'
+                                        className={`text-2xl font-bold transition-all duration-400 hover:text-brand-accent-pink hover:translate-x-2 ${
+                                            isActive ? 'text-brand-accent-pink' : 'text-navy-900'
                                         }`}
                                         style={{ transitionDelay: `${idx * 40}ms` }}
                                     >
@@ -142,7 +142,7 @@ export function Header() {
                             </Link>
 
                             <div className="flex flex-col items-center gap-4">
-                                <a href="tel:+306948965371" className="flex items-center gap-3 text-navy-800 text-lg font-bold hover:text-vetic-pink transition-colors">
+                                <a href="tel:+306948965371" className="flex items-center gap-3 text-navy-800 text-lg font-bold hover:text-brand-accent-pink transition-colors">
                                     <Phone className="w-5 h-5" /> 694 896 5371
                                 </a>
                                 

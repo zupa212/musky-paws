@@ -5,7 +5,7 @@ export const metadata: Metadata = {
     title: 'Επικοινωνία | Musky Paws Περαία',
     description: 'Επικοινωνήστε με το Musky Paws Dog Grooming στην Περαία Θεσσαλονίκης. Βρείτε πληροφορίες πρόσβασης, ωράριο, και κλείστε το ραντεβού σας.',
     alternates: {
-        canonical: '/contact',
+        canonical: 'https://muskypaws.gr/contact',
     },
 };
 

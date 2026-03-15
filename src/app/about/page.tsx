@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     title: 'Σχετικά με εμάς | Musky Paws Dog Grooming Περαία',
     description: 'Μάθετε περισσότερα για τη φιλοσοφία του Musky Paws, τις σύγχρονες εγκαταστάσεις μας και τα αυστηρά πρότυπα υγιεινής που ακολουθούμε.',
     alternates: {
-        canonical: '/about',
+        canonical: 'https://muskypaws.gr/about',
     },
 };
 

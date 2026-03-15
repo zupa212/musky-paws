@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     title: 'Περιοχές Εξυπηρέτησης | Musky Paws Dog Grooming',
     description: 'Το Musky Paws εξυπηρετεί όλη την ανατολική Θεσσαλονίκη προσφέροντας premium υπηρεσίες καλλωπισμού σκύλων.',
     alternates: {
-        canonical: '/areas',
+        canonical: 'https://muskypaws.gr/areas',
     },
 };
 
