@@ -14,6 +14,11 @@ echo "🔐 Clearing locks..."
 rm -f .next/dev/lock
 rm -f /Users/xupi/package-lock.json 2>/dev/null
 
-# Step 3: Start the server
+# Step 3: Sync changes (Automatic)
+echo "🔄 Syncing with GitHub..."
+git pull origin master 2>/dev/null
+git push origin master 2>/dev/null
+
+# Step 4: Start the server
 echo "🚀 Starting server on http://localhost:3010 ..."
 npm run dev

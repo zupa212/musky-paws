@@ -99,7 +99,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: `Dog Grooming ${area.name} | Κομμωτήριο Σκύλων Musky Paws`,
         description: area.description,
         alternates: {
-            canonical: `/areas/${slug}`,
+            canonical: `https://muskypaws.gr/areas/${slug}`,
         }
     };
 }

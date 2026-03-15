@@ -23,6 +23,21 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - Admin Dashboard for Appointment Management
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Git Sync
+
+Use one of these helpers to stage, commit, and push the current branch:
+
+```bash
+npm run git:sync -- "your commit message"
+```
+
+Or run `./Sync-Project.command` and enter a commit message when prompted.
+
+For fully automatic push without terminal commands, run:
+
+- `./Enable-AutoPush.command` (enables auto-commit + auto-push every 3 minutes)
+- `./Disable-AutoPush.command` (stops it)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
