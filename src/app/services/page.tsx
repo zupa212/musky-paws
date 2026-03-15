@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Clock, MapPin } from 'lucide-react';
+import { ArrowRight, Clock, MapPin, CheckCircle2, Sparkles, PawPrint } from 'lucide-react';
 
 export const metadata: Metadata = {
     title: 'Υπηρεσίες Καλλωπισμού Σκύλων | Musky Paws',
@@ -97,16 +97,45 @@ export default function ServicesPage() {
                         ))}
                     </div>
 
-                    <div className="mt-20 text-center space-y-8 bg-brand-100 dark:bg-brand-900 p-8 rounded-3xl border border-brand-200 dark:border-brand-800">
-                        <MapPin className="w-10 h-10 mx-auto text-brand-500" />
-                        <h3 className="text-2xl font-bold">Περιοχές Εξυπηρέτησης</h3>
-                        <p className="text-lg text-brand-600 dark:text-brand-400 max-w-2xl mx-auto">
-                            Το κατάστημά μας βρίσκεται στην Περαία, εξυπηρετώντας καθημερινά πελάτες από τους Νέους Επιβάτες, την Αγία Τριάδα, την Καλαμαριά και όλη την Ανατολική Θεσσαλονίκη.
-                        </p>
-                        <div className="pt-4">
-                            <Link href="/booking" className="inline-flex items-center justify-center rounded-full bg-foreground text-background px-8 py-3.5 text-base font-bold shadow-sm transition-transform hover:scale-105">
-                                Κλείσε Ραντεβού
-                            </Link>
+                    <div className="mt-20 space-y-16">
+                        <div className="bg-brand-100 dark:bg-brand-900 border border-brand-200 dark:border-brand-800 rounded-[2.5rem] p-10 md:p-12 shadow-sm">
+                            <h3 className="text-3xl font-bold mb-8 text-foreground flex items-center gap-3">
+                                <Sparkles className="w-8 h-8 text-accent-500" /> Σημαντικές Σημειώσεις
+                            </h3>
+                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 text-brand-700 dark:text-brand-300 leading-relaxed font-medium">
+                                <li className="flex gap-3 items-start bg-white/50 dark:bg-black/20 p-4 rounded-2xl">
+                                    <CheckCircle2 className="w-5 h-5 text-accent-500 shrink-0 mt-0.5" />
+                                    <span>Η τιμή εξαρτάται από το <strong>μέγεθος</strong>, τη <strong>φυλή</strong> και την <strong>κατάσταση τριχώματος</strong> του σκύλου.</span>
+                                </li>
+                                <li className="flex gap-3 items-start bg-white/50 dark:bg-black/20 p-4 rounded-2xl">
+                                    <CheckCircle2 className="w-5 h-5 text-accent-500 shrink-0 mt-0.5" />
+                                    <span>Για ακριβή εκτίμηση, γίνεται <strong>αξιολόγηση στο κατάστημα</strong> ή μέσω φωτογραφιών.</span>
+                                </li>
+                                <li className="flex gap-3 items-start bg-white/50 dark:bg-black/20 p-4 rounded-2xl">
+                                    <CheckCircle2 className="w-5 h-5 text-accent-500 shrink-0 mt-0.5" />
+                                    <span>Η <strong>συμπεριφορά του σκύλου</strong> παίζει ρόλο στην τελική διαμόρφωση της τιμής.</span>
+                                </li>
+                                <li className="flex gap-3 items-start bg-white/50 dark:bg-black/20 p-4 rounded-2xl">
+                                    <CheckCircle2 className="w-5 h-5 text-accent-500 shrink-0 mt-0.5" />
+                                    <span>Η αφαίρεση κόμπων (matting) είναι χρονοβόρα και επηρεάζει τον χρόνο περιποίησης.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="text-center space-y-8 bg-navy-900 text-white p-12 rounded-[3rem] shadow-2xl border border-white/10 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 p-8 opacity-10 rotate-12">
+                                <PawPrint className="w-32 h-32" />
+                            </div>
+                            <MapPin className="w-12 h-12 mx-auto text-accent-500" />
+                            <h3 className="text-3xl font-extrabold tracking-tight">Περιοχές Εξυπηρέτησης</h3>
+                            <p className="text-lg text-brand-200 max-w-2xl mx-auto leading-relaxed">
+                                Το κατάστημά μας βρίσκεται στην Περαία, εξυπηρετώντας καθημερινά πελάτες από τους Νέους Επιβάτες, την Αγία Τριάδα, την Καλαμαριά και όλη την Ανατολική Θεσσαλονίκη.
+                            </p>
+                            <div className="pt-4">
+                                <Link href="/booking" className="inline-flex items-center justify-center rounded-full bg-accent-500 text-brand-950 px-10 py-4 text-lg font-bold shadow-xl transition-all hover:scale-105 hover:bg-accent-400">
+                                    Κλείσε Ραντεβού Online
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>

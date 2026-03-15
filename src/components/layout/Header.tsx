@@ -10,7 +10,6 @@ import { LanguageToggle } from './LanguageToggle';
 const navLinkKeys = [
     { key: 'nav.home', href: '/' },
     { key: 'nav.services', href: '/services' },
-    { key: 'nav.pricing', href: '/pricing' },
     { key: 'nav.blog', href: '/blog' },
     { key: 'nav.contact', href: '/contact' },
 ];

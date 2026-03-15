@@ -45,7 +45,6 @@ export function Footer() {
                     <div className="flex flex-col gap-4">
                         <Link href="/" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.home')}</Link>
                         <Link href="/services" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.services')}</Link>
-                        <Link href="/pricing" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.pricing')}</Link>
                         <Link href="/gallery" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Gallery</Link>
                     </div>
 
