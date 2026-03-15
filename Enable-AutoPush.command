@@ -21,6 +21,16 @@ if [ -z "$(git config --local --get user.email || true)" ]; then
   git config --local user.email "$(id -un)@local"
 fi
 
+credential_blob="$(printf "protocol=https\nhost=github.com\n\n" | git credential-osxkeychain get || true)"
+if [[ "$credential_blob" != *"password="* ]]; then
+  GH_USER="$(osascript -e 'text returned of (display dialog "GitHub username (one-time setup):" default answer "")')"
+  GH_TOKEN="$(osascript -e 'text returned of (display dialog "GitHub Personal Access Token (classic, repo scope):" default answer "" with hidden answer)')"
+
+  if [ -n "$GH_USER" ] && [ -n "$GH_TOKEN" ]; then
+    printf "protocol=https\nhost=github.com\nusername=%s\npassword=%s\n\n" "$GH_USER" "$GH_TOKEN" | git credential-osxkeychain store
+  fi
+fi
+
 launchctl bootout "gui/$(id -u)/com.muskypaws.autopush" >/dev/null 2>&1 || true
 launchctl bootstrap "gui/$(id -u)" "$DST_PLIST"
 launchctl enable "gui/$(id -u)/com.muskypaws.autopush"

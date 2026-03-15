@@ -35,7 +35,7 @@ Or run `./Sync-Project.command` and enter a commit message when prompted.
 
 For fully automatic push without terminal commands, run:
 
-- `./Enable-AutoPush.command` (enables auto-commit + auto-push every 3 minutes)
+- `./Enable-AutoPush.command` (first run asks GitHub username + token once, then enables auto-commit + auto-push every 3 minutes)
 - `./Disable-AutoPush.command` (stops it)
 
 ## Learn More
