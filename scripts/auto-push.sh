@@ -30,14 +30,21 @@ timestamp="$(date '+%Y-%m-%d %H:%M:%S')"
 
   git add -A
 
-  if git diff --cached --quiet; then
-    echo "[$timestamp] No changes to commit."
-    exit 0
+  if ! git diff --cached --quiet; then
+    commit_message="chore: auto-sync $(date '+%Y-%m-%d %H:%M:%S')"
+    git commit -m "$commit_message"
+    echo "[$timestamp] New commit created."
   fi
 
-  commit_message="chore: auto-sync $(date '+%Y-%m-%d %H:%M:%S')"
-  git commit -m "$commit_message"
-  git push -u origin "$branch"
-
-  echo "[$timestamp] Auto-push success on branch '$branch'."
+  # Always try to push if we are ahead of origin
+  if [ -n "$(git status -sb | grep 'ahead')" ] || [ -n "$(git diff origin/"$branch".."$branch")" ]; then
+    echo "[$timestamp] Pushing changes to origin '$branch'..."
+    if git push -u origin "$branch"; then
+      echo "[$timestamp] Auto-push success."
+    else
+      echo "[$timestamp] Auto-push failed (possibly credentials or network)."
+    fi
+  else
+    echo "[$timestamp] Everything up to date. No push needed."
+  fi
 } >>"$LOG_FILE" 2>&1
