@@ -16,9 +16,9 @@ export default function AboutPage() {
             {/* Hero Section */}
             <section className="bg-brand-950 text-brand-50 py-20">
                 <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Σχετικά με το Musky Paws</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Γνωρίστε το Musky Paws – Κομμωτήριο Σκύλων στην Περαία</h1>
                     <p className="text-xl max-w-2xl mx-auto text-brand-300">
-                        Η αγάπη μας για τα σκυλιά έγινε επάγγελμα. Στο Musky Paws πιστεύουμε ότι κάθε σκύλος αξίζει μια εμπειρία grooming χωρίς στρες, με σεβασμό και απόλυτη ασφάλεια.
+                        Η αγάπη μας για τα σκυλιά έγινε επάγγελμα. Στο Musky Paws (Ανατολική Θεσσαλονίκη) πιστεύουμε ότι κάθε σκύλος αξίζει μια εμπειρία grooming χωρίς στρες, με σεβασμό και απόλυτη ασφάλεια.
                     </p>
                 </div>
             </section>

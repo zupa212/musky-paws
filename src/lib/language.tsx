@@ -15,6 +15,7 @@ const translations: Record<Locale, Record<string, string>> = {
         // Header
         'nav.home': 'Αρχική',
         'nav.services': 'Υπηρεσίες',
+        'nav.pricing': 'Τιμές',
         'nav.blog': 'Blog',
         'nav.contact': 'Επικοινωνία',
         'nav.booking': 'Κλείσε Ραντεβού',
@@ -79,6 +80,7 @@ const translations: Record<Locale, Record<string, string>> = {
         // Header
         'nav.home': 'Home',
         'nav.services': 'Services',
+        'nav.pricing': 'Pricing',
         'nav.blog': 'Blog',
         'nav.contact': 'Contact',
         'nav.booking': 'Book Now',
