@@ -508,10 +508,10 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
             {/* Left Images (Hidden on mobile) */}
             <div className="hidden sm:flex gap-6 lg:w-[35%] justify-center lg:justify-end">
               <div className="relative w-48 md:w-56 lg:w-64 xl:w-72 aspect-[10/16] rounded-[40px] overflow-hidden bg-[#e0ccff] shadow-md hover:-translate-y-2 transition-transform duration-500">
-                <Image src="/images/footer-cta/pet1.webp" alt="Dog placeholder" fill className="object-cover" />
+                <Image src="/images/footer-cta/pet1.webp" alt="Μικρόσωμο σκυλάκι Περαία dog grooming" fill className="object-cover" />
               </div>
               <div className="relative w-48 md:w-56 lg:w-64 xl:w-72 aspect-[10/16] rounded-[40px] overflow-hidden bg-[#b3e5fc] shadow-md hover:-translate-y-2 transition-transform duration-500 md:mt-16 lg:mt-0">
-                <Image src="/images/footer-cta/pet2.webp" alt="Turtle placeholder" fill className="object-cover" />
+                <Image src="/images/footer-cta/pet2.webp" alt="Γάτα grooming Θεσσαλονίκη" fill className="object-cover" />
               </div>
             </div>
 
@@ -541,10 +541,10 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
             {/* Right Images (Hidden on mobile) */}
             <div className="hidden md:flex gap-6 lg:w-[35%] justify-center lg:justify-start">
               <div className="relative w-48 md:w-56 lg:w-64 xl:w-72 aspect-[10/16] rounded-[40px] overflow-hidden bg-[#ffe600] shadow-md hover:-translate-y-2 transition-transform duration-500 lg:mt-0">
-                <Image src="/images/footer-cta/pet3.webp" alt="Golden Retriever placeholder" fill className="object-cover" />
+                <Image src="/images/footer-cta/pet3.webp" alt="Golden retriever μετά από deshedding Θεσσαλονίκη" fill className="object-cover" />
               </div>
               <div className="relative w-48 md:w-56 lg:w-64 xl:w-72 aspect-[10/16] rounded-[40px] overflow-hidden bg-[#e0ccff] shadow-md hover:-translate-y-2 transition-transform duration-500 md:mt-16 lg:mt-0">
-                <Image src="/images/footer-cta/pet4.webp" alt="Rabbit placeholder" fill className="object-cover" />
+                <Image src="/images/footer-cta/pet4.webp" alt="Καθαρό κουτάβι Musky Paws" fill className="object-cover" />
               </div>
             </div>
 
