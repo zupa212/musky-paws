@@ -68,9 +68,9 @@ export default function ServicesPage() {
         <>
             <section className="bg-brand-950 text-brand-50 py-16 md:py-24">
                 <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Υπηρεσίες Καλλωπισμού</h1>
-                    <p className="text-xl max-w-2xl mx-auto text-brand-300">
-                        Προσφέρουμε μια ολοκληρωμένη γκάμα υπηρεσιών σχεδιασμένη για κάθε τύπο τριχώματος και ανάγκη του αγαπημένου σας φίλου.
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Υπηρεσίες Grooming & Καλλωπισμός Σκύλων στην Περαία</h1>
+                    <p className="text-xl max-w-3xl mx-auto text-brand-300">
+                        Στο Musky Paws παρέχουμε υψηλού επιπέδου υπηρεσίες dog grooming για την Ανατολική Θεσσαλονίκη. Από το απλό μπάνιο μέχρι το πλήρες κούρεμα σκύλου και την αφαίρεση νεκρής τρίχας, η προσέγγισή μας είναι πάντα stress-free. Επιλέξτε την υπηρεσία που ταιριάζει στον φίλο σας.
                     </p>
                 </div>
             </section>

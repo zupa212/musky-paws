@@ -80,6 +80,19 @@ export default function ContactPage() {
                                             </a>
                                         </div>
                                     </div>
+
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center shrink-0">
+                                            <svg className="w-6 h-6 text-[#25D366]" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004... /* simple whatsapp path replaced via icon later if needed, we'll use Phone icon for now */" /></svg>
+                                            <Phone className="w-6 h-6 text-[#25D366]" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold text-xl mb-1">WhatsApp</h3>
+                                            <a href="https://wa.me/306948965371" target="_blank" rel="noopener noreferrer" className="text-brand-600 dark:text-brand-400 hover:text-[#25D366] transition-colors">
+                                                Στείλτε μας Μήνυμα
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -121,8 +134,8 @@ export default function ContactPage() {
                             </div>
                             <div className="pt-6 pb-2 px-2 flex justify-between items-center gap-4">
                                 <p className="text-sm font-medium text-brand-600 dark:text-brand-400">Εύκολο πάρκινγκ στους γύρω δρόμους.</p>
-                                <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8157d8e728873:0xdcebed07995b9773?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" className="text-accent-600 dark:text-accent-400 font-bold hover:underline text-sm uppercase tracking-wide">
-                                    Ανοιγμα στo Google Maps
+                                <a href="https://www.google.com/maps/dir//Musky+Paws+Dog+Grooming" target="_blank" rel="noopener noreferrer" className="text-accent-600 dark:text-accent-400 font-bold hover:underline text-sm uppercase tracking-wide">
+                                    Λήψη Οδηγιών (Google Maps)
                                 </a>
                             </div>
                         </div>

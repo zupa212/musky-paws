@@ -7,6 +7,9 @@ import { Clock, CheckCircle2, ArrowRight, ChevronDown } from 'lucide-react';
 const servicesData = {
     'full-grooming': {
         title: 'Πλήρης Καλλωπισμός',
+        h1: 'Κούρεμα Σκύλου (Full Grooming) στην Περαία',
+        seoTitle: 'Κούρεμα Σκύλου Περαία | Full Dog Grooming | Musky Paws',
+        seoDesc: 'Το απόλυτο full grooming και κούρεμα σκύλου στην Περαία. Ολοκληρωμένη φροντίδα με μπάνιο, κούρεμα και καθαρισμό, σε ένα stress-free περιβάλλον.',
         description: 'Ολοκληρωμένη περιποίηση που περιλαμβάνει μπάνιο, κούρεμα (βάσει φυλής ή προτίμησης), καθαρισμό αυτιών και κόψιμο νυχιών. Η απόλυτη εμπειρία ανανέωσης για τον σκύλο σας.',
         duration: '1.5 - 3 ώρες',
         price: 'Από 30€',
@@ -29,6 +32,9 @@ const servicesData = {
     },
     'bath-brush': {
         title: 'Μπάνιο & Βούρτσισμα',
+        h1: 'Πλύσιμο Σκύλου & Μπάνιο στην Περαία',
+        seoTitle: 'Πλύσιμο Σκύλου Περαία | Bath and Brush | Musky Paws',
+        seoDesc: 'Εξειδικευμένο πλύσιμο και μπάνιο σκύλου στην Περαία. Χρησιμοποιούμε υποαλλεργικά σαμπουάν για λαμπερό τρίχωμα. Κλείστε ραντεβού!',
         description: 'Εξειδικευμένα σαμπουάν, βαθύς καθαρισμός και εντατικό βούρτσισμα για αφαίρεση νεκρής τρίχας και ρύπων.',
         duration: '1 - 2 ώρες',
         price: 'Από 15€',
@@ -49,6 +55,9 @@ const servicesData = {
     },
     'deshedding': {
         title: 'Απομάκρυνση Νεκρής Τρίχας (Deshedding)',
+        h1: 'Αφαίρεση Νεκρής Τρίχας (Deshedding) Σκύλου στη Θεσσαλονίκη',
+        seoTitle: 'Αφαίρεση Νεκρής Τρίχας & Deshedding Σκύλου Θεσσαλονίκη | Musky Paws',
+        seoDesc: 'Δώστε λύση στην έντονη τριχόπτωση με την υπηρεσία αφαίρεσης νεκρής τρίχας (deshedding) σκύλου στη Θεσσαλονίκη.',
         description: 'Μία εξειδικευμένη διαδικασία που στοχεύει αποκλειστικά στον διπλό μανδύα των σκύλων, μειώνοντας την τριχόπτωση στο σπίτι σας έως και 80%.',
         duration: '1.5 - 2.5 ώρες',
         price: 'Από 25€',
@@ -69,6 +78,9 @@ const servicesData = {
     },
     'nails-ears': {
         title: 'Κόψιμο Νυχιών & Καθαρισμός Αυτιών',
+        h1: 'Κόψιμο Νυχιών & Καθαρισμός Αυτιών Σκύλου στην Περαία',
+        seoTitle: 'Κόψιμο Νυχιών Σκύλου Περαία | Musky Paws',
+        seoDesc: 'Ασφαλές κόψιμο νυχιών και προσεκτικός καθαρισμός αυτιών σκύλου στην Περαία. Η απαραίτητη υγιεινή ρουτίνα για το κατοικίδιό σας.',
         description: 'Μια γρήγορη αλλά απαραίτητη ρουτίνα υγιεινής για τον φίλο σας. Τα μακριά νύχια μπορούν να προκαλέσουν πόνο και αρθριτικά προβλήματα.',
         duration: '15 λεπτά',
         price: '5€',
@@ -88,6 +100,9 @@ const servicesData = {
     },
     'puppy-grooming': {
         title: 'Περιποίηση Κουταβιών (Puppy Intro)',
+        h1: 'Το Πρώτο Grooming Κουταβιού στη Θεσσαλονίκη',
+        seoTitle: 'Πρώτο Grooming Κουταβιού Θεσσαλονίκη | Musky Paws',
+        seoDesc: 'Το πρώτο grooming του κουταβιού σας ξεκινάει ήρεμα στο Musky Paws! Εξειδικευμένη φροντίδα για τη σωστή κοινωνικοποίησή του.',
         description: 'Μια ήπια, πρώτη γνωριμία του κουταβιού με το κομμωτήριο. Σκοπός είναι να αποκτήσει θετικές εμπειρίες και να μην φοβάται το νερό, το πιστολάκι και τα ψαλίδια.',
         duration: '1 - 1.5 ώρες',
         price: 'Από 20€',
@@ -108,6 +123,9 @@ const servicesData = {
     },
     'furminator': {
         title: 'Furminator (Εξειδικευμένο Βούρτσισμα)',
+        h1: 'Θεραπεία Furminator Σκύλου στη Θεσσαλονίκη & Περαία',
+        seoTitle: 'Furminator Σκύλου Θεσσαλονίκη & Περαία | Musky Paws',
+        seoDesc: 'Εξειδικευμένο βούρτσισμα με Furminator σκύλου στη Θεσσαλονίκη. Ιδανικό για την αφαίρεση υποστρώματος.',
         description: 'Επαγγελματική αφαίρεση του εσωτερικού υποστρώματος που προκαλεί τη μεγάλη τριχόπτωση στα έπιπλα, χωρίς να βλάπτεται το εξωτερικό τρίχωμα.',
         duration: '45 - 90 λεπτά',
         price: 'Από 15€',
@@ -148,8 +166,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     return {
-        title: `${service.title} | Musky Paws Περαία`,
-        description: service.description,
+        title: service.seoTitle || `${service.title} | Musky Paws Περαία`,
+        description: service.seoDesc || service.description,
         alternates: {
             canonical: `https://muskypaws.gr/services/${slug}`,
         }
@@ -168,7 +186,7 @@ export default async function ServicePage({ params }: Props) {
         '@context': 'https://schema.org',
         '@type': 'Service',
         name: service.title,
-        description: service.description,
+        description: service.seoDesc || service.description,
         provider: {
             '@type': 'LocalBusiness',
             name: 'Musky Paws',
@@ -203,7 +221,7 @@ export default async function ServicePage({ params }: Props) {
                         <ArrowRight className="w-4 h-4 mr-2 rotate-180" />
                         Ολες οι υπηρεσιες
                     </Link>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 drop-shadow-sm">{service.title}</h1>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 drop-shadow-sm">{service.h1 || service.title}</h1>
                     <p className="text-xl max-w-2xl mx-auto text-brand-200 leading-relaxed font-medium">
                         {service.description}
                     </p>
@@ -225,7 +243,7 @@ export default async function ServicePage({ params }: Props) {
 
                     <div className="max-w-4xl mx-auto bg-brand-50 dark:bg-brand-900/40 rounded-3xl shadow-2xl p-6 md:p-12 mb-16 border border-brand-200 dark:border-brand-800">
                         <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden mb-12">
-                            <Image src={service.img} alt={service.title} fill className="object-cover" />
+                            <Image src={service.img} alt={service.seoTitle || service.title} fill className="object-cover" />
                         </div>
 
                         <div className="mb-12">
