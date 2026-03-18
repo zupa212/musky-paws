@@ -3,8 +3,8 @@ import { getAllPosts } from "@/lib/blog";
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Musky Paws | Dog Grooming Περαία Θεσσαλονίκη',
-  description: 'Κορυφαίος καλλωπισμός σκύλων στην Περαία Θεσσαλονίκης. Κούρεμα, μπάνιο, αφαίρεση νεκρής τρίχας και εξειδικευμένη περιποίηση για τον μικρό σας φίλο.',
+  title: 'Κομμωτήριο Σκύλων Περαία | Dog Grooming & Spa | Musky Paws',
+  description: 'Το premium κομμωτήριο σκύλων στην Περαία. Εξειδικευμένο dog grooming, κούρεμα και πλύσιμο σκύλων χωρίς άγχος. Κλείστε το ραντεβού σας!',
   alternates: {
     canonical: 'https://muskypaws.gr',
   },

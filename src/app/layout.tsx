@@ -12,12 +12,12 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://muskypaws.gr'),
-  title: "Musky Paws | Dog Grooming Περαία Θεσσαλονίκη",
-  description: "Premium υπηρεσίες καλλωπισμού (κούρεμα και πλύσιμο σκύλων) στην Ανατολική Θεσσαλονίκη (Περαία, Καλαμαριά, Τρίλοφος κ.ά.). Κλείστε ραντεβού σήμερα για την καλύτερη φροντίδα του αγαπημένου σας κατοικίδιου.",
-  keywords: ["dog grooming", "grooming σκύλων", "πλύσιμο σκύλου", "Περαία", "Θεσσαλονίκη", "Τρίλοφος", "Επανομή", "Μηχανιώνα", "Θέρμη", "Πλαγιάρι", "Ανατολική Θεσσαλονίκη", "Καλαμαριά", "κούρεμα σκύλου", "μπάνιο σκύλου", "Musky Paws"],
+  title: "Κομμωτήριο Σκύλων Περαία | Dog Grooming & Spa | Musky Paws",
+  description: "Το premium κομμωτήριο σκύλων στην Περαία. Εξειδικευμένο dog grooming, κούρεμα και πλύσιμο σκύλων χωρίς άγχος. Κλείστε το ραντεβού σας!",
+  keywords: ["dog grooming", "grooming σκύλων", "πλύσιμο σκύλου", "Περαία", "Θεσσαλονίκη", "Τρίλοφος", "Επανομή", "Μηχανιώνα", "Θέρμη", "Πλαγιάρι", "Ανατολική Θεσσαλονίκη", "Καλαμαριά", "κούρεμα σκύλου", "μπάνιο σκύλου", "Musky Paws", "κομμωτήριο σκύλων Περαία"],
   openGraph: {
-    title: "Musky Paws | Dog Grooming Περαία",
-    description: "Premium υπηρεσίες καλλωπισμού σκύλων στην Περαία Θεσσαλονίκης.",
+    title: "Κομμωτήριο Σκύλων Περαία | Musky Paws",
+    description: "Premium υπηρεσίες dog grooming στην Περαία Θεσσαλονίκης.",
     url: "https://muskypaws.gr",
     siteName: "Musky Paws",
     images: [
@@ -47,17 +47,18 @@ export default function RootLayout({
         <Script id="json-ld" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "DogGrooming",
-            "name": "Musky Paws",
+            "@type": "LocalBusiness",
+            "name": "Musky Paws Dog Grooming",
             "image": "https://muskypaws.gr/logo.png",
             "@id": "https://muskypaws.gr",
             "url": "https://muskypaws.gr",
             "telephone": "+306948965371",
+            "priceRange": "$$",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Solonos 28B",
-              "addressLocality": "Peraia",
-              "postalCode": "57019",
+              "streetAddress": "Σόλωνος 28Β",
+              "addressLocality": "Περαία",
+              "postalCode": "570 19",
               "addressCountry": "GR"
             },
             "geo": {

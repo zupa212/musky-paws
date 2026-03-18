@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Επικοινωνία | Musky Paws Περαία',
-    description: 'Επικοινωνήστε με το Musky Paws Dog Grooming στην Περαία Θεσσαλονίκης. Βρείτε πληροφορίες πρόσβασης, ωράριο, και κλείστε το ραντεβού σας.',
+    title: 'Επικοινωνία & Διεύθυνση | Κομμωτήριο Σκύλων Περαία | Musky Paws',
+    description: 'Επικοινωνήστε με το Musky Paws, το κορυφαίο dog grooming salon στην Περαία. Δείτε τη διεύθυνση στον χάρτη, το τηλέφωνο και το ωράριο λειτουργίας μας.',
     alternates: {
         canonical: 'https://muskypaws.gr/contact',
     },

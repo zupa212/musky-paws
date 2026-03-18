@@ -20,10 +20,10 @@ const translations: Record<Locale, Record<string, string>> = {
         'nav.booking': 'Κλείσε Ραντεβού',
 
         // Hero
-        'hero.badge': 'Dog Grooming Περαία',
-        'hero.title1': 'Dog Grooming',
-        'hero.title2': 'Θεσσαλονίκη',
-        'hero.subtitle': 'Κορυφαίο κούρεμα και πλύσιμο σκύλων & γατών στην Ανατολική Θεσσαλονίκη (Περαία, Καλαμαριά και γύρω περιοχές). Κλείσε ραντεβού online ή κάλεσε τώρα για άμεση επιβεβαίωση.',
+        'hero.badge': 'Κομμωτήριο Σκύλων Περαία',
+        'hero.title1': 'Κομμωτήριο Σκύλων',
+        'hero.title2': 'στην Περαία',
+        'hero.subtitle': 'Το premium dog grooming salon στην Ανατολική Θεσσαλονίκη. Προσφέρουμε εξειδικευμένο κούρεμα, πλύσιμο και καλλωπισμό σκύλων με απόλυτη ασφάλεια και χωρίς άγχος. Εξυπηρετούμε Περαία, Καλαμαριά, Τρίλοφο και Μηχανιώνα.',
         'hero.cta': 'Κλείσε Ραντεβού Online',
         'hero.gallery': 'Before/After Αποτελέσματα',
         'hero.online': 'Online Κράτηση',

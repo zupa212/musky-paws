@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { ArrowRight, Clock, MapPin, CheckCircle2, Sparkles, PawPrint, Tag } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Υπηρεσίες Καλλωπισμού Σκύλων | Musky Paws',
-    description: 'Πλήρης καλλωπισμός, μπάνιο και βούρτσισμα, αφαίρεση νεκρής τρίχας, και περιποίηση κουταβιών στο Musky Paws στην Περαία.',
+    title: 'Υπηρεσίες Grooming & Καλλωπισμός Σκύλων Περαία | Musky Paws',
+    description: 'Δείτε τις κορυφαίες υπηρεσίες καλλωπισμού σκύλων στην Περαία (Ανατολική Θεσσαλονίκη). Από κούρεμα και μπάνιο μέχρι trimming και αφαίρεση νεκρής τρίχας.',
     alternates: {
         canonical: 'https://muskypaws.gr/services',
     },

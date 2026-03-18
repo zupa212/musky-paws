@@ -4,25 +4,18 @@ import { getAllPosts } from '@/lib/blog';
 const BASE_URL = 'https://muskypaws.gr';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const routes = ['', '/about', '/contact', '/gallery', '/services', '/booking', '/areas', '/blog'].map((route) => ({
+    const routes = ['', '/about', '/contact', '/gallery', '/services', '/booking', '/blog', '/pricing'].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: route === '' ? 1 : 0.8,
     }));
 
-    const services = ['full-grooming', 'bath-brush', 'deshedding', 'nails-ears', 'puppy-grooming'].map((slug) => ({
+    const services = ['full-grooming', 'bath-brush', 'deshedding', 'nails-ears', 'puppy-grooming', 'furminator'].map((slug) => ({
         url: `${BASE_URL}/services/${slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.9,
-    }));
-
-    const areas = ['peraea', 'neoi-epivates', 'agia-triada', 'kalamaria', 'thessaloniki', 'trilofos', 'epanomi', 'nea-michaniona', 'thermi', 'plagiari'].map((slug) => ({
-        url: `${BASE_URL}/areas/${slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
     }));
 
     const posts = getAllPosts().map((post) => ({
@@ -32,5 +25,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.6,
     }));
 
-    return [...routes, ...services, ...areas, ...posts];
+    return [...routes, ...services, ...posts];
 }
