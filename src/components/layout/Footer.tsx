@@ -80,14 +80,7 @@ export function Footer() {
                         </span>
                     </a>
 
-                    <a href="https://wa.me/306948965371" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
-                        <div className="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white group-hover:scale-110 shadow-lg shadow-[#25D366]/20 transition-all shrink-0">
-                            <MessageCircle className="w-[18px] h-[18px]" />
-                        </div>
-                        <span className="text-gray-300 text-sm font-medium group-hover:text-white transition-colors">
-                            WhatsApp Message
-                        </span>
-                    </a>
+
                 </div>
             </div>
         </footer>

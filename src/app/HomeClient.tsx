@@ -8,6 +8,7 @@ import { useLanguage } from '@/lib/language';
 import { BlogPost } from '@/types/blog';
 import { format } from 'date-fns';
 import { el } from 'date-fns/locale';
+import { BeforeAfterSlider } from '@/components/ui/BeforeAfterSlider';
 
 // Mock Services for Marquee
 const marqueeServices = [
@@ -252,6 +253,33 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ BEFORE & AFTER SLIDER ═══════════════ */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 text-center">
+            <div className="flex justify-center items-center gap-2 text-sm font-semibold text-navy-800 mb-6">
+                <div className="w-2 h-2 rounded-full bg-brand-accent-green" />
+                Αποτελέσματα
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-navy-900 tracking-tight leading-[1.1] mb-6">
+                 Πριν & <span className="wavy-underline">Μετά</span>
+            </h2>
+            <p className="text-lg text-navy-800/60 mb-12 max-w-2xl mx-auto">
+                 Σύρετε τον κέρσορα στην παρακάτω εικόνα για να δείτε τη μεταμόρφωση πριν και μετά το grooming. Θα αντικατασταθούν με δικές σας φωτογραφίες σύντομα!
+            </p>
+            <div className="w-full max-w-4xl mx-auto">
+                <BeforeAfterSlider 
+                    beforeImage="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80" 
+                    afterImage="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&q=80" 
+                />
+            </div>
+            <div className="mt-12">
+                 <Link href="/gallery" className="inline-flex items-center gap-2 font-bold text-navy-900 hover:text-brand-accent-pink transition-colors">
+                     Δείτε περισσότερες φωτογραφίες <ArrowRight className="w-5 h-5" />
+                 </Link>
+            </div>
         </div>
       </section>
 
