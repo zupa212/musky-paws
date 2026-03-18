@@ -20,5 +20,5 @@ git pull origin master 2>/dev/null
 git push origin master 2>/dev/null
 
 # Step 4: Start the server
-echo "🚀 Starting server on http://localhost:3010 ..."
+echo "🚀 Starting server on http://localhost:3030 ..."
 npm run dev
