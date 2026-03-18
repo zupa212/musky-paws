@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Phone, PawPrint } from 'lucide-react';
+import { Phone, PawPrint, MessageCircle } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/lib/language';
@@ -82,16 +82,35 @@ export function Header() {
                     })}
                 </nav>
 
-                {/* Right Side Toggle & Desktop-Only Language Toggle */}
-                <div className="flex items-center gap-4">
-                    {/* Desktop language toggle - only visible when menu is closed for cleaner look */}
+                {/* Right Side Actions */}
+                <div className="flex items-center gap-2 md:gap-4 relative z-[60]">
+                    {/* Desktop-only Booking Button */}
+                    <Link
+                        href="/booking"
+                        className="hidden lg:flex items-center justify-center bg-brand-accent-pink shadow-md text-navy-900 px-6 py-2.5 rounded-2xl font-bold hover:scale-105 transition-transform"
+                    >
+                        {t('nav.booking')}
+                    </Link>
+
+                    {/* WhatsApp Button - Visible on both Mobile & Desktop */}
+                    <a
+                        href="https://wa.me/306948965371"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-11 h-11 rounded-2xl bg-[#25D366] flex items-center justify-center text-white hover:scale-105 transition-transform shadow-md"
+                        aria-label="WhatsApp Us"
+                    >
+                        <MessageCircle className="w-5 h-5 fill-current" />
+                    </a>
+
+                    {/* Desktop language toggle */}
                     <div className="hidden lg:block">
                         <LanguageToggle />
                     </div>
 
-                    {/* Hamburger Button with smooth animation - Now universal */}
+                    {/* Hamburger Button - Mobile/Tablet Only */}
                     <button
-                        className="w-11 h-11 bg-navy-900 rounded-2xl flex items-center justify-center transition-all duration-300 hover:bg-navy-800 hover:scale-105 active:scale-95 relative z-[60]"
+                        className="lg:hidden w-11 h-11 bg-navy-900 rounded-2xl flex items-center justify-center transition-all duration-300 hover:bg-navy-800 hover:scale-105 active:scale-95"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         aria-label="Toggle Menu"
                     >
@@ -107,13 +126,13 @@ export function Header() {
             {/* Slide-down Menu (Universal) */}
             <div
                 ref={menuRef}
-                className={`container mx-auto mt-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden ${
+                className={`container mx-auto mt-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden lg:hidden ${
                     isMobileMenuOpen
                         ? 'max-h-[600px] opacity-100 translate-y-0'
                         : 'max-h-0 opacity-0 -translate-y-4 pointer-events-none'
                 }`}
             >
-                <div className="bg-white/95 backdrop-blur-xl rounded-[2.5rem] p-8 shadow-2xl border border-white/20">
+                <div className="bg-white/95 backdrop-blur-xl rounded-[2.5rem] p-6 shadow-2xl border border-white/20">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <nav className="flex flex-col gap-3">
                             {navLinkKeys.map((link, idx) => {

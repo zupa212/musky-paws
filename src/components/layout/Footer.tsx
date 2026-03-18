@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Phone, AtSign, PawPrint } from 'lucide-react';
+import { MapPin, Phone, AtSign, PawPrint, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 
 export function Footer() {
@@ -58,12 +58,16 @@ export function Footer() {
 
                 {/* Right Contact Details */}
                 <div className="flex flex-col gap-6 z-10 w-full md:w-[280px]">
-                    <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8157d8e728873:0xdcebed07995b9773?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
-                        <div className="w-10 h-10 rounded-full bg-brand-accent-pink flex items-center justify-center text-[#151515] group-hover:scale-110 shadow-lg shadow-brand-accent-pink/20 transition-all shrink-0">
+                    <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8157d8e728873:0xdcebed07995b9773?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 group cursor-pointer">
+                        <div className="w-10 h-10 rounded-full bg-brand-accent-pink flex items-center justify-center text-[#151515] group-hover:scale-110 shadow-lg shadow-brand-accent-pink/20 transition-all shrink-0 mt-1">
                             <MapPin className="w-[18px] h-[18px] fill-[#151515]" />
                         </div>
                         <span className="text-gray-300 text-sm font-medium pr-4 leading-relaxed group-hover:text-white transition-colors">
-                            {t('footer.address')}
+                            Σόλωνος 28Β, Περαία 570 19<br />
+                            <span className="text-xs text-gray-500 block mt-1">
+                                Δευτέρα – Παρασκευή: 09:00 – 21:00<br />
+                                Σάββατο: 10:00 – 15:00
+                            </span>
                         </span>
                     </a>
 
@@ -76,12 +80,12 @@ export function Footer() {
                         </span>
                     </a>
 
-                    <a href="mailto:muskypawsdg@gmail.com" className="flex items-center gap-4 group cursor-pointer">
-                        <div className="w-10 h-10 rounded-full bg-brand-accent-pink flex items-center justify-center text-[#151515] group-hover:scale-110 shadow-lg shadow-brand-accent-pink/20 transition-all shrink-0">
-                            <AtSign className="w-[18px] h-[18px]" />
+                    <a href="https://wa.me/306948965371" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
+                        <div className="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white group-hover:scale-110 shadow-lg shadow-[#25D366]/20 transition-all shrink-0">
+                            <MessageCircle className="w-[18px] h-[18px]" />
                         </div>
-                        <span className="text-gray-300 text-sm font-medium truncate pr-4 group-hover:text-white transition-colors">
-                            muskypawsdg@gmail.com
+                        <span className="text-gray-300 text-sm font-medium group-hover:text-white transition-colors">
+                            WhatsApp Message
                         </span>
                     </a>
                 </div>
