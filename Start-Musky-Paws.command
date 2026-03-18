@@ -1,6 +1,12 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
+# Ensure we have access to npm/node when running in the background (LaunchAgent)
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  source "$HOME/.nvm/nvm.sh"
+fi
+
 echo "🐾 Musky Paws Auto-Starter"
 echo "--------------------------"
 
