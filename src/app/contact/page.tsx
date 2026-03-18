@@ -14,9 +14,9 @@ export default function ContactPage() {
         <>
             <section className="bg-brand-950 text-brand-50 py-16 md:py-24">
                 <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Επικοινωνία</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Επικοινωνία – Dog Grooming Περαία</h1>
                     <p className="text-xl max-w-2xl mx-auto text-brand-300">
-                        Είμαστε εδώ για εσάς και τον μικρό σας φίλο. Μη διστάσετε να επικοινωνήσετε μαζί μας για οποιαδήποτε απορία ή για να κλείσετε ραντεβού.
+                        Βρείτε μας στο κομμωτήριο σκύλων Musky Paws (Σόλωνος 28Β, Περαία). Καλέστε μας, στείλτε WhatsApp ή κλείστε ραντεβού online.
                     </p>
                 </div>
             </section>
@@ -83,7 +83,6 @@ export default function ContactPage() {
 
                                     <div className="flex items-start gap-4">
                                         <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center shrink-0">
-                                            <svg className="w-6 h-6 text-[#25D366]" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004... /* simple whatsapp path replaced via icon later if needed, we'll use Phone icon for now */" /></svg>
                                             <Phone className="w-6 h-6 text-[#25D366]" />
                                         </div>
                                         <div>
