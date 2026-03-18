@@ -146,7 +146,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
             className="mt-20 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 w-full max-w-5xl mx-auto"
           >
             <div className="relative aspect-square md:aspect-auto md:h-[400px] w-full rounded-3xl md:rounded-[40px] overflow-hidden bg-[#e0ccff]">
-              <Image src="https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?auto=format&fit=crop&q=80&w=800" alt="Γάτα grooming Περαία" fill className="object-cover object-top hover:scale-105 transition-transform duration-700" />
+              <Image src="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&q=80&w=800" alt="Μπάνιο σκύλου Περαία" fill className="object-cover object-top hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="relative aspect-square md:aspect-auto md:h-[400px] w-full rounded-3xl md:rounded-[40px] overflow-hidden bg-[#ffe600]">
               <Image src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800" alt="Σκύλος grooming Θεσσαλονίκη" fill className="object-cover hover:scale-105 transition-transform duration-700" />
