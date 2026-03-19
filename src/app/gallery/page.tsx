@@ -1,95 +1,130 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { BeforeAfterSlider } from '@/components/ui/BeforeAfterSlider';
+import { PawPrint, Camera, Star } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Gallery - Πριν & Μετά | Musky Paws',
-    description: 'Δείτε τη δουλειά μας! Φωτογραφίες πριν και μετά από τα κουρέματα και τα μπάνια των σκύλων πελατών μας.',
+    title: 'Gallery Μεταμορφώσεων - Πριν & Μετά | Musky Paws',
+    description: 'Δείτε τη δουλειά μας! Διαδραστικές φωτογραφίες πριν και μετά από τα κουρέματα και τα μπάνια των σκύλων πελατών μας στην Περαία.',
     alternates: {
         canonical: 'https://muskypaws.gr/gallery',
     },
 };
 
 export default function GalleryPage() {
-    const images = [
-        {
-            id: 1,
-            url: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80",
-            alt: "Pomeranian Grooming Transformation"
-        },
-        {
-            id: 2,
-            url: "https://images.unsplash.com/photo-1591768575198-88dac53fbd0a?auto=format&fit=crop&q=80",
-            alt: "Maltese Summer Cut"
-        },
-        {
-            id: 3,
-            url: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80",
-            alt: "Golden Retriever Deshedding Result"
-        },
-        {
-            id: 4,
-            url: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&q=80",
-            alt: "Poodle Teddy Bear Cut"
-        },
-        {
-            id: 5,
-            url: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80",
-            alt: "Dog Spa Therapy"
-        },
-        {
-            id: 6,
-            url: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80",
-            alt: "Puppy's First Grooming"
-        },
-        {
-            id: 7,
-            url: "https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?auto=format&fit=crop&q=80",
-            alt: "Nail Trimming and Paw Care"
-        },
-        {
-            id: 8,
-            url: "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80",
-            alt: "Smooth Coat Shine"
-        }
+    // Numerical logic: 1 prin, 1 meta, 2 prin, 2 meta...
+    // We assume 10 sets for now, can be adjusted
+    const transformations = Array.from({ length: 10 }, (_, i) => ({
+        id: i + 1,
+        title: `Μεταμόρφωση ${i + 1}`,
+        before: `/images/before-after/sets/set${i + 1}/before.jpg`,
+        after: `/images/before-after/sets/set${i + 1}/after.jpg`,
+        category: "Dogs"
+    }));
+
+    // General photos (not before/after)
+    const generalPhotos = [
+        { id: 1, url: "/images/stella.webp", alt: "Happy Client" },
+        // Add more general photos here as they arrive
     ];
 
     return (
-        <section className="py-20 bg-background text-foreground min-h-screen">
-            <div className="container mx-auto px-4">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Gallery Μεταμορφώσεων</h1>
-                <p className="text-xl text-center text-brand-600 dark:text-brand-400 mb-16 max-w-2xl mx-auto">
-                    Στο Musky Paws είμαστε περήφανοι για τη δουλειά μας. Δείτε μερικούς από τους χαρούμενους, μοσχομυριστούς και πεντακάθαρους φίλους μας!
-                </p>
+        <section className="pt-32 pb-24 bg-brand-50 min-h-screen">
+            <div className="container mx-auto px-4 max-w-7xl">
+                
+                {/* Header Section */}
+                <div className="text-center max-w-3xl mx-auto mb-20">
+                    <div className="inline-flex items-center gap-2 text-sm font-semibold text-navy-800 mb-6 bg-white px-4 py-1.5 rounded-full border border-brand-200">
+                        <Camera className="w-4 h-4 text-brand-accent-pink" />
+                        Our Portfolio
+                    </div>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 tracking-tight leading-[1.1] mb-6">
+                        Gallery <span className="wavy-underline">Μεταμορφώσεων</span>
+                    </h1>
+                    <p className="text-navy-900/60 text-lg leading-relaxed">
+                        Σύρετε τον κέρσορα σε κάθε εικόνα για να δείτε το εντυπωσιακό αποτέλεσμα "Πριν & Μετά" της δουλειάς μας. Κάθε κατοικίδιο αντιμετωπίζεται με αγάπη και φροντίδα.
+                    </p>
+                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-                    {images.map((img) => (
-                        <div key={img.id} className="relative aspect-square rounded-xl overflow-hidden group border border-brand-200 dark:border-brand-800">
-                            <Image
-                                src={img.url}
-                                alt={img.alt}
-                                fill
-                                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                                <span className="text-white font-medium">Πριν & Μετά</span>
+                {/* Before/After Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 mb-24">
+                    {transformations.map((item) => (
+                        <div key={item.id} className="group">
+                            <div className="mb-6 flex items-center justify-between">
+                                <h3 className="text-2xl font-bold text-navy-900 flex items-center gap-3">
+                                    <Star className="w-5 h-5 text-brand-accent-green" />
+                                    {item.title}
+                                </h3>
+                                <div className="text-sm font-bold text-navy-900/40 uppercase tracking-widest">
+                                    {item.category}
+                                </div>
                             </div>
+                            <BeforeAfterSlider 
+                                beforeImage={item.before}
+                                afterImage={item.after}
+                            />
                         </div>
                     ))}
                 </div>
 
-                <div className="mt-16 text-center">
-                    <p className="text-brand-600 dark:text-brand-400 mb-6 font-medium">Ακολουθήστε μας στο Instagram για καθημερινές ενημερώσεις και νέες φωτογραφίες!</p>
-                    <a
-                        href="https://instagram.com/muskypaws_dog_grooming"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3.5 text-base font-bold shadow-sm transition-transform hover:scale-105"
-                    >
-                        @muskypaws_dog_grooming
-                    </a>
+                {/* General Gallery Grid */}
+                {generalPhotos.length > 0 && (
+                    <div className="mb-24">
+                        <div className="flex items-center gap-3 mb-10">
+                            <div className="w-10 h-1 object-accent-pink bg-brand-accent-pink rounded-full" />
+                            <h2 className="text-3xl font-bold text-navy-900">Περισσότερες Στιγμές</h2>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                            {generalPhotos.map((photo) => (
+                                <div key={photo.id} className="relative aspect-square rounded-3xl overflow-hidden group border border-brand-200 shadow-sm hover:shadow-md transition-shadow">
+                                    <Image
+                                        src={photo.url}
+                                        alt={photo.alt}
+                                        fill
+                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
+                                    />
+                                    <div className="absolute inset-0 bg-navy-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                        <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 scale-75 group-hover:scale-100 transition-transform">
+                                            <Camera className="w-6 h-6 text-brand-accent-pink" />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Call to Action Section */}
+                <div className="bg-navy-900 rounded-[40px] p-8 md:p-16 text-center text-white relative overflow-hidden shadow-2xl">
+                    <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                        <PawPrint className="absolute top-10 left-10 w-32 h-32 rotate-12" />
+                        <PawPrint className="absolute bottom-10 right-10 w-32 h-32 -rotate-12" />
+                    </div>
+                    
+                    <h2 className="text-3xl md:text-5xl font-bold mb-8 relative z-10">
+                        Θέλετε το ίδιο αποτέλεσμα για το <br/> <span className="text-brand-accent-pink">δικό σας κατοικίδιο;</span>
+                    </h2>
+                    
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                        <a
+                            href="/booking"
+                            className="bg-brand-accent-pink text-navy-900 px-10 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-lg"
+                        >
+                            Κλείστε Ραντεβού
+                        </a>
+                        <a
+                            href="https://instagram.com/muskypaws_dog_grooming"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2"
+                        >
+                            Δείτε μας στο Instagram
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
     );
 }
+

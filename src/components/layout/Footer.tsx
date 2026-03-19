@@ -27,12 +27,14 @@ export function Footer() {
                 {/* Left Section: Logo & Copyright */}
                 <div className="flex flex-col justify-between z-10 w-full md:w-auto">
                     <Link href="/" className="flex items-center gap-3 group inline-block">
-                        <div className="w-12 h-12 rounded-2xl bg-brand-accent-pink flex items-center justify-center shrink-0">
-                            <PawPrint className="w-7 h-7 text-navy-900 group-hover:scale-110 transition-transform duration-300" />
+                        <div className="relative w-20 h-20 flex items-center justify-center shrink-0">
+                            <Image 
+                                src="/logo-musky-removebg-preview.png" 
+                                alt="Musky Paws Logo" 
+                                fill 
+                                className="object-contain group-hover:scale-110 transition-transform duration-300"
+                            />
                         </div>
-                        <span className="font-extrabold text-2xl tracking-tight text-white">
-                            Musky Paws
-                        </span>
                     </Link>
 
                     <div className="mt-16 md:mt-32 text-sm text-gray-400">
@@ -45,6 +47,7 @@ export function Footer() {
                     <div className="flex flex-col gap-4">
                         <Link href="/" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.home')}</Link>
                         <Link href="/services" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.services')}</Link>
+                        <Link href="/pricing" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">{t('nav.pricing')}</Link>
                         <Link href="/gallery" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all">Gallery</Link>
                     </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, PawPrint, MessageCircle } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
@@ -58,12 +59,14 @@ export function Header() {
 
                 {/* Logo Area */}
                 <Link href="/" className="flex items-center gap-2 group shrink-0">
-                    <div className="w-10 h-10 rounded-xl bg-accent-500 flex items-center justify-center shrink-0">
-                        <PawPrint className="w-6 h-6 text-brand-950 group-hover:scale-110 transition-transform duration-300" />
+                    <div className="relative w-12 h-12 flex items-center justify-center">
+                        <Image 
+                            src="/logo-musky-removebg-preview.png" 
+                            alt="Musky Paws Logo" 
+                            fill 
+                            className="object-contain group-hover:scale-110 transition-transform duration-300"
+                        />
                     </div>
-                    <span className="font-extrabold text-xl tracking-tight text-brand-950">
-                        Musky Paws
-                    </span>
                 </Link>
 
                 {/* Desktop Navigation */}
