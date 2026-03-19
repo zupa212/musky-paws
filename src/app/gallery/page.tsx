@@ -15,7 +15,7 @@ export default function GalleryPage() {
     // Numerical logic: 1 prin, 1 meta, 2 prin, 2 meta...
     // The user has IMG_3262.JPG to IMG_3323.JPG in public/images/before-after/dogs/
     const startNum = 3262;
-    const transformations = Array.from({ length: 15 }, (_, i) => {
+    const transformations = Array.from({ length: 4 }, (_, i) => {
         const setStart = startNum + (i * 2);
         return {
             id: i + 1,

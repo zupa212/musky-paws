@@ -107,16 +107,7 @@ export function Header() {
                         <Phone className="w-5 h-5" />
                     </a>
 
-                    {/* WhatsApp Button */}
-                    <a
-                        href="https://wa.me/306948965371"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-11 h-11 rounded-2xl bg-[#25D366]/10 flex items-center justify-center text-[#25D366] hover:bg-[#25D366]/20 hover:scale-105 transition-transform shadow-sm"
-                        aria-label="WhatsApp"
-                    >
-                        <MessageCircle className="w-5 h-5" />
-                    </a>
+
 
                     {/* Desktop language toggle */}
                     <div className="hidden lg:block">

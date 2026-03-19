@@ -31,8 +31,8 @@ export function Footer() {
                             <Image 
                                 src="/logo-musky-removebg-preview.png" 
                                 alt="Musky Paws Logo" 
-                                width={80}
-                                height={80}
+                                width={120}
+                                height={120}
                                 className="object-contain group-hover:scale-110 transition-transform duration-300"
                             />
                         </div>
