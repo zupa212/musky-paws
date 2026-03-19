@@ -369,39 +369,39 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
             {[
               {
                 quote: t('testimonials.q1'),
-                name: "Μαρία Κ.",
+                name: "Δημήτρης Δολιανίτης",
                 location: "Περαία",
-                img: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=200&h=200"
+                img: "/images/reviews/1.jpg"
               },
               {
                 quote: t('testimonials.q2'),
-                name: "Γιώργος Π.",
+                name: "Γεώργιος Π.",
                 location: "Τρίλοφος",
-                img: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=80&w=200&h=200"
+                img: "/images/reviews/2.jpg"
               },
               {
                 quote: t('testimonials.q3'),
                 name: "Ελένη Σ.",
                 location: "Καλαμαριά",
-                img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=200&h=200"
+                img: "/images/reviews/3.jpg"
               },
               {
                 quote: t('testimonials.q4'),
-                name: "Δημήτρης Α.",
-                location: "Αγία Τριάδα",
-                img: "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&q=80&w=200&h=200"
+                name: "Βασιλική Α.",
+                location: "Θεσσαλονίκη",
+                img: "/images/reviews/4.jpg"
               },
               {
                 quote: t('testimonials.q5'),
                 name: "Κατερίνα Μ.",
                 location: "Μηχανιώνα",
-                img: "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80&w=200&h=200"
+                img: "/images/reviews/1.jpg"
               },
               {
                 quote: t('testimonials.q6'),
                 name: "Νίκος Β.",
                 location: "Περαία",
-                img: "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?auto=format&fit=crop&q=80&w=200&h=200"
+                img: "/images/reviews/2.jpg"
               },
             ].map((t, i) => (
               <div key={i} className="w-[500px] shrink-0 mx-4">
@@ -437,39 +437,39 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
             {[
               {
                 quote: t('testimonials.q1'),
-                name: "Μαρία Κ.",
+                name: "Δημήτρης Δολιανίτης",
                 location: "Περαία",
-                img: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=200&h=200"
+                img: "/images/reviews/1.jpg"
               },
               {
                 quote: t('testimonials.q2'),
-                name: "Γιώργος Π.",
+                name: "Γεώργιος Π.",
                 location: "Τρίλοφος",
-                img: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=80&w=200&h=200"
+                img: "/images/reviews/2.jpg"
               },
               {
                 quote: t('testimonials.q3'),
                 name: "Ελένη Σ.",
                 location: "Καλαμαριά",
-                img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=200&h=200"
+                img: "/images/reviews/3.jpg"
               },
               {
                 quote: t('testimonials.q4'),
-                name: "Δημήτρης Α.",
-                location: "Αγία Τριάδα",
-                img: "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&q=80&w=200&h=200"
+                name: "Βασιλική Α.",
+                location: "Θεσσαλονίκη",
+                img: "/images/reviews/4.jpg"
               },
               {
                 quote: t('testimonials.q5'),
                 name: "Κατερίνα Μ.",
                 location: "Μηχανιώνα",
-                img: "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80&w=200&h=200"
+                img: "/images/reviews/1.jpg"
               },
               {
                 quote: t('testimonials.q6'),
                 name: "Νίκος Β.",
                 location: "Περαία",
-                img: "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?auto=format&fit=crop&q=80&w=200&h=200"
+                img: "/images/reviews/2.jpg"
               },
             ].map((t, i) => (
               <div key={`dup-${i}`} className="w-[500px] shrink-0 mx-4">
