@@ -13,19 +13,25 @@ export const metadata: Metadata = {
 
 export default function GalleryPage() {
     // Numerical logic: 1 prin, 1 meta, 2 prin, 2 meta...
-    // We assume 10 sets for now, can be adjusted
-    const transformations = Array.from({ length: 10 }, (_, i) => ({
-        id: i + 1,
-        title: `Μεταμόρφωση ${i + 1}`,
-        before: `/images/before-after/sets/set${i + 1}/before.jpg`,
-        after: `/images/before-after/sets/set${i + 1}/after.jpg`,
-        category: "Dogs"
-    }));
+    // The user has IMG_3262.JPG to IMG_3323.JPG in public/images/before-after/dogs/
+    const startNum = 3262;
+    const transformations = Array.from({ length: 15 }, (_, i) => {
+        const setStart = startNum + (i * 2);
+        return {
+            id: i + 1,
+            title: `Μεταμόρφωση ${i + 1}`,
+            before: `/images/before-after/dogs/IMG_${setStart}.JPG`,
+            after: `/images/before-after/dogs/IMG_${setStart + 1}.JPG`,
+            category: "Dogs"
+        };
+    });
 
-    // General photos (not before/after)
+    // General photos (remaining ones after sets)
     const generalPhotos = [
         { id: 1, url: "/images/stella.webp", alt: "Happy Client" },
-        // Add more general photos here as they arrive
+        { id: 2, url: "/images/before-after/dogs/IMG_3318.JPG", alt: "Grooming session" },
+        { id: 3, url: "/images/before-after/dogs/IMG_3319.JPG", alt: "Happy pup" },
+        { id: 4, url: "/images/before-after/dogs/IMG_3320.JPG", alt: "Clean and fluffy" },
     ];
 
     return (

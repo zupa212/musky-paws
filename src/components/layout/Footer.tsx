@@ -27,11 +27,12 @@ export function Footer() {
                 {/* Left Section: Logo & Copyright */}
                 <div className="flex flex-col justify-between z-10 w-full md:w-auto">
                     <Link href="/" className="flex items-center gap-3 group inline-block">
-                        <div className="relative w-20 h-20 flex items-center justify-center shrink-0">
+                        <div className="flex items-center justify-center shrink-0">
                             <Image 
                                 src="/logo-musky-removebg-preview.png" 
                                 alt="Musky Paws Logo" 
-                                fill 
+                                width={80}
+                                height={80}
                                 className="object-contain group-hover:scale-110 transition-transform duration-300"
                             />
                         </div>

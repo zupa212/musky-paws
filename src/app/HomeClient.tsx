@@ -271,8 +271,8 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
             </p>
             <div className="w-full max-w-4xl mx-auto">
                 <BeforeAfterSlider 
-                    beforeImage="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80" 
-                    afterImage="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&q=80" 
+                    beforeImage="/images/before-after/dogs/IMG_3262.JPG" 
+                    afterImage="/images/before-after/dogs/IMG_3263.JPG" 
                 />
             </div>
             <div className="mt-12">
