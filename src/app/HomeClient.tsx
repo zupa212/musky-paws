@@ -369,9 +369,9 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
             {[
               {
                 quote: t('testimonials.q1'),
-                name: "Δημήτρης Δολιανίτης",
+                name: "Σοφία Βακιρτζή",
                 location: "Περαία",
-                img: "/images/before-after/dogs/IMG_3321.JPG"
+                img: "/images/reviews/sofia.jpg"
               },
               {
                 quote: t('testimonials.q2'),
@@ -437,9 +437,9 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
             {[
               {
                 quote: t('testimonials.q1'),
-                name: "Δημήτρης Δολιανίτης",
+                name: "Σοφία Βακιρτζή",
                 location: "Περαία",
-                img: "/images/before-after/dogs/IMG_3321.JPG"
+                img: "/images/reviews/sofia.jpg"
               },
               {
                 quote: t('testimonials.q2'),
