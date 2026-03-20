@@ -371,37 +371,37 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                 quote: t('testimonials.q1'),
                 name: "Δημήτρης Δολιανίτης",
                 location: "Περαία",
-                img: "/images/reviews/1.jpg"
+                img: "/images/before-after/dogs/IMG_3321.JPG"
               },
               {
                 quote: t('testimonials.q2'),
                 name: "Γεώργιος Π.",
                 location: "Τρίλοφος",
-                img: "/images/reviews/2.jpg"
+                img: "/images/before-after/dogs/IMG_3322.JPG"
               },
               {
                 quote: t('testimonials.q3'),
                 name: "Ελένη Σ.",
                 location: "Καλαμαριά",
-                img: "/images/reviews/3.jpg"
+                img: "/images/before-after/dogs/IMG_3323.JPG"
               },
               {
                 quote: t('testimonials.q4'),
                 name: "Βασιλική Α.",
                 location: "Θεσσαλονίκη",
-                img: "/images/reviews/4.jpg"
+                img: "/images/before-after/dogs/IMG_3316.JPG"
               },
               {
                 quote: t('testimonials.q5'),
                 name: "Κατερίνα Μ.",
                 location: "Μηχανιώνα",
-                img: "/images/reviews/1.jpg"
+                img: "/images/before-after/dogs/IMG_3317.JPG"
               },
               {
                 quote: t('testimonials.q6'),
                 name: "Νίκος Β.",
                 location: "Περαία",
-                img: "/images/reviews/2.jpg"
+                img: "/images/before-after/dogs/IMG_3309.JPG"
               },
             ].map((t, i) => (
               <div key={i} className="w-[500px] shrink-0 mx-4">
@@ -439,37 +439,37 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                 quote: t('testimonials.q1'),
                 name: "Δημήτρης Δολιανίτης",
                 location: "Περαία",
-                img: "/images/reviews/1.jpg"
+                img: "/images/before-after/dogs/IMG_3321.JPG"
               },
               {
                 quote: t('testimonials.q2'),
                 name: "Γεώργιος Π.",
                 location: "Τρίλοφος",
-                img: "/images/reviews/2.jpg"
+                img: "/images/before-after/dogs/IMG_3322.JPG"
               },
               {
                 quote: t('testimonials.q3'),
                 name: "Ελένη Σ.",
                 location: "Καλαμαριά",
-                img: "/images/reviews/3.jpg"
+                img: "/images/before-after/dogs/IMG_3323.JPG"
               },
               {
                 quote: t('testimonials.q4'),
                 name: "Βασιλική Α.",
                 location: "Θεσσαλονίκη",
-                img: "/images/reviews/4.jpg"
+                img: "/images/before-after/dogs/IMG_3316.JPG"
               },
               {
                 quote: t('testimonials.q5'),
                 name: "Κατερίνα Μ.",
                 location: "Μηχανιώνα",
-                img: "/images/reviews/1.jpg"
+                img: "/images/before-after/dogs/IMG_3317.JPG"
               },
               {
                 quote: t('testimonials.q6'),
                 name: "Νίκος Β.",
                 location: "Περαία",
-                img: "/images/reviews/2.jpg"
+                img: "/images/before-after/dogs/IMG_3309.JPG"
               },
             ].map((t, i) => (
               <div key={`dup-${i}`} className="w-[500px] shrink-0 mx-4">

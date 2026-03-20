@@ -28,10 +28,12 @@ export default function GalleryPage() {
 
     // General photos (remaining ones after sets)
     const generalPhotos = [
-        { id: 1, url: "/images/stella.webp", alt: "Happy Client" },
-        { id: 2, url: "/images/before-after/dogs/IMG_3318.JPG", alt: "Grooming session" },
-        { id: 3, url: "/images/before-after/dogs/IMG_3319.JPG", alt: "Happy pup" },
-        { id: 4, url: "/images/before-after/dogs/IMG_3320.JPG", alt: "Clean and fluffy" },
+        { id: 1, url: "/images/before-after/dogs/IMG_3310.JPG", alt: "Happy Client" },
+        { id: 2, url: "/images/before-after/dogs/IMG_3311.JPG", alt: "Grooming session" },
+        { id: 3, url: "/images/before-after/dogs/IMG_3312.JPG", alt: "Happy pup" },
+        { id: 4, url: "/images/before-after/dogs/IMG_3313.JPG", alt: "Clean and fluffy" },
+        { id: 5, url: "/images/before-after/dogs/IMG_3314.JPG", alt: "Premium grooming result" },
+        { id: 6, url: "/images/before-after/dogs/IMG_3315.JPG", alt: "Musky Paws customer" },
     ];
 
     return (
