@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import Script from "next/script";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { SiteProtection } from "@/components/layout/SiteProtection";
+import { seoReviews } from "@/config/seo";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -83,7 +84,15 @@ export default function RootLayout({
             "sameAs": [
               "https://www.facebook.com/p/Musky-Paws-61558785775782/",
               "https://instagram.com/muskypaws_dog_grooming"
-            ]
+            ],
+            "review": seoReviews.map((review) => ({
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": review.author,
+              },
+              "reviewBody": review.body,
+            }))
           })}
         </Script>
         {/* Google Analytics & Google Ads Tag */}

@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, MapPin, PawPrint, Play, CalendarDays, Clock } from 'lucide-react';
+import { ArrowRight, PawPrint, CalendarDays, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/language';
 import { BlogPost } from '@/types/blog';
 import { format } from 'date-fns';
 import { el } from 'date-fns/locale';
 import { BeforeAfterSlider } from '@/components/ui/BeforeAfterSlider';
+import { localAreaPages, topicalClusters } from '@/config/seo';
 
 // Mock Services for Marquee
 const marqueeServices = [
@@ -24,6 +25,10 @@ const marqueeServices = [
 
 export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
   const { t } = useLanguage();
+  const areaHighlights = Object.entries(localAreaPages).map(([slug, area]) => ({
+    slug,
+    ...area,
+  }));
   return (
     <>
       <div className="pt-24 pb-8 overflow-hidden">
@@ -280,6 +285,60 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                      Δείτε περισσότερες φωτογραφίες <ArrowRight className="w-5 h-5" />
                  </Link>
             </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ LOCAL SEO HUB ═══════════════ */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="max-w-3xl mb-12">
+            <div className="flex items-center gap-2 text-sm font-semibold text-navy-800 mb-6">
+              <div className="w-2 h-2 rounded-full bg-brand-accent-green" />
+              Τοπικές αναζητήσεις
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-navy-900 tracking-tight leading-[1.1] mb-6">
+              Grooming για <span className="wavy-underline">Περαία, Καλαμαριά, Μηχανιώνα, Τρίλοφο</span>
+            </h2>
+            <p className="text-lg text-navy-800/65 leading-relaxed">
+              Δημιουργήσαμε ξεχωριστές σελίδες για τις βασικές περιοχές που εξυπηρετούμε, μαζί με οδηγούς για κουτάβια, deshedding και μικρόσωμες φυλές, ώστε να βρίσκετε πιο εύκολα την υπηρεσία που σας ταιριάζει.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-16">
+            {areaHighlights.map((area) => (
+              <Link
+                key={area.slug}
+                href={`/areas/${area.slug}`}
+                className="group rounded-[28px] border border-brand-200 bg-brand-50 p-6 hover:bg-white hover:shadow-lg transition-all"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-sm font-black uppercase tracking-[0.18em] text-navy-900/40">{area.name}</span>
+                  <ArrowRight className="w-5 h-5 text-navy-900/30 group-hover:text-brand-accent-pink group-hover:translate-x-1 transition-all" />
+                </div>
+                <h3 className="text-2xl font-bold text-navy-900 mb-4">{area.heroTitle}</h3>
+                <p className="text-sm leading-7 text-navy-900/65">
+                  {area.description}
+                </p>
+              </Link>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {topicalClusters.map((cluster) => (
+              <Link
+                key={cluster.href}
+                href={cluster.href}
+                className="group rounded-[28px] bg-navy-900 text-white p-8 border border-white/10 hover:bg-navy-800 transition-colors"
+              >
+                <h3 className="text-2xl font-bold leading-tight mb-4">{cluster.title}</h3>
+                <p className="text-sm leading-7 text-white/70 mb-8">{cluster.description}</p>
+                <span className="inline-flex items-center gap-2 font-bold text-brand-accent-green">
+                  {cluster.cta}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -1,10 +1,11 @@
 import { MetadataRoute } from 'next';
 import { getAllPosts } from '@/lib/blog';
+import { localAreaPages } from '@/config/seo';
 
 const BASE_URL = 'https://muskypaws.gr';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const routes = ['', '/about', '/contact', '/gallery', '/services', '/booking', '/blog', '/pricing'].map((route) => ({
+    const routes = ['', '/about', '/contact', '/gallery', '/services', '/booking', '/blog', '/pricing', '/areas'].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
@@ -18,6 +19,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.9,
     }));
 
+    const areaPages = Object.keys(localAreaPages).map((slug) => ({
+        url: `${BASE_URL}/areas/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+    }));
+
     const posts = getAllPosts().map((post) => ({
         url: `${BASE_URL}/blog/${post.slug}`,
         lastModified: new Date(post.updated_at || post.published_at),
@@ -25,5 +33,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.6,
     }));
 
-    return [...routes, ...services, ...posts];
+    return [...routes, ...services, ...areaPages, ...posts];
 }
