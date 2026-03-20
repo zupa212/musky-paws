@@ -375,21 +375,21 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
               },
               {
                 quote: t('testimonials.q2'),
-                name: "Γεώργιος Π.",
-                location: "Τρίλοφος",
-                img: "/images/before-after/dogs/IMG_3322.JPG"
+                name: "R. R.",
+                location: "Θεσσαλονίκη",
+                img: "/images/reviews/rr.jpg"
               },
               {
                 quote: t('testimonials.q3'),
-                name: "Ελένη Σ.",
-                location: "Καλαμαριά",
-                img: "/images/before-after/dogs/IMG_3323.JPG"
+                name: "Λυδία Αγγελίδου",
+                location: "Θεσσαλονίκη",
+                img: "/images/reviews/lydia.jpg"
               },
               {
                 quote: t('testimonials.q4'),
-                name: "Βασιλική Α.",
+                name: "Γιώτα Αλεξάκη",
                 location: "Θεσσαλονίκη",
-                img: "/images/before-after/dogs/IMG_3316.JPG"
+                img: "/images/reviews/giota.jpg"
               },
               {
                 quote: t('testimonials.q5'),
@@ -443,21 +443,21 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
               },
               {
                 quote: t('testimonials.q2'),
-                name: "Γεώργιος Π.",
-                location: "Τρίλοφος",
-                img: "/images/before-after/dogs/IMG_3322.JPG"
+                name: "R. R.",
+                location: "Θεσσαλονίκη",
+                img: "/images/reviews/rr.jpg"
               },
               {
                 quote: t('testimonials.q3'),
-                name: "Ελένη Σ.",
-                location: "Καλαμαριά",
-                img: "/images/before-after/dogs/IMG_3323.JPG"
+                name: "Λυδία Αγγελίδου",
+                location: "Θεσσαλονίκη",
+                img: "/images/reviews/lydia.jpg"
               },
               {
                 quote: t('testimonials.q4'),
-                name: "Βασιλική Α.",
+                name: "Γιώτα Αλεξάκη",
                 location: "Θεσσαλονίκη",
-                img: "/images/before-after/dogs/IMG_3316.JPG"
+                img: "/images/reviews/giota.jpg"
               },
               {
                 quote: t('testimonials.q5'),
