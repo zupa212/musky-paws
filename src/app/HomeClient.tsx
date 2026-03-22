@@ -294,7 +294,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
           <div className="max-w-3xl mb-12">
             <div className="flex items-center gap-2 text-sm font-semibold text-navy-800 mb-6">
               <div className="w-2 h-2 rounded-full bg-brand-accent-green" />
-              Τοπικές αναζητήσεις
+              Περιοχές που εξυπηρετούμε
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-navy-900 tracking-tight leading-[1.1] mb-6">
               Grooming για <span className="wavy-underline">Θεσσαλονίκη, Περαία, Καλαμαριά, Πυλαία</span>
@@ -361,9 +361,9 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="flex overflow-x-auto pb-8 -mx-4 px-4 snap-x snap-mandatory gap-5 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 md:px-0 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {recentPosts.map((post) => (
-                <Link key={post.slug} href={`/blog/${post.slug}`} className="group h-full flex flex-col bg-white rounded-3xl border border-brand-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="w-[280px] sm:w-[320px] snap-center shrink-0 md:w-auto h-full flex flex-col bg-white rounded-3xl border border-brand-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
                   <div className="relative aspect-[3/2] w-full bg-brand-100 overflow-hidden shrink-0">
                     <Image
                       src={post.cover_image}
