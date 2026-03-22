@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Phone, AtSign, PawPrint, MessageCircle } from 'lucide-react';
+import { MapPin, Phone } from 'lucide-react';
 import { useLanguage } from '@/lib/language';
 
 export function Footer() {

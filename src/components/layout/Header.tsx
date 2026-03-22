@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, PawPrint, MessageCircle } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/lib/language';
@@ -28,11 +28,6 @@ export function Header() {
         window.addEventListener('scroll', handler);
         return () => window.removeEventListener('scroll', handler);
     }, []);
-
-    // Close mobile menu on route change
-    useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, [pathname]);
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -147,6 +142,7 @@ export function Header() {
                                     <Link
                                         key={link.href}
                                         href={link.href}
+                                        onClick={() => setIsMobileMenuOpen(false)}
                                         className={`text-2xl font-bold transition-all duration-400 hover:text-brand-accent-pink hover:translate-x-2 ${
                                             isActive ? 'text-brand-accent-pink' : 'text-navy-900'
                                         }`}
@@ -161,6 +157,7 @@ export function Header() {
                         <div className="flex flex-col gap-6">
                             <Link
                                 href="/booking"
+                                onClick={() => setIsMobileMenuOpen(false)}
                                 className="btn-pill bg-navy-900 text-white px-8 py-5 text-xl font-bold w-full shadow-2xl text-center hover:bg-navy-800 hover:-translate-y-1 transition-all active:translate-y-0"
                             >
                                 {t('nav.booking')}
