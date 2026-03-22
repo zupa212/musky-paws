@@ -17,7 +17,7 @@ const services = [
         slug: "full-grooming",
         desc: "Η απόλυτη εμπειρία περιποίησης. Μπάνιο, κούρεμα φυλής ή δικής σας επιλογής, καθαρισμός αυτιών & κόψιμο νυχιών.",
         duration: "1.5 - 3 ώρες",
-        price: "Από 30€",
+        price: "Κατόπιν εκτίμησης",
         img: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80"
     },
     {
@@ -25,7 +25,7 @@ const services = [
         slug: "bath-brush",
         desc: "Εξειδικευμένα σαμπουάν, βαθύς καθαρισμός και βούρτσισμα για αφαίρεση νεκρής τρίχας. Για λαμπερό και υγιές τρίχωμα.",
         duration: "1 - 2 ώρες",
-        price: "Από 15€",
+        price: "Κατόπιν εκτίμησης",
         img: "https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&q=80"
     },
     {
@@ -33,7 +33,7 @@ const services = [
         slug: "deshedding",
         desc: "Ειδική θεραπεία για φυλές με διπλό μανδύα που μαδάνε έντονα. Μειώνει την τριχόπτωση στο σπίτι έως και 80%.",
         duration: "1.5 - 2.5 ώρες",
-        price: "Από 25€",
+        price: "Κατόπιν εκτίμησης",
         img: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80"
     },
     {
@@ -41,7 +41,7 @@ const services = [
         slug: "puppy-grooming",
         desc: "Ήπια εισαγωγή στον κόσμο του grooming. Μπάνιο, απαλό χτένισμα, καθαρισμός προσώπου και αυτιών με πολλή θετική ενίσχυση.",
         duration: "1 - 1.5 ώρες",
-        price: "Από 20€",
+        price: "Κατόπιν εκτίμησης",
         img: "https://images.unsplash.com/photo-1591160690555-5debfba289f0?auto=format&fit=crop&q=80"
     },
     {
@@ -49,7 +49,7 @@ const services = [
         slug: "furminator",
         desc: "Επαγγελματική αφαίρεση του εσωτερικού υποστρώματος που προκαλεί τη μεγάλη τριχόπτωση στα έπιπλα, χωρίς να βλάπτεται το εξωτερικό τρίχωμα.",
         duration: "45 - 90 λεπτά",
-        price: "Από 15€",
+        price: "Κατόπιν εκτίμησης",
         img: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80"
     },
     {
@@ -57,7 +57,7 @@ const services = [
         slug: "nails-ears",
         desc: "Απαραίτητη υγιεινή φροντίδα. Περιλαμβάνεται δωρεάν στις κύριες υπηρεσίες μας, αλλά προσφέρεται και μεμονωμένα.",
         duration: "15 λεπτά",
-        price: "5€",
+        price: "Κατόπιν εκτίμησης",
         img: "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&q=80"
     }
 ];
@@ -109,6 +109,25 @@ export default function ServicesPage() {
                     </div>
 
                     <div className="mt-20 space-y-16">
+                        <div className="bg-white border border-brand-200 rounded-[2.5rem] p-10 md:p-12 shadow-sm">
+                            <h3 className="text-3xl font-bold mb-8 text-foreground">Δημοφιλείς Αναζητήσεις Grooming</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {[
+                                    { href: "/services/small-breed-grooming", title: "Κούρεμα μικρόσωμου σκύλου", desc: "Για Maltese, Poodle, Yorkshire, Bichon και Shih Tzu." },
+                                    { href: "/services/puppy-grooming", title: "Πρώτο grooming κουταβιού", desc: "Ήπια εισαγωγή στον χώρο και στα εργαλεία." },
+                                    { href: "/services/deshedding", title: "Deshedding σκύλου", desc: "Για έντονη τριχόπτωση και νεκρό υπόστρωμα." },
+                                    { href: "/areas/thermi", title: "Dog grooming για Θέρμη", desc: "Τοπική σελίδα για κατοίκους Θέρμης." },
+                                    { href: "/areas/epanomi", title: "Dog grooming για Επανομή", desc: "Τοπική σελίδα για κατοίκους Επανομής." },
+                                    { href: "/areas/kalamaria", title: "Dog grooming για Καλαμαριά", desc: "Για ιδιοκτήτες που αναζητούν πιο προσωποποιημένη φροντίδα." },
+                                ].map((item) => (
+                                    <Link key={item.href} href={item.href} className="group rounded-2xl bg-brand-50 border border-brand-200 p-5 hover:bg-white hover:shadow-md transition-all">
+                                        <h4 className="font-bold text-lg text-foreground mb-2 group-hover:text-accent-600 transition-colors">{item.title}</h4>
+                                        <p className="text-sm text-brand-600 dark:text-brand-400 leading-relaxed">{item.desc}</p>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+
                         <div className="bg-brand-100 dark:bg-brand-900 border border-brand-200 dark:border-brand-800 rounded-[2.5rem] p-10 md:p-12 shadow-sm">
                             <h3 className="text-3xl font-bold mb-8 text-foreground flex items-center gap-3">
                                 <Sparkles className="w-8 h-8 text-accent-500" /> Σημαντικές Σημειώσεις

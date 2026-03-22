@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: route === '' ? 1 : 0.8,
     }));
 
-    const services = ['full-grooming', 'bath-brush', 'deshedding', 'nails-ears', 'puppy-grooming', 'furminator'].map((slug) => ({
+    const services = ['full-grooming', 'bath-brush', 'deshedding', 'nails-ears', 'puppy-grooming', 'furminator', 'small-breed-grooming'].map((slug) => ({
         url: `${BASE_URL}/services/${slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { ArrowRight, CheckCircle2, Receipt } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Τιμές Dog Grooming Περαία | Κούρεμα, Μπάνιο, Deshedding | Musky Paws',
-    description: 'Αναλυτικές τιμές για dog grooming στην Περαία Θεσσαλονίκης: full grooming, μπάνιο, deshedding, furminator, puppy grooming και μεμονωμένες υπηρεσίες.',
+    title: 'Τιμές Dog Grooming Περαία | Οδηγός Κόστους για Κούρεμα, Μπάνιο, Deshedding | Musky Paws',
+    description: 'Οδηγός κόστους για dog grooming στην Περαία Θεσσαλονίκης. Δείτε τι επηρεάζει την τελική χρέωση για κούρεμα, μπάνιο, deshedding, furminator και puppy grooming.',
     alternates: {
         canonical: 'https://muskypaws.gr/pricing',
     },
@@ -14,25 +14,25 @@ const pricingCategories = [
     {
         title: "Βασικές Υπηρεσίες",
         items: [
-            { name: "Full Grooming (Μικρόσωμα)", price: "Από 30€", desc: "Πλήρες κούρεμα, μπάνιο, νύχια, αυτιά." },
+            { name: "Full Grooming (Μικρόσωμα)", price: "Κατόπιν εκτίμησης", desc: "Πλήρες κούρεμα, μπάνιο, νύχια, αυτιά." },
             { name: "Full Grooming (Μεσαία/Μεγαλόσωμα)", price: "Κατόπιν εκτίμησης", desc: "Προσαρμοσμένο στις ανάγκες της φυλής." },
-            { name: "Μπάνιο & Βούρτσισμα (Bath & Brush)", price: "Από 15€", desc: "Για βαθύ καθαρισμό και φρεσκάδα." },
+            { name: "Μπάνιο & Βούρτσισμα (Bath & Brush)", price: "Κατόπιν εκτίμησης", desc: "Για βαθύ καθαρισμό και φρεσκάδα." },
         ]
     },
     {
         title: "Εξειδικευμένες Υπηρεσίες",
         items: [
-            { name: "Αφαίρεση Νεκρής Τρίχας (Deshedding)", price: "Από 25€", desc: "Ιδανικό για φυλές με έντονη τριχόπτωση." },
-            { name: "Θεραπεία Furminator", price: "Από 15€", desc: "Για εντατική απομάκρυνση υποστρώματος." },
-            { name: "Puppy Grooming", price: "Από 20€", desc: "Η πρώτη, stress-free εμπειρία για κουτάβια." },
+            { name: "Αφαίρεση Νεκρής Τρίχας (Deshedding)", price: "Κατόπιν εκτίμησης", desc: "Ιδανικό για φυλές με έντονη τριχόπτωση." },
+            { name: "Θεραπεία Furminator", price: "Κατόπιν εκτίμησης", desc: "Για εντατική απομάκρυνση υποστρώματος." },
+            { name: "Puppy Grooming", price: "Κατόπιν εκτίμησης", desc: "Η πρώτη, stress-free εμπειρία για κουτάβια." },
         ]
     },
     {
         title: "Μεμονωμένες Παροχές (A la Carte)",
         items: [
-            { name: "Κόψιμο Νυχιών", price: "5€", desc: "Ασφαλής περιποίηση νυχιών." },
-            { name: "Καθαρισμός Αυτιών", price: "5€", desc: "Για υγιεινή και πρόληψη μολύνσεων." },
-            { name: "Super Premium Σαμπουάν", price: "+5€", desc: "Αναβάθμιση σε εξειδικευμένα, θεραπευτικά σαμπουάν." },
+            { name: "Κόψιμο Νυχιών", price: "Κατόπιν εκτίμησης", desc: "Ασφαλής περιποίηση νυχιών." },
+            { name: "Καθαρισμός Αυτιών", price: "Κατόπιν εκτίμησης", desc: "Για υγιεινή και πρόληψη μολύνσεων." },
+            { name: "Super Premium Σαμπουάν", price: "Κατόπιν εκτίμησης", desc: "Αναβάθμιση σε εξειδικευμένα, θεραπευτικά σαμπουάν." },
         ]
     }
 ];
@@ -43,9 +43,9 @@ export default function PricingPage() {
             <section className="bg-brand-950 text-brand-50 py-16 md:py-24">
                 <div className="container mx-auto px-4 text-center">
                     <Receipt className="w-16 h-16 mx-auto mb-6 text-accent-500 opacity-90" />
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Τιμοκατάλογος Υπηρεσιών Dog Grooming</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Οδηγός Κόστους Υπηρεσιών Dog Grooming</h1>
                     <p className="text-xl max-w-2xl mx-auto text-brand-300">
-                        Ξεκάθαρες τιμές grooming σκύλου στην Περαία Θεσσαλονίκης. Επιλέξτε την υπηρεσία που ταιριάζει στις ανάγκες του δικού σας κατοικίδιου.
+                        Δεν δημοσιεύουμε σταθερό τιμοκατάλογο, γιατί κάθε σκύλος έχει διαφορετικές ανάγκες. Εδώ θα δείτε τι επηρεάζει την τελική εκτίμηση για grooming στην Περαία Θεσσαλονίκης.
                     </p>
                 </div>
             </section>
@@ -79,6 +79,25 @@ export default function PricingPage() {
                         ))}
                     </div>
 
+                    <div className="mt-16 bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-brand-100">
+                        <h2 className="text-2xl font-bold mb-8">Τι επηρεάζει το κόστος του grooming</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {[
+                                "Το μέγεθος και τα κιλά του σκύλου",
+                                "Η φυλή και ο τύπος τριχώματος",
+                                "Η ύπαρξη κόμπων ή έντονης νεκρής τρίχας",
+                                "Η συχνότητα που γίνεται συντήρηση στο σπίτι",
+                                "Η διάρκεια που θα χρειαστεί το ραντεβού",
+                                "Η συμπεριφορά του σκύλου κατά το grooming",
+                            ].map((item) => (
+                                <div key={item} className="flex gap-3 items-start bg-brand-50 p-4 rounded-2xl border border-brand-200">
+                                    <CheckCircle2 className="w-5 h-5 shrink-0 text-brand-500 mt-0.5" />
+                                    <span className="text-brand-700 dark:text-brand-300">{item}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* FAQ & Notes Section */}
                     <div className="mt-16 bg-brand-50 dark:bg-brand-950 rounded-[2rem] p-8 md:p-12 border border-brand-200 dark:border-brand-800">
                         <h2 className="text-2xl font-bold mb-6">Συχνές Ερωτήσεις για τις Τιμές</h2>
@@ -97,7 +116,31 @@ export default function PricingPage() {
                                     <span className="text-brand-700 dark:text-brand-300">Όχι, όλες οι υπηρεσίες πραγματοποιούνται αποκλειστικά στον ασφαλή και άρτια εξοπλισμένο χώρο μας (Σόλωνος 28Β, Περαία).</span>
                                 </div>
                             </li>
+                            <li className="flex gap-4">
+                                <CheckCircle2 className="w-6 h-6 shrink-0 text-brand-500 mt-1" />
+                                <div>
+                                    <strong className="block text-lg mb-1">Μπορώ να πάρω εκτίμηση χωρίς να φαίνονται δημόσια οι τιμές;</strong>
+                                    <span className="text-brand-700 dark:text-brand-300">Ναι. Μπορείτε να κλείσετε ραντεβού ή να επικοινωνήσετε μαζί μας με πληροφορίες για τη φυλή, τα κιλά και το τρίχωμα του σκύλου σας ώστε να σας δώσουμε πιο σωστή εκτίμηση.</span>
+                                </div>
+                            </li>
                         </ul>
+                    </div>
+
+                    <div className="mt-16 bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-brand-100">
+                        <h2 className="text-2xl font-bold mb-6">Δημοφιλείς Αναζητήσεις για Τιμές Grooming</h2>
+                        <div className="flex flex-wrap gap-3">
+                            {[
+                                { href: "/services/full-grooming", label: "κόστος κουρέματος σκύλου" },
+                                { href: "/services/bath-brush", label: "τιμή για πλύσιμο σκύλου" },
+                                { href: "/services/deshedding", label: "κόστος deshedding σκύλου" },
+                                { href: "/services/small-breed-grooming", label: "τιμή για μικρόσωμο σκύλο" },
+                                { href: "/services/puppy-grooming", label: "κόστος puppy grooming" },
+                            ].map((item) => (
+                                <Link key={item.href} href={item.href} className="rounded-full border border-brand-200 bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-800 hover:bg-brand-100 transition-colors">
+                                    {item.label}
+                                </Link>
+                            ))}
+                        </div>
                     </div>
 
                     <div className="mt-16 text-center">

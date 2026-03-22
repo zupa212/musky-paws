@@ -10,6 +10,15 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+    const popularLinks = [
+        { href: '/areas/peraia', label: 'Dog grooming Περαία' },
+        { href: '/areas/kalamaria', label: 'Dog grooming Καλαμαριά' },
+        { href: '/areas/michaniona', label: 'Dog grooming Μηχανιώνα' },
+        { href: '/areas/trilofos', label: 'Dog grooming Τρίλοφος' },
+        { href: '/areas/epanomi', label: 'Dog grooming Επανομή' },
+        { href: '/areas/thermi', label: 'Dog grooming Θέρμη' },
+    ];
+
     return (
         <>
             <section className="bg-brand-950 text-brand-50 py-16 md:py-24">
@@ -113,6 +122,17 @@ export default function ContactPage() {
                                 <a href="/booking" className="inline-flex w-full items-center justify-center rounded-full bg-foreground text-background px-6 py-3 font-medium transition-transform hover:scale-105">
                                     Φόρμα Ραντεβού
                                 </a>
+                            </div>
+
+                            <div className="bg-white p-6 rounded-2xl border border-brand-200">
+                                <h3 className="font-bold text-lg mb-4">Περιοχές που εξυπηρετούμε</h3>
+                                <div className="flex flex-wrap gap-3">
+                                    {popularLinks.map((item) => (
+                                        <a key={item.href} href={item.href} className="rounded-full border border-brand-200 bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-800 hover:bg-brand-100 transition-colors">
+                                            {item.label}
+                                        </a>
+                                    ))}
+                                </div>
                             </div>
                         </div>
 

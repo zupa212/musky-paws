@@ -158,6 +158,72 @@ export const localAreaPages = {
             },
         ],
     },
+    epanomi: {
+        name: "Επανομή",
+        title: "Dog Grooming για Επανομή | Musky Paws Περαία",
+        description: "Dog grooming για κατοίκους Επανομής με stress-free περιποίηση, bath & brush, full grooming, deshedding και πρακτικό online booking στην Περαία.",
+        heroTitle: "Dog grooming για Επανομή με σταθερό πρόγραμμα περιποίησης",
+        intro: "Για πολλούς ιδιοκτήτες στην Επανομή, η ανάγκη δεν είναι απλώς ένα περιστασιακό μπάνιο αλλά ένα σταθερό πρόγραμμα grooming που κρατά το τρίχωμα καθαρό, διαχειρίσιμο και ευχάριστο όλο τον χρόνο. Το Musky Paws στην Περαία εξυπηρετεί αυτή την ανάγκη με ήρεμο χειρισμό και σωστή εκτίμηση ανά σκύλο.",
+        audience: "Η σελίδα απευθύνεται σε κατοίκους Επανομής που θέλουν αξιόπιστο groomer για τακτική συντήρηση, puppy grooming ή λύσεις για τριχόπτωση και κόμπους.",
+        localFit: [
+            "Καλή επιλογή για ιδιοκτήτες που θέλουν σταθερό grooming πλάνο και όχι μόνο έκτακτα ραντεβού.",
+            "Ταιριάζει σε μικρόσωμες φυλές αλλά και σε σκύλους που μαδάνε έντονα ή λερώνουν συχνά.",
+            "Το online booking διευκολύνει τον προγραμματισμό από Επανομή χωρίς περιττά τηλεφωνήματα.",
+        ],
+        serviceLinks: [
+            { href: "/services/full-grooming", label: "Πλήρης καλλωπισμός", blurb: "Για σκύλους που χρειάζονται πλήρη φροντίδα και styling." },
+            { href: "/services/deshedding", label: "Deshedding", blurb: "Για έντονη νεκρή τρίχα και καλύτερη καθημερινότητα στο σπίτι." },
+            { href: "/services/small-breed-grooming", label: "Κούρεμα μικρόσωμου σκύλου", blurb: "Για φυλές που χρειάζονται τακτική συντήρηση και κόψιμο." },
+        ],
+        relatedArticles: [
+            { href: "/blog/kourema-mikrosomou-skylou-ti-prepei-na-gnwrizete", label: "Οδηγός για μικρόσωμες φυλές" },
+            { href: "/blog/deshedding-skylou-lisi-trixoptosi", label: "Πότε βοηθά το deshedding" },
+            { href: "/blog/plysimo-skylou-peraia", label: "Πότε χρειάζεται επαγγελματικό πλύσιμο" },
+        ],
+        faqs: [
+            {
+                q: "Αξίζει να έρχομαι από Επανομή για grooming στην Περαία;",
+                a: "Ναι, ειδικά όταν θέλετε πιο σταθερό αποτέλεσμα, σωστή εκτίμηση του τριχώματος και ένα ήρεμο ραντεβού που δεν γίνεται βιαστικά.",
+            },
+            {
+                q: "Ποιες υπηρεσίες ζητούν συχνότερα οι ιδιοκτήτες από Επανομή;",
+                a: "Συνήθως full grooming, bath & brush, deshedding και κουρέματα μικρόσωμων φυλών που χρειάζονται συχνή συντήρηση.",
+            },
+        ],
+    },
+    thermi: {
+        name: "Θέρμη",
+        title: "Dog Grooming για Θέρμη | Musky Paws Περαία",
+        description: "Dog grooming για κατοίκους Θέρμης με έμφαση σε κούρεμα μικρόσωμου σκύλου, puppy grooming, deshedding και full grooming στην Περαία.",
+        heroTitle: "Dog grooming για Θέρμη με έμφαση στην ποιότητα και τη συνέπεια",
+        intro: "Οι ιδιοκτήτες από τη Θέρμη αναζητούν συχνά έναν χώρο grooming που να προσφέρει συνέπεια, ήρεμο χειρισμό και σωστή επικοινωνία για το αποτέλεσμα. Στο Musky Paws, ο στόχος είναι να υπάρχει σαφές πλάνο περιποίησης και όχι απλώς ένα γρήγορο κούρεμα.",
+        audience: "Η συγκεκριμένη σελίδα ταιριάζει σε ιδιοκτήτες από Θέρμη που θέλουν καλύτερη εμπειρία grooming για μικρόσωμους σκύλους, κουτάβια ή σκύλους με αυξημένες ανάγκες τριχώματος.",
+        localFit: [
+            "Κατάλληλο για ιδιοκτήτες που δίνουν βάρος στη λεπτομέρεια και στο σωστό handling.",
+            "Ιδανικό για κουτάβια, μικρόσωμες φυλές και σκύλους που χρειάζονται τακτικό styling.",
+            "Καλή επιλογή για ιδιοκτήτες που αναζητούν σταθερό groomer και οργανωμένο booking.",
+        ],
+        serviceLinks: [
+            { href: "/services/small-breed-grooming", label: "Κούρεμα μικρόσωμου σκύλου", blurb: "Για Maltese, Poodle, Bichon, Yorkshire και παρόμοιες φυλές." },
+            { href: "/services/puppy-grooming", label: "Puppy grooming", blurb: "Για ήρεμη πρώτη γνωριμία με το grooming." },
+            { href: "/services/full-grooming", label: "Full grooming", blurb: "Για ολοκληρωμένη φροντίδα και καλύτερη συντήρηση του τριχώματος." },
+        ],
+        relatedArticles: [
+            { href: "/blog/kourema-mikrosomou-skylou-ti-prepei-na-gnwrizete", label: "Κούρεμα μικρόσωμου σκύλου" },
+            { href: "/blog/prwto-grooming-koutaviou-thessaloniki", label: "Το πρώτο grooming κουταβιού" },
+            { href: "/blog/bath-brush-vs-full-grooming-skylou", label: "Bath & brush ή full grooming" },
+        ],
+        faqs: [
+            {
+                q: "Τι επιλέγουν πιο συχνά οι ιδιοκτήτες από Θέρμη;",
+                a: "Συχνά επιλέγουν full grooming για μικρόσωμες φυλές, puppy grooming για σωστή πρώτη εμπειρία και ενδιάμεσο bath & brush για συντήρηση.",
+            },
+            {
+                q: "Ταιριάζει το Musky Paws αν θέλω σταθερό groomer για μικρόσωμο σκύλο;",
+                a: "Ναι. Ειδικά για φυλές που χρειάζονται συχνό κούρεμα και βούρτσισμα, η συνέπεια στο handling και στο αποτέλεσμα είναι κρίσιμη.",
+            },
+        ],
+    },
 } as const;
 
 export const topicalClusters = [
