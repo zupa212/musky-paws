@@ -6,8 +6,8 @@ import { el } from 'date-fns/locale';
 import { ArrowRight, Clock, CalendarDays } from 'lucide-react';
 
 export const metadata = {
-    title: 'Blog | Musky Paws Dog Grooming Περαία',
-    description: 'Οδηγοί και πληροφορίες για το grooming, την υγεία και την περιποίηση του σκύλου σας στο Musky Paws.',
+    title: 'Blog Dog Grooming Περαία Θεσσαλονίκη | Musky Paws',
+    description: 'Οδηγοί για κούρεμα σκύλου, πλύσιμο, deshedding, furminator, puppy grooming και περιποίηση μικρόσωμων φυλών στην Περαία Θεσσαλονίκης.',
     alternates: {
         canonical: 'https://muskypaws.gr/blog',
     },

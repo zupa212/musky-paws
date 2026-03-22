@@ -13,24 +13,51 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://muskypaws.gr'),
-  title: "Κομμωτήριο Σκύλων Περαία | Dog Grooming & Spa | Musky Paws",
-  description: "Το premium κομμωτήριο σκύλων στην Περαία. Εξειδικευμένο dog grooming, κούρεμα και πλύσιμο σκύλων χωρίς άγχος. Κλείστε το ραντεβού σας!",
-  keywords: ["dog grooming", "grooming σκύλων", "πλύσιμο σκύλου", "Περαία", "Θεσσαλονίκη", "Τρίλοφος", "Επανομή", "Μηχανιώνα", "Θέρμη", "Πλαγιάρι", "Ανατολική Θεσσαλονίκη", "Καλαμαριά", "κούρεμα σκύλου", "μπάνιο σκύλου", "Musky Paws", "κομμωτήριο σκύλων Περαία"],
+  applicationName: "Musky Paws",
+  title: "Musky Paws | Κομμωτήριο Σκύλων Περαία Θεσσαλονίκη",
+  description: "Full grooming, πλύσιμο σκύλου, deshedding, furminator, νύχια και αυτιά στην Περαία Θεσσαλονίκης. Εξυπηρετούμε Περαία, Καλαμαριά, Μηχανιώνα, Τρίλοφο, Επανομή και Θέρμη με online booking.",
+  keywords: [
+    "κομμωτήριο σκύλων Περαία",
+    "dog grooming Περαία",
+    "κούρεμα σκύλου Περαία",
+    "πλύσιμο σκύλου Περαία",
+    "deshedding σκύλου Θεσσαλονίκη",
+    "furminator σκύλου Περαία",
+    "puppy grooming Θεσσαλονίκη",
+    "κούρεμα μικρόσωμου σκύλου",
+    "dog grooming Καλαμαριά",
+    "dog grooming Μηχανιώνα",
+    "dog grooming Τρίλοφος",
+    "dog grooming Επανομή",
+    "dog grooming Θέρμη",
+    "Musky Paws"
+  ],
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: ["/icon.svg"],
+    apple: [{ url: "/logo.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
-    title: "Κομμωτήριο Σκύλων Περαία | Musky Paws",
-    description: "Premium υπηρεσίες dog grooming στην Περαία Θεσσαλονίκης.",
+    title: "Musky Paws | Dog Grooming Περαία Θεσσαλονίκη",
+    description: "Full grooming, bath & brush, deshedding, furminator και puppy grooming στην Περαία Θεσσαλονίκης.",
     url: "https://muskypaws.gr",
     siteName: "Musky Paws",
     images: [
       {
-        url: "/logo.png",
-        width: 800,
-        height: 800,
-        alt: "Musky Paws Dog Grooming Περαία",
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Musky Paws Dog Grooming Περαία Θεσσαλονίκη",
       },
     ],
     locale: "el_GR",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Musky Paws | Dog Grooming Περαία Θεσσαλονίκη",
+    description: "Κούρεμα σκύλου, πλύσιμο, deshedding και puppy grooming στην Περαία Θεσσαλονίκης.",
+    images: ["/og-image.jpg"],
   },
 };
 
@@ -50,11 +77,13 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "Musky Paws Dog Grooming",
-            "image": "https://muskypaws.gr/logo.png",
+            "image": "https://muskypaws.gr/og-image.jpg",
+            "logo": "https://muskypaws.gr/logo.png",
             "@id": "https://muskypaws.gr",
             "url": "https://muskypaws.gr",
             "telephone": "+306948965371",
             "priceRange": "$$",
+            "description": "Κομμωτήριο σκύλων στην Περαία Θεσσαλονίκης για full grooming, πλύσιμο, deshedding, furminator και puppy grooming.",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "Σόλωνος 28Β",
@@ -85,6 +114,7 @@ export default function RootLayout({
               "https://www.facebook.com/p/Musky-Paws-61558785775782/",
               "https://instagram.com/muskypaws_dog_grooming"
             ],
+            "areaServed": ["Περαία", "Καλαμαριά", "Μηχανιώνα", "Τρίλοφος", "Επανομή", "Θέρμη", "Ανατολική Θεσσαλονίκη"],
             "review": seoReviews.map((review) => ({
               "@type": "Review",
               "author": {

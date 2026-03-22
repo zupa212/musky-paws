@@ -4,8 +4,8 @@ import { BeforeAfterSlider } from '@/components/ui/BeforeAfterSlider';
 import { PawPrint, Camera, Star } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Gallery Μεταμορφώσεων - Πριν & Μετά | Musky Paws',
-    description: 'Δείτε τη δουλειά μας! Διαδραστικές φωτογραφίες πριν και μετά από τα κουρέματα και τα μπάνια των σκύλων πελατών μας στην Περαία.',
+    title: 'Gallery Πριν & Μετά | Dog Grooming Περαία | Musky Paws',
+    description: 'Δείτε before & after φωτογραφίες από κούρεμα σκύλου, bath & brush και grooming μεταμορφώσεις πελατών μας στην Περαία Θεσσαλονίκης.',
     alternates: {
         canonical: 'https://muskypaws.gr/gallery',
     },
@@ -50,7 +50,7 @@ export default function GalleryPage() {
                         Gallery <span className="wavy-underline">Μεταμορφώσεων</span>
                     </h1>
                     <p className="text-navy-900/60 text-lg leading-relaxed">
-                        Σύρετε τον κέρσορα σε κάθε εικόνα για να δείτε το εντυπωσιακό αποτέλεσμα "Πριν & Μετά" της δουλειάς μας. Κάθε κατοικίδιο αντιμετωπίζεται με αγάπη και φροντίδα.
+                        Σύρετε τον κέρσορα σε κάθε εικόνα για να δείτε το εντυπωσιακό αποτέλεσμα &quot;Πριν &amp; Μετά&quot; της δουλειάς μας. Κάθε κατοικίδιο αντιμετωπίζεται με αγάπη και φροντίδα.
                     </p>
                 </div>
 
@@ -135,4 +135,3 @@ export default function GalleryPage() {
         </section>
     );
 }
-

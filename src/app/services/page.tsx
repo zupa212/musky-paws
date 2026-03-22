@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Clock, MapPin, CheckCircle2, Sparkles, PawPrint, Tag } from 'lucide-react';
+import { ArrowRight, Clock, CheckCircle2, Sparkles, PawPrint, Tag } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Υπηρεσίες Grooming & Καλλωπισμός Σκύλων Περαία | Musky Paws',
-    description: 'Δείτε τις κορυφαίες υπηρεσίες καλλωπισμού σκύλων στην Περαία (Ανατολική Θεσσαλονίκη). Από κούρεμα και μπάνιο μέχρι trimming και αφαίρεση νεκρής τρίχας.',
+    title: 'Υπηρεσίες Dog Grooming Περαία | Full Grooming, Bath & Brush, Deshedding | Musky Paws',
+    description: 'Υπηρεσίες dog grooming στην Περαία Θεσσαλονίκης για full grooming, bath & brush, deshedding, furminator, puppy grooming και κόψιμο νυχιών.',
     alternates: {
         canonical: 'https://muskypaws.gr/services',
     },

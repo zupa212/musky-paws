@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Κλείσε Ραντεβού Online | Musky Paws Περαία',
-    description: 'Κλείστε το ραντεβού σας για καλλωπισμό σκύλου online στο Musky Paws. Επιλέξτε υπηρεσία, ημερομηνία και ώρα που σας εξυπηρετεί.',
+    title: 'Κλείσε Ραντεβού Dog Grooming Online | Musky Paws Περαία',
+    description: 'Κλείστε online ραντεβού για κούρεμα σκύλου, πλύσιμο, deshedding, furminator ή puppy grooming στο Musky Paws στην Περαία Θεσσαλονίκης.',
     alternates: {
         canonical: 'https://muskypaws.gr/booking',
     },

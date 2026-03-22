@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { Shield, Sparkles, Heart, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Σχετικά με Εμάς | Κομμωτήριο Σκύλων Περαία | Musky Paws',
-    description: 'Μάθετε για το Musky Paws, το stress-free κομμωτήριο σκύλων στην Περαία Θεσσαλονίκης. Γνωρίστε την ομάδα μας και τις υπηρεσίες dog grooming.',
+    title: 'Σχετικά με το Musky Paws | Stress-Free Dog Grooming Περαία',
+    description: 'Γνωρίστε το Musky Paws, το stress-free κομμωτήριο σκύλων στην Περαία Θεσσαλονίκης για full grooming, bath & brush, deshedding και puppy grooming.',
     alternates: {
         canonical: 'https://muskypaws.gr/about',
     },

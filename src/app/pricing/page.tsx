@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, ChevronRight, Calculator, CalculatorIcon, Receipt } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Receipt } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Τιμές & Τιμοκατάλογος Dog Grooming Περαία | Musky Paws',
-    description: 'Ο αναλυτικός τιμοκατάλογος για υπηρεσίες dog grooming στην Περαία. Διαφανείς τιμές για κούρεμα, μπάνιο και περιποίηση του σκύλου σας.',
+    title: 'Τιμές Dog Grooming Περαία | Κούρεμα, Μπάνιο, Deshedding | Musky Paws',
+    description: 'Αναλυτικές τιμές για dog grooming στην Περαία Θεσσαλονίκης: full grooming, μπάνιο, deshedding, furminator, puppy grooming και μεμονωμένες υπηρεσίες.',
     alternates: {
         canonical: 'https://muskypaws.gr/pricing',
     },
@@ -86,14 +86,14 @@ export default function PricingPage() {
                             <li className="flex gap-4">
                                 <CheckCircle2 className="w-6 h-6 shrink-0 text-brand-500 mt-1" />
                                 <div>
-                                    <strong className="block text-lg mb-1">Πώς προκύπτει το "Από" στις τιμές;</strong>
+                                    <strong className="block text-lg mb-1">Πώς προκύπτει το &quot;Από&quot; στις τιμές;</strong>
                                     <span className="text-brand-700 dark:text-brand-300">Το τελικό κόστος κουρέματος σκύλου εξαρτάται από παράγοντες όπως το μέγεθος (κιλά), η φυλή, η κατάσταση του τριχώματος (π.χ. πολλοί κόμποι) και η συμπεριφορά του ζώου.</span>
                                 </div>
                             </li>
                             <li className="flex gap-4">
                                 <CheckCircle2 className="w-6 h-6 shrink-0 text-brand-500 mt-1" />
                                 <div>
-                                    <strong className="block text-lg mb-1">Γίνεται κατ' οίκον grooming;</strong>
+                                    <strong className="block text-lg mb-1">Γίνεται κατ&apos; οίκον grooming;</strong>
                                     <span className="text-brand-700 dark:text-brand-300">Όχι, όλες οι υπηρεσίες πραγματοποιούνται αποκλειστικά στον ασφαλή και άρτια εξοπλισμένο χώρο μας (Σόλωνος 28Β, Περαία).</span>
                                 </div>
                             </li>
