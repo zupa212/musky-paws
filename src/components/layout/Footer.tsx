@@ -29,7 +29,7 @@ export function Footer() {
                     <Link href="/" className="flex items-center gap-3 group inline-block">
                         <div className="flex items-center justify-center shrink-0">
                             <Image 
-                                src="/logo-musky-removebg-preview.png" 
+                                src="/logo.png" 
                                 alt="Musky Paws Logo" 
                                 width={120}
                                 height={120}

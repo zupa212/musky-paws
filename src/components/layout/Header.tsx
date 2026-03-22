@@ -59,9 +59,9 @@ export function Header() {
 
                 {/* Logo Area */}
                 <Link href="/" className="flex items-center gap-2 group shrink-0">
-                    <div className="flex items-center justify-center">
-                        <Image 
-                            src="/logo-musky-removebg-preview.png" 
+                        <div className="flex items-center justify-center">
+                            <Image 
+                            src="/logo.png" 
                             alt="Musky Paws Logo" 
                             width={64}
                             height={64}
