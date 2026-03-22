@@ -297,10 +297,10 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
               Τοπικές αναζητήσεις
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-navy-900 tracking-tight leading-[1.1] mb-6">
-              Grooming για <span className="wavy-underline">Περαία, Καλαμαριά, Μηχανιώνα, Τρίλοφο</span>
+              Grooming για <span className="wavy-underline">Θεσσαλονίκη, Περαία, Καλαμαριά, Πυλαία</span>
             </h2>
             <p className="text-lg text-navy-800/65 leading-relaxed">
-              Δημιουργήσαμε ξεχωριστές σελίδες για τις βασικές περιοχές που εξυπηρετούμε, μαζί με οδηγούς για κουτάβια, deshedding και μικρόσωμες φυλές, ώστε να βρίσκετε πιο εύκολα την υπηρεσία που σας ταιριάζει.
+              Δημιουργήσαμε ξεχωριστές local σελίδες για Θεσσαλονίκη, Περαία, Καλαμαριά, Πυλαία και τις γύρω περιοχές, μαζί με οδηγούς για κουτάβια, deshedding και μικρόσωμες φυλές, ώστε να βρίσκετε πιο εύκολα την υπηρεσία που σας ταιριάζει.
             </p>
           </div>
 
@@ -323,7 +323,7 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {topicalClusters.map((cluster) => (
               <Link
                 key={cluster.href}

@@ -11,8 +11,10 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
     const popularLinks = [
+        { href: '/areas/thessaloniki', label: 'Dog grooming Θεσσαλονίκη' },
         { href: '/areas/peraia', label: 'Dog grooming Περαία' },
         { href: '/areas/kalamaria', label: 'Dog grooming Καλαμαριά' },
+        { href: '/areas/pylaia', label: 'Dog grooming Πυλαία' },
         { href: '/areas/michaniona', label: 'Dog grooming Μηχανιώνα' },
         { href: '/areas/trilofos', label: 'Dog grooming Τρίλοφος' },
         { href: '/areas/epanomi', label: 'Dog grooming Επανομή' },

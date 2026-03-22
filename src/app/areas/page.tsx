@@ -5,7 +5,7 @@ import { localAreaPages } from "@/config/seo";
 
 export const metadata: Metadata = {
     title: "Περιοχές Εξυπηρέτησης | Musky Paws Dog Grooming",
-    description: "Δείτε τις βασικές περιοχές που εξυπηρετεί το Musky Paws, με ξεχωριστές σελίδες για Περαία, Καλαμαριά, Μηχανιώνα και Τρίλοφο.",
+    description: "Δείτε τις περιοχές που εξυπηρετεί το Musky Paws, με ξεχωριστές local σελίδες για Θεσσαλονίκη, Περαία, Καλαμαριά, Πυλαία, Μηχανιώνα και Τρίλοφο.",
     alternates: {
         canonical: "https://muskypaws.gr/areas",
     },
@@ -29,7 +29,7 @@ export default function AreasIndexPage() {
                         Dog grooming για την <span className="wavy-underline">Ανατολική Θεσσαλονίκη</span>
                     </h1>
                     <p className="text-lg text-navy-900/65 leading-relaxed">
-                        Συγκεντρώσαμε ξεχωριστές τοπικές σελίδες για τις βασικές περιοχές που εξυπηρετούμε, ώστε να βρείτε πιο εύκολα τη σωστή υπηρεσία και τους αντίστοιχους οδηγούς για το grooming του σκύλου σας.
+                        Συγκεντρώσαμε ξεχωριστές local σελίδες για Θεσσαλονίκη, Περαία, Καλαμαριά, Πυλαία και τις βασικές γύρω περιοχές, ώστε να βρίσκετε πιο εύκολα τη σωστή υπηρεσία και τους αντίστοιχους οδηγούς για το grooming του σκύλου σας.
                     </p>
                 </div>
 
