@@ -87,6 +87,17 @@ export function Footer() {
 
                 </div>
             </div>
+
+            {/* Subtle SEO Area Links */}
+            <div className="container mx-auto max-w-7xl mt-6 px-10 flex flex-wrap gap-2 text-[11px] text-[#151515]/40 justify-center">
+                <span>Εξυπηρετούμε:</span>
+                <Link href="/areas/peraia" className="hover:text-brand-accent-pink transition-colors">Περαία</Link><span>•</span>
+                <Link href="/areas/kalamaria" className="hover:text-brand-accent-pink transition-colors">Καλαμαριά</Link><span>•</span>
+                <Link href="/areas/michaniona" className="hover:text-brand-accent-pink transition-colors">Μηχανιώνα</Link><span>•</span>
+                <Link href="/areas/trilofos" className="hover:text-brand-accent-pink transition-colors">Τρίλοφος</Link><span>•</span>
+                <Link href="/areas/epanomi" className="hover:text-brand-accent-pink transition-colors">Επανομή</Link><span>•</span>
+                <Link href="/areas/thermi" className="hover:text-brand-accent-pink transition-colors">Θέρμη</Link>
+            </div>
         </footer>
     );
 }
