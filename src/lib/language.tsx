@@ -54,8 +54,6 @@ const translations: Record<Locale, Record<string, string>> = {
         'testimonials.q2': 'Ειλικρινά δεν έχω λόγια!! Η Στέλλα είναι καταπληκτική στην δουλειά της αλλά και σαν άνθρωπος!! Η φουσκιτσα μου την λατρεύει!!!! Στέλλα τα φιλιά μας!!!',
         'testimonials.q3': 'Εξαιρετική επαγγελματίας η Στέλλα!! Το συστήνω χωρίς δεύτερη σκέψη!!! Ευχαριστούμε πολύ 🐶…',
         'testimonials.q4': 'Η εμπειρία μας με την Κυρία Στελλα ήταν εξαιρετική ! ❤️',
-        'testimonials.q5': 'Ειλικρινά δεν έχω λόγια!! Η Στέλλα είναι καταπληκτική στην δουλειά της αλλά και σαν άνθρωπος!! Η φουσκίτσα μου την λατρεύει!!!! R. R.',
-        'testimonials.q6': 'Εξαιρετική επαγγελματίας στην Περαία! Αγαπά πραγματικά τα ζώα και το αποτέλεσμα στο κούρεμα του σκύλου μου ήταν άψογο! Σοφία Μ.',
 
         // Footer CTA
         'cta.title1': 'Γιατί τα κατοικίδιά σας',
@@ -119,8 +117,6 @@ const translations: Record<Locale, Record<string, string>> = {
         'testimonials.q2': 'Honestly I have no words!! Stella is amazing at her job but also as a person!! My little Fouskitsa loves her!!!! Kisses to Stella!!!',
         'testimonials.q3': 'Stella is an excellent professional!! I recommend her without a second thought!!! Thank you very much 🐶…',
         'testimonials.q4': 'Our experience with Ms. Stella was excellent! ❤️',
-        'testimonials.q5': "Honestly I have no words!! Stella is amazing at her job but also as a person!! My little Fouskitsa loves her!!!! R. R.",
-        'testimonials.q6': 'Excellent professional!! Stella is very careful, truly loves animals and the grooming result was flawless!! Sofia M.',
 
         // Footer CTA
         'cta.title1': 'Because your',
