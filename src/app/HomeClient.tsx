@@ -450,18 +450,6 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                 location: "Θεσσαλονίκη",
                 img: "/images/reviews/giota.jpg"
               },
-              {
-                quote: t('testimonials.q5'),
-                name: "Κατερίνα Μ.",
-                location: "Μηχανιώνα",
-                img: "/images/before-after/dogs/IMG_3317.JPG"
-              },
-              {
-                quote: t('testimonials.q6'),
-                name: "Νίκος Β.",
-                location: "Περαία",
-                img: "/images/before-after/dogs/IMG_3309.JPG"
-              },
             ].map((t, i) => (
               <div key={i} className="w-[500px] shrink-0 mx-4">
                 <div className="bg-white rounded-[28px] p-8 shadow-sm h-full flex flex-col">
@@ -517,18 +505,6 @@ export function HomeClient({ recentPosts }: { recentPosts: BlogPost[] }) {
                 name: "Γιώτα Αλεξάκη",
                 location: "Θεσσαλονίκη",
                 img: "/images/reviews/giota.jpg"
-              },
-              {
-                quote: t('testimonials.q5'),
-                name: "Κατερίνα Μ.",
-                location: "Μηχανιώνα",
-                img: "/images/before-after/dogs/IMG_3317.JPG"
-              },
-              {
-                quote: t('testimonials.q6'),
-                name: "Νίκος Β.",
-                location: "Περαία",
-                img: "/images/before-after/dogs/IMG_3309.JPG"
               },
             ].map((t, i) => (
               <div key={`dup-${i}`} className="w-[500px] shrink-0 mx-4">
