@@ -126,8 +126,20 @@ export default function RootLayout({
               "https://instagram.com/muskypaws_dog_grooming"
             ],
             "areaServed": ["Θεσσαλονίκη", "Περαία", "Καλαμαριά", "Πυλαία", "Μηχανιώνα", "Τρίλοφος", "Επανομή", "Θέρμη", "Ανατολική Θεσσαλονίκη"],
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5.0",
+              "reviewCount": seoReviews.length.toString(),
+              "bestRating": "5",
+              "worstRating": "1"
+            },
             "review": seoReviews.map((review) => ({
               "@type": "Review",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
               "author": {
                 "@type": "Person",
                 "name": review.author,
